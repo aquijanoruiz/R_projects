@@ -1,0 +1,34 @@
+---
+title: 'Intergenerational empowerment and early sexual onset among female adolescents: Evidence from a prevalence study in Ecuador'
+author: "Alonso Quijano"
+output: pdf_document
+bibliography: references.bib
+---
+
+The age of puberty onset has decreased substantially over the past decades [@bellis2006adults]. Reasons exist to be concerned about this fact as early sexual debut has been linked to several adverse outcomes. Early sexual initiators have been found to be more prone to having multiple sex partners, forcing partners to have sex, having frequent sexual intercourse, and being engaged in teenage pregnancy [@o2001early]. Studies performed on different populations have also shown an association between early initiation of sexual intercourse and HIV and other STDs risks [e.g. @kaestle2005young; @stockl2013early]. One major cause of the high prevalence of STDs and unwanted pregnancies among young males and females is that those who engage in early sexual activityare much less likely to use contraception [@finer2013sexual]. Additionally, even for those who manage to avoid pregnancy at first intercourse despite not using contraception, chances of experiencing early childbearing remain high since those who fail to use contraception at first sex are more likely to continue engaging in risky sexual behavior in the future [@st1996examination; @magnusson2012early].
+
+Many studies have tested the relationship between precocious sexual initiation and household structure [e.g. @ellis2003does; @newcomer1987parental] and parental involvement [e.g. @romer1999parental; @sieverding2005influence; @velez2005family]. However, few studies have explored the intergenerational transmission of behavioral patterns, such as how the timing of sexual debut may be replicated across generations [e.g. @johnson2007adolescent]. This paper aims to examine the predicting ability of maternal behavioral variables, including the mother's age at first intercourse, and other mechanisms in which the mother's control of her sexual decisions can be passed on to her daughter’s own decision making. It is plausible to believe that those mothers with low bargaining power may directly or indirectly transmit their norms and beliefs to their daughters, who may as well then become unable to exercise decision-making over their sexuality. Parkes et al. -@parkes2011parenting found that talking about sex and contraception with children was negatively correlated with delayed sexual initiation, suggesting that parents may be able to shape their children’s skills for negotiating sexual situations.  The influence intra-household sexual bargaining has on children has yet been explored in experimental research. Therefore, this study opens up an opportunity to discuss more in depth how sexual values may be inherited and how they can relate to the sexual well-being of young women.
+
+## METHODS
+
+## Data and sample
+
+We used data from the 2018 National Health and Nutrition Survey of Ecuador (Ensanut). Ensanut is a survey conducted national wide every five years by the National Statistics Institute of Ecuador. The goal of this survey is to assess the health and nutritional status of adults and children in Ecuador. The survey gathered data from 43,311 households, totaling a number of 168,747 subjects. Measures of anthropometric, nutrition, economic status were collected for all the members of the household. Data about the sexual health of women was gathered for all those between 12 and 49 years old. Information about risk factors (e.g. smoking and drinking) was collected for only one random subject (male or female) between 5 and 18.
+
+To perform the analysis, we selected the data of girls who were 16 years old at the time of the interview and their mothers. Because the independent variables we are interested in are the mothers' sexual bargaining and age at first intercourse, we filtered those girls who were currently living with their mothers and their mothers' partner (which in most cases was the father). Additionally, since information regarding sexuality was only gathered for women at age 49 or younger, we only considered those whose mother was under that age threshold. Finally, as data about drug use were not obtained for every subject (due to the random selection), we decided to perform the analysis on two samples: one larger sample that does not include these additional confounders and a smaller one that includes them.
+
+## Measures
+
+As in most studies that use secondary data, not all variables necessary to understand the sexual activity of young females was available in Ensanut. Nevertheless, we still were able to add several of the factors that have been previously associated with early sexual debut.
+
+The dependent variable for the analysis was *early sexual activity*.  The 16-year-old girls who reported having had sexual intercourse, were coded as 1, whereas those who reported being virgin were coded as 0. The 16-year-old cutoff has been used in previous studies to demarcate early onset of sexual activity [e.g. @ellis2003does; @hallett2007age].
+
+```{r, warning=FALSE, message=FALSE}
+if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+if(!require(knitr)) install.packages("knitr", repos = "http://cran.us.r-project.org")
+
+data <- readRDS()
+```
+
+## References
+
