@@ -331,7 +331,7 @@ mothers$m_empowerment <- factor(with(mothers,
             as.integer(f2_s8_834) == 2 & ! as.integer(f2_s8_835) == 4 & 
             as.integer(f2_s8_836) == 1 & !as.integer(f2_s8_837) == 2 ~ "no",
             as.integer(f2_s8_839) == 2 ~ "no", # cannot turn down sex
-            TRUE ~ "yes")), levels = c("no", "yes"))
+            TRUE ~ "yes")), levels = c("yes", "no"))
 
 # g) mother has a job 
 mothers$m_job <- with(mothers,
@@ -354,7 +354,7 @@ mothers_tidy <- mothers %>% select(subject_id, m_teenage_birth,
 data <- daughters_tidy %>% left_join(mothers_tidy, by = c("mother_id" = "subject_id")) %>%
   filter(!is.na(early_sexual_activity)) # we eliminate NAs
 
-# saveRDS(data, file = "early_sexual_activity.rds")
+saveRDS(data, file = "early_sexual_activity.rds")
 
 #################################################################################
 #####                       4 The logit models                              #####
@@ -412,11 +412,11 @@ data_copy <- data
 data_copy$value <- 2
 data_copy <- spread(data_copy, sexuality_knowledge, value, fill = 1, sep = "_")
 
-names(data_copy)
-cat_var <- c("minority", "rural", "h_internet", "attends_school", "period_knowledge", "aids_knowledge", 
-             "pregnancy_knowledge", "sexuality_knowledge_no info", "sexuality_knowledge_family", 
-             "sexuality_knowledge_school", "sexuality_knowledge_other", "ever_drunk_alcohol", 
-             "ever_smoked", "m_job", "m_finished_HS", "m_teenage_birth", "m_empowerment")
+cat_var <- c("minority", "rural", "h_internet", "attends_school", "period_knowledge", 
+             "pregnancy_knowledge", "aids_knowledge", "sexuality_knowledge_no info", 
+             "sexuality_knowledge_family", "sexuality_knowledge_school", 
+             "sexuality_knowledge_other", "ever_drunk_alcohol", "ever_smoked", "m_job", 
+             "m_finished_HS", "m_teenage_birth", "m_empowerment")
 
 
 chi_sq_test  <- sapply(cat_var, function(x){
@@ -424,18 +424,18 @@ chi_sq_test  <- sapply(cat_var, function(x){
   return(chi_sq$p.value)
 })
 
-mean_no_early_sex  <- sapply(cat_var, function(x){
-  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "no", x]) == 2, na.rm = TRUE)
-  return(mean)
-})
-
 mean_early_sex  <- sapply(cat_var, function(x){
   mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "yes", x]) == 2, na.rm = TRUE)
   return(mean)
 })
 
-summary_statistics <- data_frame(variable = cat_var, mean_no_early_sex = mean_no_early_sex,
-                                 mean_early_sex = mean_early_sex, `p value` = chi_sq_test)
+mean_no_early_sex  <- sapply(cat_var, function(x){
+  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "no", x]) == 2, na.rm = TRUE)
+  return(mean)
+})
+
+summary_statistics <- data_frame(variable = cat_var, mean_early_sex = mean_early_sex,
+   mean_no_early_sex = mean_no_early_sex, p_value = chi_sq_test)
 
 cont_var <- c("h_income", "h_num_members", "m_age_1st_intercourse")
 
@@ -444,17 +444,42 @@ t_test  <- sapply(cont_var, function(x){
   return(t_test$p.value)
 })
 
-mean_no_early_sex  <- sapply(cont_var, function(x){
-  mean <- mean(data_copy[data_copy$early_sexual_activity == "no", x], na.rm = TRUE)
-  return(mean)
-})
-
 mean_early_sex  <- sapply(cont_var, function(x){
   mean <- mean(data_copy[data_copy$early_sexual_activity == "yes", x], na.rm = TRUE)
   return(mean)
 })
 
-summary_statistics <- rbind(summary_statistics, data_frame(variable = cont_var, 
-  mean_no_early_sex = mean_no_early_sex, mean_early_sex = mean_early_sex, `p value` = t_test))
+mean_no_early_sex  <- sapply(cont_var, function(x){
+  mean <- mean(data_copy[data_copy$early_sexual_activity == "no", x], na.rm = TRUE)
+  return(mean)
+})
 
-kable(summary_statistics, format = "latex")
+summary_statistics <- rbind(summary_statistics, data_frame(variable = cont_var, 
+  mean_early_sex = mean_early_sex, mean_no_early_sex = mean_no_early_sex, 
+  p_value = t_test))
+
+summary_statistics[, 2:3] <- round(summary_statistics[, 2:3], digits = 2)
+summary_statistics[, 4] <- round(summary_statistics[, 4], digits = 3)
+
+summary_statistics_copy <- summary_statistics
+
+summary_statistics_copy$p_value <- 
+  with(summary_statistics_copy, case_when(p_value < 0.0005 ~ paste("0.000", "***"),
+                                          p_value <= 0.001 ~ paste(as.character(p_value), "***"),
+                                          p_value <= 0.01 ~ paste(p_value, "**"),
+                                          p_value <= 0.05 ~ paste(p_value, "*"),
+                                          p_value <= 0.1 ~ paste(as.numeric(p_value), "  ."),
+                                          TRUE ~ as.character(p_value)))
+
+names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No early sexual activity", "p value")
+
+summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area", "Does not have internet", 
+  "Attends school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
+  "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from school", 
+  "Knows about sexuality from family", "Knows about sexuality from other sources",
+  "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished HS",
+  "Mother had a teenage birth", "Mother lacks sexual bargaining", "Household income", 
+  "Number of members in the household", "Mother's age at first intercourse")
+
+summary_statistics_copy
+kable(summary_statistics_copy, format = "latex" )
