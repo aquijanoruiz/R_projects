@@ -475,11 +475,14 @@ names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No ea
 
 summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area", "Does not have internet", 
   "Attends school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
-  "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from school", 
-  "Knows about sexuality from family", "Knows about sexuality from other sources",
+  "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from family", 
+  "Knows about sexuality from school", "Knows about sexuality from other sources",
   "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished HS",
   "Mother had a teenage birth", "Mother lacks sexual bargaining", "Household income", 
   "Number of members in the household", "Mother's age at first intercourse")
 
 summary_statistics_copy
 kable(summary_statistics_copy, format = "latex" )
+
+mean(data_copy$sexuality_knowledge_school == 2)
+mean(data_copy$sexuality_knowledge_family == 2)

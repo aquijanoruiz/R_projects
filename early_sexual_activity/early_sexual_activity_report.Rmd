@@ -15,13 +15,20 @@ Many studies have tested the relationship between precocious sexual initiation a
 
 We used data from the 2018 National Health and Nutrition Survey of Ecuador (Ensanut). Ensanut is a survey conducted national wide every five years by the National Statistics Institute of Ecuador. The goal of this survey is to assess the health and nutritional status of adults and children in Ecuador. The survey gathered data from 43,311 households, totaling a number of 168,747 subjects. Measures of anthropometric, nutrition, economic status were collected for all the members of the household. Data about the sexual health of women was gathered for all those between 12 and 49 years old. Information about risk factors (e.g. smoking and drinking) was collected for only one random subject (male or female) between 5 and 18.
 
-To perform the analysis, we selected the data of girls who were 16 years old at the time of the interview and their mothers. Because the independent variables we are interested in are the mothers' sexual bargaining and age at first intercourse, we filtered those girls who were currently living with their mothers and their mothers' partner (which in most cases was the father). Additionally, since information regarding sexuality was only gathered for women at age 49 or younger, we only considered those whose mother was under that age threshold. Finally, as data about drug use were not obtained for every subject (due to the random selection), we decided to perform the analysis on two samples: one larger sample that does not include these additional confounders and a smaller one that includes them.
+To perform the analysis, we selected the data of girls who were 16 years old at the time of the interview and their mothers. Because the independent variables we are interested in are the mothers' sexual bargaining ability and age at first intercourse, we filtered those girls who were currently living with their mothers and their mothers' partner (which in most cases was the father). Additionally, since information regarding sexuality was only gathered for women at age 49 or younger, we only considered those whose mother was under that age threshold. Finally, as data about drug use were not obtained for every subject (due to the random selection), we decided to perform the analysis on two samples: one larger sample that does not include these additional confounders and a smaller one that includes them.
 
 ## Measures
 
 As in most studies that use secondary data, not all variables necessary to understand the sexual activity of young females was available in Ensanut. Nevertheless, we still were able to add several of the factors that have been previously associated with early sexual debut.
 
-The dependent variable for the analysis was *early sexual activity*.  The 16-year-old girls who reported having had sexual intercourse, were coded as 1, whereas those who reported being virgin were coded as 0. The 16-year-old cutoff has been used in previous studies to demarcate early onset of sexual activity [e.g. @ellis2003does; @hallett2007age].
+The dependent variable for the analysis was *early sexual activity*.  The 16-year-old girls who reported having had sexual intercourse, were coded as 1, whereas those who reported being virgin were coded as 0. The 16-year-old cutoff has been used in previous studies to demarcate early onset of sexual activity [e.g. @ellis2003does; @paul2000determinants].
+
+Basic sociodemographic and economic measures included ethnicity (whether the girl identified herself as an ethnic minority), geographic area (urban or rural), whether the girl was attending school, and household income in US dollars. We used income as a measure of poverty. However, evidence favors the use of consumption as a more effective tool to measure well-being in developing countries [@meyer2003measuring]. Since consumption was not available in the survey, we added other variables, including access to internet and the number of members in the household. The number of members in the household was the most predicting factor for impoverishment used in the Poverty Probability Index [@schreiner2015ecuador].
+
+Individual level measures consisted of knowledge about sexuality and risk behaviors. Knowledge about sexuality was estimated through questions about menstruation, pregnancy, and AIDs. Girls were asked whether they knew what was happening to their body when they hay their first period, whether a woman could become pregnant at first intercourse, and whether HIV could spread through handshake. They were also asked whether they had ever learned about sexual relationships, and if so, from whom they had learned about (school, family, and others). Risk factors included whether the girl had ever drunk alcohol or smoked in the past.
+
+Mother-related variables included the mother’s sexual bargaining ability, her age at first intercourse, and whether she had a teenage birth. Mothers were asked if they could say no to their sexual partners whenever they did not want to have sexual intercourse. For those who were not using any form of contraception but would prefer to use one, they were asked whether they thought their partner would be willing to use it or not. Mothers who were unable to turn down sex or demand their partner to use contraception were classified as low sexual bargaining. We also considered variables such as occupation and education.
+
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
@@ -96,8 +103,8 @@ names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No ea
 
 summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area", "Does not have internet", 
   "Attends school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
-  "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from school", 
-  "Knows about sexuality from family", "Knows about sexuality from other sources",
+  "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from family", 
+  "Knows about sexuality from school", "Knows about sexuality from other sources",
   "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished HS",
   "Mother had a teenage birth", "Mother lacks sexual bargaining", "Household income", 
   "Number of members in the household", "Mother's age at first intercourse")
