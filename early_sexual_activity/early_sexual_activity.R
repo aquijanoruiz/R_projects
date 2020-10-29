@@ -6,9 +6,8 @@
 # The following code automatically downloads the packages in case they are not 
 # installed in your computer already.
 
-if(!require(readstata13)) install.packages("readstata13", repos = "http://cran.us.r-project.org")
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
-if(!require(knitr)) install.packages("knitr", repos = "http://cran.us.r-project.org")
+if(!require(readstata13)) install.packages("readstata13", repos = "http://cran.us.r-project.org")
 
 #################################################################################
 #####                            1.2 Downloading the data                   #####
@@ -257,7 +256,7 @@ daughters$minority <- with(daughters,
          levels = c("no", "yes")))
 
 # e) Misses school 
-daughters$misses_school <- sinoTOyesno(daughters$f1_s2_17)
+daughters$attends_school <- sinoTOyesno(daughters$f1_s2_17)
 
 #################################################################################
 #####                   3.3.2 Knowledge of sexual education                 #####
@@ -344,7 +343,7 @@ mothers$m_job <- with(mothers,
 #################################################################################
 
 daughters_tidy <- daughters %>%  select(household_id, subject_id, mother_id, 
-  early_sexual_activity, rural, minority, h_internet, misses_school,  period_knowledge, 
+  early_sexual_activity, rural, minority, h_internet, attends_school,  period_knowledge, 
   aids_knowledge, pregnancy_knowledge, sexuality_knowledge, ever_drunk_alcohol, ever_smoked) %>% 
   left_join(income, by = c("household_id" = "household_id"))
 
@@ -367,7 +366,7 @@ saveRDS(data, file = "early_sexual_activity.rds")
 # mother empowerment + control variables
 
 logit_m1 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment,
                 data = data, family = "binomial")
 
@@ -377,7 +376,7 @@ summary(logit_m1)
 # mother empowerment & m_teenage_birth + control variables
 
 logit_m2 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth,
                 data = data, family = "binomial")
 
@@ -387,7 +386,7 @@ summary(logit_m2)
 # mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables
 
 logit_m3 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth +
                   m_age_1st_intercourse, data = data, family = "binomial")
 
@@ -397,7 +396,7 @@ summary(logit_m3)
 # mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables (including behavioral)
 
 logit_m4 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth +
                   m_age_1st_intercourse + ever_smoked + ever_drunk_alcohol,
                 data = data, family = "binomial")
@@ -426,7 +425,7 @@ data_copy <- spread(data_copy, sexuality_knowledge, value, fill = 1, sep = "_")
 
 # chi square test (categorical variables) ------------------------------
 
-cat_var <- c("minority", "rural", "h_internet", "misses_school", "period_knowledge", 
+cat_var <- c("minority", "rural", "h_internet", "attends_school", "period_knowledge", 
              "pregnancy_knowledge", "aids_knowledge", "sexuality_knowledge_no info", 
              "sexuality_knowledge_family", "sexuality_knowledge_school", 
              "sexuality_knowledge_other", "ever_drunk_alcohol", "ever_smoked", "m_job", 
@@ -449,8 +448,8 @@ mean_no_early_sex  <- sapply(cat_var, function(x){
 })
 
 # We put the percentages and p values everything in one table
-summary_statistics <- data_frame(variable = cat_var, mean_early_sex = mean_early_sex,
-                                 mean_no_early_sex = mean_no_early_sex, p_value = chi_sq_test)
+summary_statistics <- tibble(variable = cat_var, mean_early_sex = mean_early_sex,
+                             mean_no_early_sex = mean_no_early_sex, p_value = chi_sq_test)
 
 # t test (continuous variables) ------------------------------
 
@@ -472,7 +471,7 @@ mean_no_early_sex  <- sapply(cont_var, function(x){
 })
 
 # We add the new means and p values to the table we already made
-summary_statistics <- rbind(summary_statistics, data_frame(variable = cont_var, 
+summary_statistics <- rbind(summary_statistics, tibble(variable = cont_var, 
   mean_early_sex = mean_early_sex, mean_no_early_sex = mean_no_early_sex, 
   p_value = t_test))
 
@@ -488,7 +487,7 @@ summary_statistics_copy$p_value <-
                                           p_value <= 0.001 ~ paste(as.character(p_value), "***"),
                                           p_value <= 0.01 ~ paste(p_value, "**"),
                                           p_value <= 0.05 ~ paste(p_value, "*"),
-                                          p_value <= 0.1 ~ paste(as.numeric(p_value), "  ."),
+                                          p_value <= 0.1 ~ paste(as.numeric(p_value), "."),
                                           TRUE ~ as.character(p_value)))
 
 names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No early sexual activity", "p value")
@@ -502,7 +501,6 @@ summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area
   "Number of members in the household", "Mother's age at first intercourse")
 
 summary_statistics_copy
-kable(summary_statistics_copy, format = "latex" )
 
 # What percent of our sample belongs to each group: early sexual activity and no early sexual activity
 
@@ -513,7 +511,7 @@ prop.table(table(data_copy$early_sexual_activity))
 length(index)
 
 mean(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
-sd(data_copy[data_copy$early_sexual_activity == "no", "m_age_1st_intercourse"], na.rm = TRUE)
+sd(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
 
 #################################################################################
 #####       5.2 CDF of the mother's age at first intercourse by gruop       #####
@@ -527,9 +525,35 @@ plot(ecdf(data_copy[data_copy$early_sexual_activity == "no", "m_age_1st_intercou
 legend("left", c("Early sexual activity", "No early sexual activity"),
        col = c("cadetblue1", "palegreen"), lwd = 5, bty = "n", cex = 0.6)
 
-data_copy[data_copy$early_sexual_activity == "no", "m_age_1st_intercourse"]
-
 # ------------------
 library(texreg)
+library(kableExtra)
 screenreg(logit_m1)
-texreg(logit_m1)
+texreg(list(logit_m1), float.pos = "h", return.string = TRUE, bold = 0.05, stars = 0,
+       digits = 3, leading.zero = FALSE, omit.coef = "Inter")
+
+screenreg(list(logit_m1, logit_m2))
+
+(summary_statistics)
+install.packages("stargazer")
+library(stargazer)
+
+
+# CRAN version
+install.packages('tinytex')
+
+# or the development version on Github
+remotes::install_github('yihui/tinytex')
+
+library(tinytex)
+latexmk()
+
+update.packages(ask = FALSE, checkBuilt = TRUE)
+tinytex::tlmgr_update()
+
+tinytex::reinstall_tinytex()
+tinytex::install_tinytex()
+
+tinytex::tlmgr_install(c('texlive-scripts', 'dehyph-exptl'))
+library(stargazer)
+stargazer(summary_statistics_copy, type = "text", summary = FALSE)

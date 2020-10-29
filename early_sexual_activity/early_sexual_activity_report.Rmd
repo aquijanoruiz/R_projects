@@ -1,8 +1,12 @@
 ---
 title: 'Intergenerational empowerment and early sexual onset among female adolescents: Evidence from a prevalence study in Ecuador'
 author: "Alonso Quijano"
-output: pdf_document
+output: 
+  pdf_document:
+    keep_tex: true
 bibliography: early_sexual_activity_report.bib
+header-includes:
+   - \usepackage{dcolumn}
 ---
 
 The age of puberty onset has decreased substantially over the past decades [@bellis2006adults]. Reasons exist to be concerned about this fact as early sexual debut has been linked to several adverse outcomes. Early sexual initiators have been found to be more prone to having multiple sex partners, forcing partners to have sex, having frequent sexual intercourse, and being engaged in teenage pregnancy [@o2001early]. Studies performed on different populations have also shown an association between early initiation of sexual intercourse and HIV and other STDs risks [e.g. @kaestle2005young; @stockl2013early]. One major cause of the high prevalence of STDs and unwanted pregnancies among young males and females is that those who engage in early sexual activityare much less likely to use contraception [@finer2013sexual]. Additionally, even for those who manage to avoid pregnancy at first intercourse despite not using contraception, chances of experiencing early childbearing remain high since those who fail to use contraception at first sex are more likely to continue engaging in risky sexual behavior in the future [@st1996examination; @magnusson2012early].
@@ -42,12 +46,19 @@ Mother characteristics significantly differed across groups. Mothers of early se
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
 if(!require(knitr)) install.packages("knitr", repos = "http://cran.us.r-project.org")
+if(!require(kableExtra)) install.packages("kableExtra", repos = "http://cran.us.r-project.org")
+if(!require(stargazer)) install.packages("stargazer", repos = "http://cran.us.r-project.org")
 
+options(tinytex.verbose = TRUE)
 data <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/early_sexual_activity_tidy_data.rds"))
 
-data_copy <- data
 data_copy$value <- 2
 data_copy <- spread(data_copy, sexuality_knowledge, value, fill = 1, sep = "_")
+
+# We will use the chi square test and t test to compare variables within groups (early
+# sexual activity and no early sexual activity). For that we will apply some loops
+
+# chi square test (categorical variables) ------------------------------
 
 cat_var <- c("minority", "rural", "h_internet", "attends_school", "period_knowledge", 
              "pregnancy_knowledge", "aids_knowledge", "sexuality_knowledge_no info", 
@@ -71,8 +82,11 @@ mean_no_early_sex  <- sapply(cat_var, function(x){
   return(mean)
 })
 
-summary_statistics <- data_frame(variable = cat_var, mean_early_sex = mean_early_sex,
-   mean_no_early_sex = mean_no_early_sex, p_value = chi_sq_test)
+# We put the percentages and p values everything in one table
+summary_statistics <- tibble(variable = cat_var, mean_early_sex = mean_early_sex,
+                             mean_no_early_sex = mean_no_early_sex, p_value = chi_sq_test)
+
+# t test (continuous variables) ------------------------------
 
 cont_var <- c("h_income", "h_num_members", "m_age_1st_intercourse")
 
@@ -91,9 +105,12 @@ mean_no_early_sex  <- sapply(cont_var, function(x){
   return(mean)
 })
 
-summary_statistics <- rbind(summary_statistics, data_frame(variable = cont_var, 
+# We add the new means and p values to the table we already made
+summary_statistics <- rbind(summary_statistics, tibble(variable = cont_var, 
   mean_early_sex = mean_early_sex, mean_no_early_sex = mean_no_early_sex, 
   p_value = t_test))
+
+# Adding some format to the table ------------------------------
 
 summary_statistics[, 2:3] <- round(summary_statistics[, 2:3], digits = 2)
 summary_statistics[, 4] <- round(summary_statistics[, 4], digits = 3)
@@ -105,20 +122,23 @@ summary_statistics_copy$p_value <-
                                           p_value <= 0.001 ~ paste(as.character(p_value), "***"),
                                           p_value <= 0.01 ~ paste(p_value, "**"),
                                           p_value <= 0.05 ~ paste(p_value, "*"),
-                                          p_value <= 0.1 ~ paste(as.numeric(p_value), "  ."),
+                                          p_value <= 0.1 ~ paste(as.numeric(p_value), "."),
                                           TRUE ~ as.character(p_value)))
 
 names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No early sexual activity", "p value")
 
 summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area", "Does not have internet", 
-  "Attends school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
+  "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
   "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from family", 
   "Knows about sexuality from school", "Knows about sexuality from other sources",
   "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished HS",
   "Mother had a teenage birth", "Mother lacks sexual bargaining", "Household income", 
   "Number of members in the household", "Mother's age at first intercourse")
 
-kable(summary_statistics_copy, format = "latex" )
+summary_statistics_copy
+
+kable(summary_statistics_copy, format = "latex", booktabs = TRUE)
+stargazer(summary_statistics_copy, type = "latex", title="Logistic Regression Results", align=TRUE)
 ```
 
 As expected, early sexual initiators were more likely to have been reared by a mother who had herself had her first coitus at a very young age. Figure 1 illustrates the cumulative histogram of age at first coitus of the mothers. The figure clearly shows that mothers of early sexual initiators had their first coitus at a younger age than mothers of those who were not sexually active. The mean age of first coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79), respectively. The t-test showed that these differences were unlikely to have been due to chance (p < .001).
@@ -126,6 +146,7 @@ As expected, early sexual initiators were more likely to have been reared by a m
 **Figure 1: Cumulative histogram of age at first intercourse of mothers by group**
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
+
 plot(ecdf(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"]),
           col = "cadetblue1", main = "", xlab = "Mother's age at first intercourse", ylab = "Density")
 plot(ecdf(data_copy[data_copy$early_sexual_activity == "no", "m_age_1st_intercourse"]),
@@ -134,12 +155,19 @@ legend("left", c("Early sexual activity", "No early sexual activity"),
        col = c("cadetblue1", "palegreen"), lwd = 5, bty = "n", cex = 0.75)
 ```
 
-```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
+options(tinytex.verbose = TRUE)
 logit_m1 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
                   misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment,
                 data = data, family = "binomial")
 
+logit_m2 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
+                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth,
+                data = data, family = "binomial")
+
+stargazer(logit_m1, logit_m2, title="Logistic Regression Results", align=TRUE)
 
 ```
 
