@@ -256,8 +256,8 @@ daughters$minority <- with(daughters,
   factor(ifelse(!as.integer(f1_s2_9) == 6 & !as.integer(f1_s2_9) == 7, "yes", "no"), 
          levels = c("no", "yes")))
 
-# e) attends school 
-daughters$attends_school <- sinoTOyesno(daughters$f1_s2_17)
+# e) Misses school 
+daughters$misses_school <- sinoTOyesno(daughters$f1_s2_17)
 
 #################################################################################
 #####                   3.3.2 Knowledge of sexual education                 #####
@@ -344,7 +344,7 @@ mothers$m_job <- with(mothers,
 #################################################################################
 
 daughters_tidy <- daughters %>%  select(household_id, subject_id, mother_id, 
-  early_sexual_activity, rural, minority, h_internet, attends_school,  period_knowledge, 
+  early_sexual_activity, rural, minority, h_internet, misses_school,  period_knowledge, 
   aids_knowledge, pregnancy_knowledge, sexuality_knowledge, ever_drunk_alcohol, ever_smoked) %>% 
   left_join(income, by = c("household_id" = "household_id"))
 
@@ -367,7 +367,7 @@ saveRDS(data, file = "early_sexual_activity.rds")
 # mother empowerment + control variables
 
 logit_m1 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment,
                 data = data, family = "binomial")
 
@@ -377,7 +377,7 @@ summary(logit_m1)
 # mother empowerment & m_teenage_birth + control variables
 
 logit_m2 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth,
                 data = data, family = "binomial")
 
@@ -387,7 +387,7 @@ summary(logit_m2)
 # mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables
 
 logit_m3 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth +
                   m_age_1st_intercourse, data = data, family = "binomial")
 
@@ -397,22 +397,36 @@ summary(logit_m3)
 # mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables (including behavioral)
 
 logit_m4 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth +
                   m_age_1st_intercourse + ever_smoked + ever_drunk_alcohol,
                 data = data, family = "binomial")
 
 summary(logit_m4)
 
-# ------------------------------
+#################################################################################
+#####               5 Summary statistics                                    #####
+#####               5.1 Percentages and means of each variable by gruop     #####
+#################################################################################
 
-#
-
+# We are going to create a table with the summary statistics of each variable
+# We first create a copy of the data, which we will use to create the table
 data_copy <- data
+
+# The variable sexuality_knowledge has several levels in it. We will split this
+# variable into different columns. Because this is a factor, whose levels are 1 for the
+# first level, 2 for the seconde, etc., we will code as 2 those who learned about
+# sexuality from X source and 1 otherwise
+
 data_copy$value <- 2
 data_copy <- spread(data_copy, sexuality_knowledge, value, fill = 1, sep = "_")
 
-cat_var <- c("minority", "rural", "h_internet", "attends_school", "period_knowledge", 
+# We will use the chi square test and t test to compare variables within groups (early
+# sexual activity and no early sexual activity). For that we will apply some loops
+
+# chi square test (categorical variables) ------------------------------
+
+cat_var <- c("minority", "rural", "h_internet", "misses_school", "period_knowledge", 
              "pregnancy_knowledge", "aids_knowledge", "sexuality_knowledge_no info", 
              "sexuality_knowledge_family", "sexuality_knowledge_school", 
              "sexuality_knowledge_other", "ever_drunk_alcohol", "ever_smoked", "m_job", 
@@ -434,8 +448,11 @@ mean_no_early_sex  <- sapply(cat_var, function(x){
   return(mean)
 })
 
+# We put the percentages and p values everything in one table
 summary_statistics <- data_frame(variable = cat_var, mean_early_sex = mean_early_sex,
-   mean_no_early_sex = mean_no_early_sex, p_value = chi_sq_test)
+                                 mean_no_early_sex = mean_no_early_sex, p_value = chi_sq_test)
+
+# t test (continuous variables) ------------------------------
 
 cont_var <- c("h_income", "h_num_members", "m_age_1st_intercourse")
 
@@ -454,9 +471,12 @@ mean_no_early_sex  <- sapply(cont_var, function(x){
   return(mean)
 })
 
+# We add the new means and p values to the table we already made
 summary_statistics <- rbind(summary_statistics, data_frame(variable = cont_var, 
   mean_early_sex = mean_early_sex, mean_no_early_sex = mean_no_early_sex, 
   p_value = t_test))
+
+# Adding some format to the table ------------------------------
 
 summary_statistics[, 2:3] <- round(summary_statistics[, 2:3], digits = 2)
 summary_statistics[, 4] <- round(summary_statistics[, 4], digits = 3)
@@ -474,7 +494,7 @@ summary_statistics_copy$p_value <-
 names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No early sexual activity", "p value")
 
 summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area", "Does not have internet", 
-  "Attends school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
+  "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
   "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from family", 
   "Knows about sexuality from school", "Knows about sexuality from other sources",
   "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished HS",
@@ -484,5 +504,32 @@ summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area
 summary_statistics_copy
 kable(summary_statistics_copy, format = "latex" )
 
-mean(data_copy$sexuality_knowledge_school == 2)
-mean(data_copy$sexuality_knowledge_family == 2)
+# What percent of our sample belongs to each group: early sexual activity and no early sexual activity
+
+index <- as.integer(names(logit_m1$fitted.values)) # these are the observations we used in our model
+data_copy <- data[index,]
+
+prop.table(table(data_copy$early_sexual_activity))
+length(index)
+
+mean(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
+sd(data_copy[data_copy$early_sexual_activity == "no", "m_age_1st_intercourse"], na.rm = TRUE)
+
+#################################################################################
+#####       5.2 CDF of the mother's age at first intercourse by gruop       #####
+#################################################################################
+
+plot(ecdf(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"]),
+          col = "cadetblue1", main = "", xlab = "Age at first intercourse", ylab = "Density",
+     cex.axis=0.75, cex.lab=0.75)
+plot(ecdf(data_copy[data_copy$early_sexual_activity == "no", "m_age_1st_intercourse"]),
+     col = "palegreen", add = TRUE)
+legend("left", c("Early sexual activity", "No early sexual activity"),
+       col = c("cadetblue1", "palegreen"), lwd = 5, bty = "n", cex = 0.6)
+
+data_copy[data_copy$early_sexual_activity == "no", "m_age_1st_intercourse"]
+
+# ------------------
+library(texreg)
+screenreg(logit_m1)
+texreg(logit_m1)

@@ -19,16 +19,25 @@ To perform the analysis, we selected the data of girls who were 16 years old at 
 
 ## Measures
 
-As in most studies that use secondary data, not all variables necessary to understand the sexual activity of young females was available in Ensanut. Nevertheless, we still were able to add several of the factors that have been previously associated with early sexual debut.
+As in most studies that use secondary data, not all variables necessary to understand the sexual activity of young females were available in Ensanut. Nevertheless, we still were able to add several of the factors that have been previously associated with early sexual debut.
 
-The dependent variable for the analysis was *early sexual activity*.  The 16-year-old girls who reported having had sexual intercourse, were coded as 1, whereas those who reported being virgin were coded as 0. The 16-year-old cutoff has been used in previous studies to demarcate early onset of sexual activity [e.g. @ellis2003does; @paul2000determinants].
+The dependent variable for the analysis was *early sexual activity*.  The 16-year-old girls who reported having had sexual intercourse were coded as 1, whereas those who reported being virgin were coded as 0. The 16-year-old cutoff has been used in previous studies to demarcate early onset of sexual activity [e.g. @ellis2003does; @paul2000determinants].
 
-Basic sociodemographic and economic measures included ethnicity (whether the girl identified herself as an ethnic minority), geographic area (urban or rural), whether the girl was attending school, and household income in US dollars. We used income as a measure of poverty. However, evidence favors the use of consumption as a more effective tool to measure well-being in developing countries [@meyer2003measuring]. Since consumption was not available in the survey, we added other variables, including access to internet and the number of members in the household. The number of members in the household was the most predicting factor for impoverishment used in the Poverty Probability Index [@schreiner2015ecuador].
+Basic sociodemographic and economic measures included ethnicity (whether the girl identified herself as an ethnic minority), geographic area (urban or rural), whether the girl was attending school, and household income in US dollars. We used income as a measure of poverty. However, evidence favors the use of consumption as a more effective tool to measure well-being in developing countries [@meyer2003measuring]. Since consumption was not available in the survey, we added other variables, including access to internet and the number of household members. The number of household members was the most predicting factor for impoverishment used in the Poverty Probability Index  [@schreiner2015ecuador].
 
-Individual level measures consisted of knowledge about sexuality and risk behaviors. Knowledge about sexuality was estimated through questions about menstruation, pregnancy, and AIDs. Girls were asked whether they knew what was happening to their body when they hay their first period, whether a woman could become pregnant at first intercourse, and whether HIV could spread through handshake. They were also asked whether they had ever learned about sexual relationships, and if so, from whom they had learned about (school, family, and others). Risk factors included whether the girl had ever drunk alcohol or smoked in the past.
+Individual-level measures consisted of knowledge about sexuality and risk behaviors. Sexuality knowledge was estimated through questions about menstruation, pregnancy, and AIDs. Girls were asked whether they knew what was happening to their body when they hay their first period, whether a woman could become pregnant at first intercourse, and whether HIV could spread through handshake. They were also asked whether they had ever learned about sexual relationships, and if so, from whom they had learned about (school, family, and others). Risk factors included whether the girl had ever drunk alcohol or smoked in the past.
 
-Mother-related variables included the mother’s sexual bargaining ability, her age at first intercourse, and whether she had a teenage birth. Mothers were asked if they could say no to their sexual partners whenever they did not want to have sexual intercourse. For those who were not using any form of contraception but would prefer to use one, they were asked whether they thought their partner would be willing to use it or not. Mothers who were unable to turn down sex or demand their partner to use contraception were classified as low sexual bargaining. We also considered variables such as occupation and education.
+Mother-related variables included the mother’s sexual bargaining ability, age at first intercourse, and whether she had a teenage birth. Mothers were asked if they could say no to their sexual partners whenever they did not want to have sexual intercourse. For those who were not using any form of contraception but would prefer to use one, they were asked whether they thought their partner would be willing to use it or not. Mothers who were unable to turn down sex or demand their partner to use contraception were classified as low sexual bargaining. We also considered variables such as occupation and education.
 
+## Results
+
+After cleaning up the data, the sample contained answers from 828 16-year-old girls and their respective mothers. Among those, 16.4% had ever had sexual intercourse, while 83.6% had not. Table 1 shows the percentage and mean levels of the explanatory variables by each group. Mean differences of the categorical and continuous variables were tested using the chi-square and t-test, respectively.
+
+As seen in Table 1, across the two groups, girls who were sexually active were more likely to belong to an ethnic minority (p < .001), live in a rural area (p < .05), lack internet access (p < .001), and miss school (p < .001). As for sexuality knowledge, they tended to incorrectly answer the question about AIDs (p < .05) and not know what was happening to their body when they had their first period (p < .001).  Sexually active girls were more likely to learn about sexuality from family (p < .05) and other sources (e.g., internet) (p < .001). In contrast, non-sexually active girls were more prone to learning from school (p < .001).
+
+Mother characteristics significantly differed across groups. Mothers of early sexual initiators were less likely to have finished high school (p < .1) and more likely to have become a teenage parent (p < .001). Mothers of early sexual initiators were also less likely to be sexually empowered, although this difference was not shown to be statistically significant.
+
+**Table 1: Percentage and mean levels of explanatory variables by early sexual activity**
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE}
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
@@ -112,5 +121,29 @@ summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area
 kable(summary_statistics_copy, format = "latex" )
 ```
 
+As expected, early sexual initiators were more likely to have been reared by a mother who had herself had her first coitus at a very young age. Figure 1 illustrates the cumulative histogram of age at first coitus of the mothers. The figure clearly shows that mothers of early sexual initiators had their first coitus at a younger age than mothers of those who were not sexually active. The mean age of first coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79), respectively. The t-test showed that these differences were unlikely to have been due to chance (p < .001).
+
+**Figure 1: Cumulative histogram of age at first intercourse of mothers by group**
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
+plot(ecdf(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"]),
+          col = "cadetblue1", main = "", xlab = "Mother's age at first intercourse", ylab = "Density")
+plot(ecdf(data_copy[data_copy$early_sexual_activity == "no", "m_age_1st_intercourse"]),
+     col = "palegreen", add = TRUE)
+legend("left", c("Early sexual activity", "No early sexual activity"),
+       col = c("cadetblue1", "palegreen"), lwd = 5, bty = "n", cex = 0.75)
+```
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
+logit_m1 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
+                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment,
+                data = data, family = "binomial")
+
+
+```
+
+
 ## References
+
 

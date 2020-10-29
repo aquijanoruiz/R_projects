@@ -527,4 +527,17 @@
   year        = {2003},
 }
 
+@TechReport{meyer2015measuring,
+  author      = {Meyer, Bruce D and Sullivan, James X},
+  institution = {National Bureau of Economic Research},
+  title       = {Measuring the well-being of the poor using income and consumption},
+  year        = {2003},
+}
+
+@Article{schreiner2015ecuador,
+  author = {Schreiner, Mark},
+  title  = {Ecuador 2013 Poverty Probability Index{\textregistered}(PPI{\textregistered}): Design Memo},
+  year   = {2015},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
