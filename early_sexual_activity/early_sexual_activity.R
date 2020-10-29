@@ -487,7 +487,7 @@ summary_statistics_copy$p_value <-
                                           p_value <= 0.001 ~ paste(as.character(p_value), "***"),
                                           p_value <= 0.01 ~ paste(p_value, "**"),
                                           p_value <= 0.05 ~ paste(p_value, "*"),
-                                          p_value <= 0.1 ~ paste(as.numeric(p_value), "."),
+                                          p_value <= 0.1 ~ paste(as.numeric(p_value), "  ."),
                                           TRUE ~ as.character(p_value)))
 
 names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No early sexual activity", "p value")
@@ -513,6 +513,10 @@ length(index)
 mean(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
 sd(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
 
+# Ns used in the logistic models
+length(logit_m1$fitted.values)
+length(logit_m4$fitted.values)
+
 #################################################################################
 #####       5.2 CDF of the mother's age at first intercourse by gruop       #####
 #################################################################################
@@ -526,34 +530,4 @@ legend("left", c("Early sexual activity", "No early sexual activity"),
        col = c("cadetblue1", "palegreen"), lwd = 5, bty = "n", cex = 0.6)
 
 # ------------------
-library(texreg)
-library(kableExtra)
-screenreg(logit_m1)
-texreg(list(logit_m1), float.pos = "h", return.string = TRUE, bold = 0.05, stars = 0,
-       digits = 3, leading.zero = FALSE, omit.coef = "Inter")
 
-screenreg(list(logit_m1, logit_m2))
-
-(summary_statistics)
-install.packages("stargazer")
-library(stargazer)
-
-
-# CRAN version
-install.packages('tinytex')
-
-# or the development version on Github
-remotes::install_github('yihui/tinytex')
-
-library(tinytex)
-latexmk()
-
-update.packages(ask = FALSE, checkBuilt = TRUE)
-tinytex::tlmgr_update()
-
-tinytex::reinstall_tinytex()
-tinytex::install_tinytex()
-
-tinytex::tlmgr_install(c('texlive-scripts', 'dehyph-exptl'))
-library(stargazer)
-stargazer(summary_statistics_copy, type = "text", summary = FALSE)

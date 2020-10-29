@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.29)  29 OCT 2020 12:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.10.29)  29 OCT 2020 16:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -622,84 +622,68 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 {/Users/elocarinista/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.m
 ap}] [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 245.
+(Font)              <10> on input line 247.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 245.
+(Font)              <7> on input line 247.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 245.
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
-75.
-(/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Overfull \hbox (107.7433pt too wide) in paragraph at lines 291--291
-[]\T1/lmtt/m/n/10 ## % Table created by stargazer v.5.2.2 by Marek Hlavac, Harv
-ard University. E-mail: hlavac at fas.harvard.edu[] 
- []
-
-
-Overfull \hbox (186.49307pt too wide) in paragraph at lines 291--291
-[]\T1/lmtt/m/n/10 ## \begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-
-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }[] 
- []
-
-
-Overfull \hbox (637.99176pt too wide) in paragraph at lines 291--291
-[]\T1/lmtt/m/n/10 ## Statistic & \multicolumn{1}{c}{N} & \multicolumn{1}{c}{Mea
-n} & \multicolumn{1}{c}{St. Dev.} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c
-}{Pctl(25)} & \multicolumn{1}{c}{Pctl(75)} & \multicolumn{1}{c}{Max} \\[] 
- []
-
+(Font)              <5> on input line 247.
 <early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf, id=42, 
 469.755pt x 325.215pt>
 File: early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf Gra
 phic file (type pdf)
 <use early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: early_sexual_activity_report_files/figure-latex/unname
-d-chunk-2-1.pdf  used on input line 306.
+d-chunk-2-1.pdf  used on input line 295.
 (pdftex.def)             Requested size: 375.80452pt x 260.17235pt.
-[3]
 
-LaTeX Warning: Float too large for page by 101.55388pt on input line 382.
+LaTeX Warning: Float too large for page by 101.55388pt on input line 372.
 
-[4 <./early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf>] [
-5pdfTeX warning (ext4): destination with the same identifier (name{table.1}) ha
-s been already used, duplicate ignored
+[3pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
+as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.443 
-      ] [6] (./early_sexual_activity_report.aux)
+l.406 
+      ] [4pdfTeX warning (ext4): destination with the same identifier (name{tab
+le.2}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.406 
+      ] [5pdfTeX warning (ext4): destination with the same identifier (name{fig
+ure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.460 
+       <./early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf
+>] [6] (./early_sexual_activity_report.aux)
 Package rerunfilecheck Info: File `early_sexual_activity_report.out' has not ch
 anged.
-(rerunfilecheck)             Checksum: E51CE6D81B06238E861E61E873720AA9;461.
+(rerunfilecheck)             Checksum: 632C8276E4BBD265C31E2610A36D9F33;461.
  ) 
 Here is how much of TeX's memory you used:
- 11968 strings out of 481420
- 173157 string characters out of 5918398
- 488042 words of memory out of 5000000
- 28452 multiletter control sequences out of 15000+600000
- 579064 words of font info for 68 fonts, out of 8000000 for 9000
+ 11937 strings out of 481420
+ 172612 string characters out of 5918398
+ 490213 words of memory out of 5000000
+ 28423 multiletter control sequences out of 15000+600000
+ 578742 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 66i,17n,72p,273b,392s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,17n,72p,262b,365s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.
 enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
 t.enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.
 enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
-c}</Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.
-pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx1
-2.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmm
-i10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/l
-mr10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
-lmr12.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm
-/lmr17.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/l
-m/lmri10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public
-/lm/lmsy10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/publ
-ic/lm/lmsy7.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/pub
-lic/lm/lmtt10.pfb>
-Output written on early_sexual_activity_report.pdf (6 pages, 214633 bytes).
+c}</Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.
+pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi1
+0.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr
+10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
+r12.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/l
+mr17.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
+lmri10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/l
+m/lmsy10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public
+/lm/lmsy7.pfb>
+Output written on early_sexual_activity_report.pdf (6 pages, 159543 bytes).
 PDF statistics:
- 137 PDF objects out of 1000 (max. 8388607)
- 115 compressed objects within 2 object streams
- 36 named destinations out of 1000 (max. 500000)
+ 134 PDF objects out of 1000 (max. 8388607)
+ 114 compressed objects within 2 object streams
+ 38 named destinations out of 1000 (max. 500000)
  46 words of extra memory for PDF output out of 10000 (max. 10000000)
 

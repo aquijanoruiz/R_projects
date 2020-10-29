@@ -17,7 +17,7 @@ Many studies have tested the relationship between precocious sexual initiation a
 
 ## Data and sample
 
-We used data from the 2018 National Health and Nutrition Survey of Ecuador (Ensanut). Ensanut is a survey conducted national wide every five years by the National Statistics Institute of Ecuador. The goal of this survey is to assess the health and nutritional status of adults and children in Ecuador. The survey gathered data from 43,311 households, totaling a number of 168,747 subjects. Measures of anthropometric, nutrition, economic status were collected for all the members of the household. Data about the sexual health of women was gathered for all those between 12 and 49 years old. Information about risk factors (e.g. smoking and drinking) was collected for only one random subject (male or female) between 5 and 18.
+We used data from the 2018 National Health and Nutrition Survey of Ecuador (Ensanut), which is conducted every five years by the National Statistics Institute of Ecuador. Its goal is to assess the health and nutritional status of adults and children in Ecuador. In 2018, the survey gathered data from 43,311 households, totaling a number of 168,747 subjects. Measures of anthropometric, nutrition, economic status were collected for all the members of the household. Data about the sexual health of women was gathered for all those between 12 and 49 years old. Information about risk factors (e.g. smoking and drinking) was collected for only one random subject (male or female) between 5 and 18.
 
 To perform the analysis, we selected the data of girls who were 16 years old at the time of the interview and their mothers. Because the independent variables we are interested in are the mothers' sexual bargaining ability and age at first intercourse, we filtered those girls who were currently living with their mothers and their mothers' partner (which in most cases was the father). Additionally, since information regarding sexuality was only gathered for women at age 49 or younger, we only considered those whose mother was under that age threshold. Finally, as data about drug use were not obtained for every subject (due to the random selection), we decided to perform the analysis on two samples: one larger sample that does not include these additional confounders and a smaller one that includes them.
 
@@ -33,7 +33,7 @@ Individual-level measures consisted of knowledge about sexuality and risk behavi
 
 Mother-related variables included the mother’s sexual bargaining ability, age at first intercourse, and whether she had a teenage birth. Mothers were asked if they could say no to their sexual partners whenever they did not want to have sexual intercourse. For those who were not using any form of contraception but would prefer to use one, they were asked whether they thought their partner would be willing to use it or not. Mothers who were unable to turn down sex or demand their partner to use contraception were classified as low sexual bargaining. We also considered variables such as occupation and education.
 
-## Results
+## RESULTS
 
 After cleaning up the data, the sample contained answers from 828 16-year-old girls and their respective mothers. Among those, 16.4% had ever had sexual intercourse, while 83.6% had not. Table 1 shows the percentage and mean levels of the explanatory variables by each group. Mean differences of the categorical and continuous variables were tested using the chi-square and t-test, respectively.
 
@@ -41,17 +41,16 @@ As seen in Table 1, across the two groups, girls who were sexually active were m
 
 Mother characteristics significantly differed across groups. Mothers of early sexual initiators were less likely to have finished high school (p < .1) and more likely to have become a teenage parent (p < .001). Mothers of early sexual initiators were also less likely to be sexually empowered, although this difference was not shown to be statistically significant.
 
-**Table 1: Percentage and mean levels of explanatory variables by early sexual activity**
-
-```{r, warning=FALSE, message=FALSE, echo=FALSE}
+```{r, warning=FALSE, message=FALSE, echo=FALSE, results='asis'}
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
 if(!require(knitr)) install.packages("knitr", repos = "http://cran.us.r-project.org")
 if(!require(kableExtra)) install.packages("kableExtra", repos = "http://cran.us.r-project.org")
 if(!require(stargazer)) install.packages("stargazer", repos = "http://cran.us.r-project.org")
 
 options(tinytex.verbose = TRUE)
-data <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/early_sexual_activity_tidy_data.rds"))
+data <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/early_sexual_activity_data.rds"))
 
+data_copy <- data
 data_copy$value <- 2
 data_copy <- spread(data_copy, sexuality_knowledge, value, fill = 1, sep = "_")
 
@@ -122,7 +121,7 @@ summary_statistics_copy$p_value <-
                                           p_value <= 0.001 ~ paste(as.character(p_value), "***"),
                                           p_value <= 0.01 ~ paste(p_value, "**"),
                                           p_value <= 0.05 ~ paste(p_value, "*"),
-                                          p_value <= 0.1 ~ paste(as.numeric(p_value), "."),
+                                          p_value <= 0.1 ~ paste(as.numeric(p_value), " ."),
                                           TRUE ~ as.character(p_value)))
 
 names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No early sexual activity", "p value")
@@ -135,17 +134,14 @@ summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area
   "Mother had a teenage birth", "Mother lacks sexual bargaining", "Household income", 
   "Number of members in the household", "Mother's age at first intercourse")
 
-summary_statistics_copy
-
-kable(summary_statistics_copy, format = "latex", booktabs = TRUE)
-stargazer(summary_statistics_copy, type = "latex", title="Logistic Regression Results", align=TRUE)
+kable(summary_statistics_copy, format = "latex", booktabs = TRUE, 
+      caption = "Percentage and mean levels of explanatory variables by group") %>%
+  footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. . < .1. *p < .05. **p < .01. ***p < .001.", threeparttable = T, footnote_as_chunk = T)
 ```
 
 As expected, early sexual initiators were more likely to have been reared by a mother who had herself had her first coitus at a very young age. Figure 1 illustrates the cumulative histogram of age at first coitus of the mothers. The figure clearly shows that mothers of early sexual initiators had their first coitus at a younger age than mothers of those who were not sexually active. The mean age of first coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79), respectively. The t-test showed that these differences were unlikely to have been due to chance (p < .001).
 
-**Figure 1: Cumulative histogram of age at first intercourse of mothers by group**
-
-```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
+```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%', fig.cap=paste("Cumulative histogram of age at first intercourse of mothers by group")}
 
 plot(ecdf(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"]),
           col = "cadetblue1", main = "", xlab = "Mother's age at first intercourse", ylab = "Density")
@@ -156,18 +152,18 @@ legend("left", c("Early sexual activity", "No early sexual activity"),
 ```
 
 ```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
-options(tinytex.verbose = TRUE)
+
 logit_m1 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment,
                 data = data, family = "binomial")
 
 logit_m2 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  misses_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth,
                 data = data, family = "binomial")
 
-stargazer(logit_m1, logit_m2, title="Logistic Regression Results", align=TRUE)
+stargazer(logit_m1, logit_m2, title="Logistic Regression Results", align=TRUE, header = FALSE)
 
 ```
 
