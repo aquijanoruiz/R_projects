@@ -153,17 +153,44 @@ legend("left", c("Early sexual activity", "No early sexual activity"),
 
 ```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
 
-logit_m1 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+# Model 1: ------------------------------
+# mother empowerment + control variables
+
+logit_m1 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment,
                 data = data, family = "binomial")
 
-logit_m2 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
-                  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth,
+
+# Model 2: ------------------------------
+# mother empowerment & m_teenage_birth + control variables
+
+logit_m2 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education +  m_empowerment + m_teenage_birth,
                 data = data, family = "binomial")
 
-stargazer(logit_m1, logit_m2, title="Logistic Regression Results", align=TRUE, header = FALSE)
+
+# Model 3: ------------------------------ 
+# mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables
+
+logit_m3 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education +  m_empowerment + m_teenage_birth +
+                  m_age_1st_intercourse, data = data, family = "binomial")
+
+stargazer(logit_m1, logit_m2, logit_m3, title="Logistic Regression Results", 
+          covariate.labels = c("Ethnic minority", "Lives in a rural area", "Household income", 
+                               "Number of members in the household", "Does not have internet", 
+                               "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy",
+                               "Lacks knowledge about AIDs", "Knows about sexuality from family", 
+                               "Knows about sexuality from school", "Knows about sexuality from other sources",
+                               "Mother has a job", "Mother finished primary school", 
+                               "Mother finished secondary school", "Mother finished college", 
+                               "Mother lacks sexual bargaining", "Mother had a teenage birth",
+                               "Mother's age at first intercourse"),
+          align=TRUE, header = FALSE,
+          dep.var.labels = c("Early sexual activity"), no.space = TRUE)
 
 ```
 

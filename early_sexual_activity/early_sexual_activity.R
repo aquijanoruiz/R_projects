@@ -313,9 +313,9 @@ mothers$m_education <- mothers$f1_s2_19_1
 levels(mothers$m_education) <- c("none", "none", "none", "primary", "primary", "secondary", 
                                  "secondary", "tertiary", "tertiary", "tertiary")
 
-# e) mother finished high school
-mothers$m_finished_HS <- mothers$m_education
-levels(mothers$m_finished_HS) <- c("no", "no", "yes", "yes")
+# e) mother finished primary school
+mothers$m_finished_ps <- mothers$m_education
+levels(mothers$m_finished_ps) <- c("no", "yes", "yes", "yes")
 
 # f) empowerment & sexual decision making of the mother
 # We measure empowerment as the ability of the mothers's to make their own sexual decisions
@@ -348,7 +348,7 @@ daughters_tidy <- daughters %>%  select(household_id, subject_id, mother_id,
   left_join(income, by = c("household_id" = "household_id"))
 
 mothers_tidy <- mothers %>% select(subject_id, m_teenage_birth,
-  m_empowerment, m_finished_HS, m_job, m_age_1st_intercourse)
+  m_empowerment, m_finished_HS, m_job, m_age_1st_intercourse, m_education, m_finished_ps)
 
 data <- daughters_tidy %>% left_join(mothers_tidy, by = c("mother_id" = "subject_id")) %>%
   filter(!is.na(early_sexual_activity)) # we eliminate NAs
@@ -365,8 +365,8 @@ saveRDS(data, file = "early_sexual_activity.rds")
 # Model 1: ------------------------------
 # mother empowerment + control variables
 
-logit_m1 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+logit_m1 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
                   sexuality_knowledge + m_job + m_finished_HS +  m_empowerment,
                 data = data, family = "binomial")
 
@@ -375,9 +375,9 @@ summary(logit_m1)
 # Model 2: ------------------------------
 # mother empowerment & m_teenage_birth + control variables
 
-logit_m2 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
-                  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth,
+logit_m2 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education +  m_empowerment + m_teenage_birth,
                 data = data, family = "binomial")
 
 summary(logit_m2)
@@ -385,9 +385,9 @@ summary(logit_m2)
 # Model 3: ------------------------------ 
 # mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables
 
-logit_m3 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
-                  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth +
+logit_m3 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education +  m_empowerment + m_teenage_birth +
                   m_age_1st_intercourse, data = data, family = "binomial")
 
 summary(logit_m3)
@@ -397,7 +397,7 @@ summary(logit_m3)
 
 logit_m4 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
                   attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
-                  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment + m_teenage_birth +
+                  sexuality_knowledge + m_job + m_education +  m_empowerment + m_teenage_birth +
                   m_age_1st_intercourse + ever_smoked + ever_drunk_alcohol,
                 data = data, family = "binomial")
 
@@ -429,7 +429,7 @@ cat_var <- c("minority", "rural", "h_internet", "attends_school", "period_knowle
              "pregnancy_knowledge", "aids_knowledge", "sexuality_knowledge_no info", 
              "sexuality_knowledge_family", "sexuality_knowledge_school", 
              "sexuality_knowledge_other", "ever_drunk_alcohol", "ever_smoked", "m_job", 
-             "m_finished_HS", "m_teenage_birth", "m_empowerment")
+             "m_finished_ps", "m_teenage_birth", "m_empowerment")
 
 
 chi_sq_test  <- sapply(cat_var, function(x){
@@ -496,7 +496,7 @@ summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area
   "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
   "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from family", 
   "Knows about sexuality from school", "Knows about sexuality from other sources",
-  "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished HS",
+  "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished primary school",
   "Mother had a teenage birth", "Mother lacks sexual bargaining", "Household income", 
   "Number of members in the household", "Mother's age at first intercourse")
 
@@ -531,3 +531,22 @@ legend("left", c("Early sexual activity", "No early sexual activity"),
 
 # ------------------
 
+mean(data[data$early_sexual_activity == "no", "m_finished_PS"] == "yes", na.rm = TRUE)
+
+summary(logit_m1)
+
+logit_mx <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education +  m_empowerment, data = data, family = "binomial")
+summary(logit_mx)
+
+c("Ethnic minority", "Lives in a rural area", "Household income", "Number of members in the household", "Does not have internet", 
+  "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", "Lacks knowledge about AIDs", 
+  "Knows about sexuality from family", "Knows about sexuality from school", "Knows about sexuality from other sources",
+  "Mother has a job", "Mother finished primary school", "Mother finished secondary school", "Mother finished college",
+  "Mother lacks sexual bargaining", "Mother had a teenage birth",
+   "Mother's age at first intercourse")
+
+minority + rural + h_income + h_num_members + h_internet + 
+  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment
