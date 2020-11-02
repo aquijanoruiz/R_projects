@@ -575,4 +575,33 @@
   publisher = {JSTOR},
 }
 
+@Article{guo2012timing,
+  author    = {Guo, Wei and Wu, Zheng and Qiu, Yue and Chen, Gong and Zheng, Xiaoying},
+  journal   = {International perspectives on sexual and reproductive health},
+  title     = {The timing of sexual debut among Chinese youth},
+  year      = {2012},
+  pages     = {196--204},
+  publisher = {JSTOR},
+}
+
+@Article{chong2013effectiveness,
+  author    = {Chong, Alberto and Gonzalez-Navarro, Marco and Karlan, Dean and Valdivia, Martin},
+  journal   = {NBER Working Paper Series},
+  title     = {Effectiveness and spillovers of online sex education: Evidence from a randomized evaluation in Colombian public schools},
+  year      = {2013},
+  pages     = {18776},
+  publisher = {National Bureau of Economic Research, Inc.},
+}
+
+@Article{jerves2014understanding,
+  author    = {Jerves, Elena and L{\'o}pez, Silvia and Castro, Cecilia and Ortiz, William and Palacios, Mar{\'\i}a and Rober, Peter and Enzlin, Paul},
+  journal   = {Sex Education},
+  title     = {Understanding parental views of adolescent sexuality and sex education in Ecuador: a qualitative study},
+  year      = {2014},
+  number    = {1},
+  pages     = {14--27},
+  volume    = {14},
+  publisher = {Taylor \& Francis},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
