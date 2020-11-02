@@ -19,7 +19,7 @@ Many studies have tested the relationship between precocious sexual initiation a
 
 We used data from the 2018 National Health and Nutrition Survey of Ecuador (Ensanut), which is conducted every five years by the National Statistics Institute of Ecuador. Its goal is to assess the health and nutritional status of adults and children in Ecuador. In 2018, the survey gathered data from 43,311 households, totaling a number of 168,747 subjects. Measures of anthropometric, nutrition, economic status were collected for all the members of the household. Data about the sexual health of women was gathered for all those between 12 and 49 years old. Information about risk factors (e.g. smoking and drinking) was collected for only one random subject (male or female) between 5 and 18.
 
-To perform the analysis, we selected the data of girls who were 16 years old at the time of the interview and their mothers. Because the independent variables we are interested in are the mothers' sexual bargaining ability and age at first intercourse, we filtered those girls who were currently living with their mothers and their mothers' partner (which in most cases was the father). Additionally, since information regarding sexuality was only gathered for women at age 49 or younger, we only considered those whose mother was under that age threshold. Finally, as data about drug use were not obtained for every subject (due to the random selection), we decided to perform the analysis on two samples: one larger sample that does not include these additional confounders and a smaller one that includes them.
+To perform the analysis, we selected the data of girls who were 16 years old at the time of the interview and their mothers. Because the we are interested on how mother-related variables such as sexual empowerment may relate to early sexual debut among young females, we filtered those girls who were currently living with their mothers and their mothers' partner (which in most cases was the father). As mentioned before, information regarding sexuality was only gathered for women at age 49 or younger. Therefore, we only considered those whose mother was under that age threshold. Finally, as data about smoking and drinking are not available for every subject, we decided to perform the analysis on two samples: one larger sample that does not include these additional confounders and a smaller one that includes them.
 
 ## Measures
 
@@ -27,19 +27,17 @@ As in most studies that use secondary data, not all variables necessary to under
 
 The dependent variable for the analysis was *early sexual activity*.  The 16-year-old girls who reported having had sexual intercourse were coded as 1, whereas those who reported being virgin were coded as 0. The 16-year-old cutoff has been used in previous studies to demarcate early onset of sexual activity [e.g. @ellis2003does; @paul2000determinants].
 
-Basic sociodemographic and economic measures included ethnicity (whether the girl identified herself as an ethnic minority), geographic area (urban or rural), whether the girl was attending school, and household income in US dollars. We used income as a measure of poverty. However, evidence favors the use of consumption as a more effective tool to measure well-being in developing countries [@meyer2003measuring]. Since consumption was not available in the survey, we added other variables, including access to internet and the number of household members. The number of household members was the most predicting factor for impoverishment used in the Poverty Probability Index  [@schreiner2015ecuador].
+Basic sociodemographic and economic measures included ethnicity (whether the girl identified herself as an ethnic minority), geographic area (urban or rural), whether the girl was attending school, and household income in US dollars. We used income as a measure of poverty. However, evidence favors the use of consumption as a more effective tool to measure well-being in developing countries [@meyer2003measuring]. Since consumption was not available in the survey, we added other variables which may relate to the economic status of the household, including access to internet and the number of household members. The number of household members was the most predicting factor for impoverishment used in the Poverty Probability Index  [@schreiner2015ecuador].
 
-Individual-level measures consisted of knowledge about sexuality and risk behaviors. Sexuality knowledge was estimated through questions about menstruation, pregnancy, and AIDs. Girls were asked whether they knew what was happening to their body when they hay their first period, whether a woman could become pregnant at first intercourse, and whether HIV could spread through handshake. They were also asked whether they had ever learned about sexual relationships, and if so, from whom they had learned about (school, family, and others). Risk factors included whether the girl had ever drunk alcohol or smoked in the past.
+Individual-level measures consisted of knowledge about sexuality and risk behaviors. Sexuality knowledge was estimated through questions about menstruation, pregnancy, and AIDs. Girls were asked whether they knew what was happening to their body when they hay their first period, whether a woman could become pregnant at first intercourse, and whether HIV could spread through handshake. They were also asked whether they had ever learned about sexual relations, and if so, from whom they had learned about (school, family, and others). Risk factors included whether the girl had ever drunk alcohol or smoked in the past.
 
 Mother-related variables included the mother’s sexual bargaining ability, age at first intercourse, and whether she had a teenage birth. Mothers were asked if they could say no to their sexual partners whenever they did not want to have sexual intercourse. For those who were not using any form of contraception but would prefer to use one, they were asked whether they thought their partner would be willing to use it or not. Mothers who were unable to turn down sex or demand their partner to use contraception were classified as low sexual bargaining. We also considered variables such as occupation and education.
 
 ## RESULTS
 
-After cleaning up the data, the sample contained answers from 828 16-year-old girls and their respective mothers. Among those, 16.4% had ever had sexual intercourse, while 83.6% had not. Table 1 shows the percentage and mean levels of the explanatory variables by each group. Mean differences of the categorical and continuous variables were tested using the chi-square and t-test, respectively.
+After cleaning up the data, the sample contained answers from 828 16-year-old girls and their respective mothers. Among those, 16.4% had ever had sexual intercourse, while 83.6% had not. Before performing the primary analysis, differences in the prevalence of early sexual onset and their relationship with the explanatory variables were assessed using the chi-square and t-test. The primary analysis was based on a series of logistic regression models examining the association between early sexual activity among young females and the characteristics of their mothers after adjustment for covariates.
 
-As seen in Table 1, across the two groups, girls who were sexually active were more likely to belong to an ethnic minority (p < .001), live in a rural area (p < .05), lack internet access (p < .001), and miss school (p < .001). As for sexuality knowledge, they tended to incorrectly answer the question about AIDs (p < .05) and not know what was happening to their body when they had their first period (p < .001).  Sexually active girls were more likely to learn about sexuality from family (p < .05) and other sources (e.g., internet) (p < .001). In contrast, non-sexually active girls were more prone to learning from school (p < .001).
-
-Mother characteristics significantly differed across groups. Mothers of early sexual initiators were less likely to have finished high school (p < .1) and more likely to have become a teenage parent (p < .001). Mothers of early sexual initiators were also less likely to be sexually empowered, although this difference was not shown to be statistically significant.
+Table 1 shows the percentage and mean levels of the explanatory variables by each group. Mean differences of the categorical and continuous variables were tested using the chi-square and t-test, respectively. Across the two groups, girls who were sexually active were more likely to belong to an ethnic minority (p < .001), live in a rural area (p < .05), lack internet access (p < .001), and miss school (p < .001). As for sexuality knowledge, they tended to incorrectly answer the question about AIDs (p < .05) and not know what was happening to their body when they had their first period (p < .001).  Sexually active girls were more likely to learn about sexuality from family (p < .05) and other sources (e.g., internet) (p < .001). In contrast, non-sexually active girls were more prone to learning from school (p < .001).
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, results='asis'}
 if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
@@ -63,7 +61,7 @@ cat_var <- c("minority", "rural", "h_internet", "attends_school", "period_knowle
              "pregnancy_knowledge", "aids_knowledge", "sexuality_knowledge_no info", 
              "sexuality_knowledge_family", "sexuality_knowledge_school", 
              "sexuality_knowledge_other", "ever_drunk_alcohol", "ever_smoked", "m_job", 
-             "m_finished_HS", "m_teenage_birth", "m_empowerment")
+             "m_finished_ps", "m_teenage_birth", "m_empowerment")
 
 
 chi_sq_test  <- sapply(cat_var, function(x){
@@ -119,9 +117,9 @@ summary_statistics_copy <- summary_statistics
 summary_statistics_copy$p_value <- 
   with(summary_statistics_copy, case_when(p_value < 0.0005 ~ paste("0.000", "***"),
                                           p_value <= 0.001 ~ paste(as.character(p_value), "***"),
-                                          p_value <= 0.01 ~ paste(p_value, "**"),
-                                          p_value <= 0.05 ~ paste(p_value, "*"),
-                                          p_value <= 0.1 ~ paste(as.numeric(p_value), " ."),
+                                          p_value <= 0.01 ~ paste(p_value, "***"),
+                                          p_value <= 0.05 ~ paste(p_value, "**"),
+                                          p_value <= 0.1 ~ paste(as.numeric(p_value), " *"),
                                           TRUE ~ as.character(p_value)))
 
 names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No early sexual activity", "p value")
@@ -130,16 +128,16 @@ summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area
   "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
   "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from family", 
   "Knows about sexuality from school", "Knows about sexuality from other sources",
-  "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished HS",
+  "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished primary school",
   "Mother had a teenage birth", "Mother lacks sexual bargaining", "Household income", 
   "Number of members in the household", "Mother's age at first intercourse")
 
 kable(summary_statistics_copy, format = "latex", booktabs = TRUE, 
       caption = "Percentage and mean levels of explanatory variables by group") %>%
-  footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. . < .1. *p < .05. **p < .01. ***p < .001.", threeparttable = T, footnote_as_chunk = T)
+  footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. *p < .1; **p < .05; ***p < .01", threeparttable = T, footnote_as_chunk = T)
 ```
 
-As expected, early sexual initiators were more likely to have been reared by a mother who had herself had her first coitus at a very young age. Figure 1 illustrates the cumulative histogram of age at first coitus of the mothers. The figure clearly shows that mothers of early sexual initiators had their first coitus at a younger age than mothers of those who were not sexually active. The mean age of first coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79), respectively. The t-test showed that these differences were unlikely to have been due to chance (p < .001).
+Mother characteristics significantly differed across groups. Mothers of early sexual initiators were less likely to have finished primary school (p < .01) and more likely to have become a teenage parent (p < .001). As expected, early sexual initiators were more likely to have been reared by a mother who had herself had her first coitus at a very young age. Figure 1 illustrates the cumulative histogram of age at first coitus of the mothers. The figure clearly shows that mothers of early sexual initiators had their first coitus at a younger age than mothers of those who were not sexually active. The mean age at first coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79), respectively. The t-test showed that these differences were unlikely to have been due to chance (p < .001).
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%', fig.cap=paste("Cumulative histogram of age at first intercourse of mothers by group")}
 
@@ -151,6 +149,16 @@ legend("left", c("Early sexual activity", "No early sexual activity"),
        col = c("cadetblue1", "palegreen"), lwd = 5, bty = "n", cex = 0.75)
 ```
 
+Logistic regressions were used to assess the relationship between the early onset of sexual activity among girls and the mothers’ sexual bargaining ability, as well as other behavioral traits such as the mothers’ age at first intercourse and whether she had a teenage birth. Table 2 shows the coefficients (log odds ratio) of these regressions. To observe the predicting ability of the three mother-related variables (sexual bargaining, teenage birth, and age at first intercourse) alone and in interaction, we computed three logistic regressions. Thus, we can notice how the significance of the coefficient changes with each additional variable. Each regression is represented by a separate column in Table 2.
+
+As demonstrated in column 2 of Table 2, after adjustment for all covariates, having a mother who lacks sexual bargaining and a mother who had a teenage birth significantly increases the log odds of early sexual onset. These results support the hypothesis that the sexual attitudes and behavior may be in some mechanism inherited from mother to daughter. Similarly, column 3 of Table 2 shows that for each additional year that the mother delays her sexual debut, the log odds of her daughter being sexually active decrease. When the age at first intercourse of the mother is added to the model, however, lacking sexual bargaining and having a teenage birth become statistically insignificant due to the correlation of predictors. A plausible explanation is that the age at first intercourse explains whether the mother is sexually empowered and whether she was once a teenage mother.
+
+Although not the main focus of the study, it is worth examining whether sexuality knowledge has a predictive value in the model. As shown in Table 2, while knowledge about period, pregnancy, and AIDs are not statistically significant in any of the regressions, from whom girls acquire information about sexual relations seems to matter. Even after controlling for school attendance and other covariates, girls who learn about sex from family have higher odds of engaging in early sexual activity than those who learn from school. It is also worth noting that the sociodemographic variables do not appear to explain the differences in early sexual onset. In contrast, missing school and having an employed mother significantly increases the logs odds of early sexual debut.
+
+As mentioned before, data about smoking and drinking were not gathered for all subjects in our sample. Therefore, a series of logistic regressions were performed on a smaller sample in order to add the two cofounders to the original model. These regressions are illustrated in Table 3.  However, it is important to emphasize that the probability of falling into type 2 error increases as the sample becomes smaller. Thus, while having more cofounders improves the accuracy of the outcomes, reducing the sample size may as well affect the precision of the estimates.
+
+As expected, smoking and drinking were high predictors for precocious sexual initiation. Table 3 shows that even after controlling for these two additional variables, the log odds of early sexual onset decrease for each additional year that the mother delays her sexual debut. Interestingly, when adding these cofounders, from whom girls learn about sexual relations and having an employed mother are no longer significant. As with the previous regressions, attending school and having a mother who finished primary school are associated with delayed sexual activity.
+
 ```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
 
 # Model 1: ------------------------------
@@ -158,7 +166,7 @@ legend("left", c("Early sexual activity", "No early sexual activity"),
 
 logit_m1 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
                   attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
-                  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment,
+                  sexuality_knowledge + m_job + m_education +  m_empowerment,
                 data = data, family = "binomial")
 
 
@@ -189,11 +197,56 @@ stargazer(logit_m1, logit_m2, logit_m3, title="Logistic Regression Results",
                                "Mother finished secondary school", "Mother finished college", 
                                "Mother lacks sexual bargaining", "Mother had a teenage birth",
                                "Mother's age at first intercourse"),
-          align=TRUE, header = FALSE,
+          align=TRUE, header = FALSE, star.cutoffs = c(.05, .01, .001),
           dep.var.labels = c("Early sexual activity"), no.space = TRUE)
 
 ```
 
+
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
+# Model 4/5/6------------------------------
+# mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables (including behavioral)
+logit_m4 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education + ever_drunk_alcohol + ever_smoked + 
+                  m_empowerment,
+                data = data, family = "binomial")
+
+logit_m5 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education + ever_drunk_alcohol + ever_smoked + 
+                  m_empowerment + m_teenage_birth,
+                data = data, family = "binomial")
+
+logit_m6 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education + ever_drunk_alcohol + ever_smoked + 
+                  m_empowerment + m_teenage_birth + m_age_1st_intercourse,
+                data = data, family = "binomial")
+
+stargazer(logit_m4, logit_m5, logit_m6, title="Logistic Regression Results", 
+          covariate.labels = c("Ethnic minority", "Lives in a rural area", "Household income", 
+                               "Number of members in the household", "Does not have internet", 
+                               "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy",
+                               "Lacks knowledge about AIDs", "Knows about sexuality from family", 
+                               "Knows about sexuality from school", "Knows about sexuality from other sources",
+                               "Mother has a job", "Mother finished primary school", 
+                               "Mother finished secondary school", "Mother finished college", 
+                               "Ever drunk alcohol", "Ever smoked", "Mother lacks sexual bargaining",
+                               "Mother had a teenage birth", "Mother's age at first intercourse"),
+          align=TRUE, header = FALSE, star.cutoffs = c(.05, .01, .001),
+          dep.var.labels = c("Early sexual activity"), no.space = TRUE)
+```                
+
+## DISCUSSION
+
+This study contributes to the literature on early initiation of sexual activity among female adolescents. It is not the time maternal empowerment has been studied as a predictor of sexual activity. Gipson and Upchurch -@gipson2017status, for instance, found that some of characteristics and measures of maternal empowerment and status were predictive of their daughters’ sexual initiation. Yet, few if any have explored maternal empowerment in the way it has been done in this study. In this research, we found that girls who had a mother that was unable to turn down sex or demand the use of contraception were more likely to be sexually active. This raises the question of whether women’s sexual behavior or empowerment can be transmitted intergenerationally. It is worth noting that sexual coercion is still a major cause of sexual debut [@moore2007coerced].  In our sample, 34% of girls reported not having agreed or being convinced to engage in sexual activity at the time of their first sexual experience. Perhaps, young women are able to mimic the sexual conduct of their mothers. If submissive behavior is normalized within the family, girls may find it acceptable to receive and accept sexual advances against their will.
+
+Another important outcome of this research was the relationship between the timing of sexual onset among mothers and daughters. Even after controlling for several cofounders, the mother's age at sexual debut was one of the most significant and independent predictors. The younger a mother was when she had her first intercourse, the higher the odds of her daughter being sexually active by the age of 16. This finding is parallel to the intergenerational tendency of early childbearing [@kahn1992intergenerational], in which teenage mothers are more likely to have been brought up by a single mother who had herself become a parent early in her life. Previous research on sexual initiation has found that adding drug use as a covariate largely impacts the significance of coefficients [e.g. @mandara2003predictors]. However, when smoking and drinking were added into our models, the mother's age at first intercourse remained statistically significant.
+
+It is also worth discussing the interaction between sexual bargaining and sexual onset among mothers. The mothers’ sexual bargaining was a good predictor of their daughters' sexual activity in the first models. Nevertheless, when combined with the mothers’ age at first coitus, sexual bargaining was no longer significant, implying that sexual bargaining predicted sexual activity through age at first coitus. These findings strengthen the hypothesis of maternal empowerment as a potential determinant of the timing of sexual debut. How much control mothers have of their own sexual decision making may be mirrored in their daughters’ behavior. Mothers who started their sexual life prematurely may have done so for reasons not necessarily attached to their choice. These assumptions, however, need to be corroborated with future research.
+
+We found that girls whose mothers had completed primary school were less likely to have engaged in sexual intercourse. These results are consistent with previous evidence that has shown that maternal education inhibits the risk of early sexual debut [e.g. @brewster1994race; @jordahl2009bioecological; @santelli2000association]. One explanation that has been proposed is that better-educated parents have higher expectations for their children to finish school and establish a career, putting pressure on them to delay sexual onset [@guo2012timing]. We also found that the source from which girls received information about sexuality was a good predictor of their sexual behavior. After controlling for school attendance, girls who learned about sexuality from family were more likely to have experienced sexual activity than their peers who reported having learned from school. In Ecuador, parents have shown interest in addressing sexuality with their children in order to discourage them from having sexual relations. Yet, they face a few constraints, including lack of knowledge and feelings of shame and anxiety [@jerves2014understanding]. These limitations may hinder these efforts and even produce unintended results. This may be one of the explanations why communication from parent to child about sex was predictive of early sexual activity.
 
 ## References
 

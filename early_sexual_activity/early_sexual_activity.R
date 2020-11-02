@@ -214,6 +214,12 @@ sinoTOnoyes <- function(x){
 # early sexual acrtivity ------------------------------
 daughters$early_sexual_activity <- sinoTOnoyes(daughters$f2_s8_803)
 
+# cercion at first intercourse ------------------------------
+# (Not the dependent variable but something we will look at)
+daughters$coercion_1st_intercourse <- factor(with(daughters,
+  ifelse(as.integer(f2_s8_807) == 1 | as.integer(f2_s8_807) == 2, "no", "yes"), 
+  levels = c("yes", "no")))
+
 #################################################################################
 #####                   3.3 Independent variables                           #####
 #####                   3.3.1 Social, economic and demographic variabless   #####
@@ -344,8 +350,8 @@ mothers$m_job <- with(mothers,
 
 daughters_tidy <- daughters %>%  select(household_id, subject_id, mother_id, 
   early_sexual_activity, rural, minority, h_internet, attends_school,  period_knowledge, 
-  aids_knowledge, pregnancy_knowledge, sexuality_knowledge, ever_drunk_alcohol, ever_smoked) %>% 
-  left_join(income, by = c("household_id" = "household_id"))
+  aids_knowledge, pregnancy_knowledge, sexuality_knowledge, ever_drunk_alcohol, ever_smoked,
+  coercion_1st_intercourse) %>% left_join(income, by = c("household_id" = "household_id"))
 
 mothers_tidy <- mothers %>% select(subject_id, m_teenage_birth,
   m_empowerment, m_finished_HS, m_job, m_age_1st_intercourse, m_education, m_finished_ps)
@@ -392,16 +398,31 @@ logit_m3 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_memb
 
 summary(logit_m3)
 
-# Model 4 ------------------------------
+# Model 4/5/6------------------------------
 # mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables (including behavioral)
-
 logit_m4 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
+                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  sexuality_knowledge + m_job + m_education +  m_empowerment + ever_smoked +
+                  ever_drunk_alcohol,
+                data = data, family = "binomial")
+
+summary(logit_m4)
+
+logit_m5 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
+                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
+                  sexuality_knowledge + m_job + m_education +  m_empowerment + m_teenage_birth +
+                  ever_smoked + ever_drunk_alcohol,
+                data = data, family = "binomial")
+
+summary(logit_m5)
+
+logit_m6 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
                   attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
                   sexuality_knowledge + m_job + m_education +  m_empowerment + m_teenage_birth +
                   m_age_1st_intercourse + ever_smoked + ever_drunk_alcohol,
                 data = data, family = "binomial")
 
-summary(logit_m4)
+summary(logit_m6)
 
 #################################################################################
 #####               5 Summary statistics                                    #####
@@ -547,6 +568,21 @@ c("Ethnic minority", "Lives in a rural area", "Household income", "Number of mem
   "Mother lacks sexual bargaining", "Mother had a teenage birth",
    "Mother's age at first intercourse")
 
-minority + rural + h_income + h_num_members + h_internet + 
-  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
-  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment
+
+# ------------------
+index <- as.integer(names(logit_m4$fitted.values)) # these are the observations we used in our model
+data_copy <- data[index,]
+
+prop.table(table(data_copy$early_sexual_activity))
+length(index)
+
+mean(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
+sd(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
+
+#################################################################################
+#####                              6. Q & A                                 #####
+#################################################################################
+
+# How many girls in our sample had a coerced first sex?
+
+mean(data$coercion_1st_intercourse == "yes", na.rm = TRUE)
