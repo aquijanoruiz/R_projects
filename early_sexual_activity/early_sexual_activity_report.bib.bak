@@ -544,4 +544,35 @@
   publisher = {NIH Public Access},
 }
 
+@Article{gipson2017status,
+  author    = {Gipson, Jessica D and Upchurch, Dawn M},
+  journal   = {BMC pregnancy and childbirth},
+  title     = {Do the status and empowerment of mothers predict their daughters’ reproductive outcomes?},
+  year      = {2017},
+  number    = {2},
+  pages     = {348},
+  volume    = {17},
+  publisher = {Springer},
+}
+
+@Article{santelli2000association,
+  author    = {Santelli, John S and Lowry, Richard and Brener, Nancy D and Robin, Leah},
+  journal   = {American journal of public health},
+  title     = {The association of sexual behaviors with socioeconomic status, family structure, and race/ethnicity among US adolescents.},
+  year      = {2000},
+  number    = {10},
+  pages     = {1582},
+  volume    = {90},
+  publisher = {American Public Health Association},
+}
+
+@Article{brewster1994race,
+  author    = {Brewster, Karin L},
+  journal   = {American Sociological Review},
+  title     = {Race differences in sexual activity among adolescent women: The role of neighborhood characteristics},
+  year      = {1994},
+  pages     = {408--424},
+  publisher = {JSTOR},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
