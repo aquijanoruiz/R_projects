@@ -544,4 +544,15 @@
   publisher = {NIH Public Access},
 }
 
+@Article{gipson2017status,
+  author    = {Gipson, Jessica D and Upchurch, Dawn M},
+  journal   = {BMC pregnancy and childbirth},
+  title     = {Do the status and empowerment of mothers predict their daughters’ reproductive outcomes?},
+  year      = {2017},
+  number    = {2},
+  pages     = {348},
+  volume    = {17},
+  publisher = {Springer},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
