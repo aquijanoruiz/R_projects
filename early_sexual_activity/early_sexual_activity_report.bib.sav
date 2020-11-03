@@ -604,4 +604,18 @@
   publisher = {Taylor \& Francis},
 }
 
+@Article{sieving2000maternal,
+  author    = {Sieving, Renee E and McNeely, Clea S and Blum, Robert Wm},
+  journal   = {Archives of Pediatrics \& Adolescent Medicine},
+  title     = {Maternal expectations, mother-child connectedness, and adolescent sexual debut},
+  year      = {2000},
+  number    = {8},
+  pages     = {809--816},
+  volume    = {154},
+  publisher = {American Medical Association},
+}
+
+@Article{,
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
