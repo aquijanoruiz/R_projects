@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  2 NOV 2020 17:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  2 NOV 2020 17:31
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -664,24 +664,39 @@ le.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
 l.510 
-      ] [7]
+      ] [7] [8] [9] (./early_sexual_activity_report.aux)
+Package rerunfilecheck Info: File `early_sexual_activity_report.out' has not ch
+anged.
+(rerunfilecheck)             Checksum: 52E5A9C5043B77BD881B4E48B254C2B5;555.
 
-! Package inputenc Error: Unicode character ́ (U+0301)
-(inputenc)                not set up for use with LaTeX.
+LaTeX Warning: There were multiply-defined labels.
 
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.599 ...z, Cecilia Castro, William Ortiz, Marı́
-                                                  a 
+ ) 
 Here is how much of TeX's memory you used:
- 11928 strings out of 481408
- 172491 string characters out of 5917944
- 511462 words of memory out of 5000000
- 28438 multiletter control sequences out of 15000+600000
+ 11954 strings out of 481408
+ 172894 string characters out of 5917944
+ 511453 words of memory out of 5000000
+ 28437 multiletter control sequences out of 15000+600000
  578742 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  66i,17n,72p,262b,357s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.
+enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
+t.enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.
+enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
+c}</Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.
+pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi1
+0.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr
+10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
+r12.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/l
+mr17.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
+lmri10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/l
+m/lmsy10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public
+/lm/lmsy7.pfb>
+Output written on early_sexual_activity_report.pdf (9 pages, 173078 bytes).
+PDF statistics:
+ 165 PDF objects out of 1000 (max. 8388607)
+ 142 compressed objects within 2 object streams
+ 53 named destinations out of 1000 (max. 500000)
+ 54 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-!  ==> Fatal error occurred, no output PDF file produced!
