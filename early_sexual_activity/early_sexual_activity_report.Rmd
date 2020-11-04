@@ -163,7 +163,7 @@ As mentioned before, data about smoking and drinking were not gathered for all s
 
 As expected, smoking and drinking were high predictors for precocious sexual initiation. Table 3 shows that even after controlling for these two additional variables, the log odds of early sexual onset decrease for each additional year that the mother delays her sexual debut. Interestingly, when adding these cofounders, from whom girls learn about sexual relations and having an employed mother are no longer significant. As with the previous regressions, attending school and having a mother who finished primary school are associated with delayed sexual activity.
 
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
 
 # Model 1: ------------------------------
 # mother empowerment + control variables
@@ -203,11 +203,10 @@ stargazer(logit_m1, logit_m2, logit_m3, title="Logistic Regression Results",
                                "Mother's age at first intercourse"),
           align=TRUE, header = FALSE, star.cutoffs = c(.05, .01, .001),
           dep.var.labels = c("Early sexual activity"), no.space = TRUE)
-
 ```
 
 
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%'}
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
 # Model 4/5/6------------------------------
 # mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables (including behavioral)
 logit_m4 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 

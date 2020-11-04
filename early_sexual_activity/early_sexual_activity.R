@@ -157,14 +157,6 @@ daughters <- people %>% # the demographic and economic data
   # filter the "mothers" set)
   filter(sex == "female" & age == 16) # we filter the girls who are 16
 
-nrow(daughters) # we have 11,446 girls in our dataset. This will not be final version 
-# as we will continue cleaning the data (this includes eliminating NAs, errors, etc.)
-
-n_distinct(daughters$mother_id) # we can also see we have data for 8,063 mothers. We have 
-# more daughters than mothers because some are sisters, and there is missing data for 
-# some mothers whether because they do not live with their daughters, were not at home 
-# when the survey took place, etc.
-
 #################################################################################
 #####                       2.3.2 The "mothers" set                         #####
 #################################################################################
@@ -214,7 +206,7 @@ sinoTOnoyes <- function(x){
 # early sexual acrtivity ------------------------------
 daughters$early_sexual_activity <- sinoTOnoyes(daughters$f2_s8_803)
 
-# cercion at first intercourse ------------------------------
+# coercion at first intercourse ------------------------------
 # (Not the dependent variable but something we will look at)
 daughters$coercion_1st_intercourse <- factor(with(daughters,
   ifelse(as.integer(f2_s8_807) == 1 | as.integer(f2_s8_807) == 2, "no", "yes"), 
@@ -249,7 +241,6 @@ income <- income %>% group_by(household_id) %>%
             h_num_members = n()) 
 
 # b) area (urban/rural) 
-
 daughters$rural <- daughters$area.x
 levels(daughters$rural) <- c("no", "yes")
 
@@ -285,7 +276,6 @@ daughters$sexuality_knowledge <- factor(with(daughters,
             as.integer(f2_s8_801d) == 1 ~ "family", as.integer(f2_s8_801d) == 2 ~ "school",
             TRUE ~ "other")), levels = c("no info", "family", "school", "other"))
 
-
 #################################################################################
 #####                   3.3.3 Behavioral risk factors                       #####
 #################################################################################
@@ -319,11 +309,16 @@ mothers$m_education <- mothers$f1_s2_19_1
 levels(mothers$m_education) <- c("none", "none", "none", "primary", "primary", "secondary", 
                                  "secondary", "tertiary", "tertiary", "tertiary")
 
-# e) mother finished primary school
-mothers$m_finished_ps <- mothers$m_education
+mothers$m_finished_ps <- mothers$m_education # mother finished primary school
 levels(mothers$m_finished_ps) <- c("no", "yes", "yes", "yes")
 
-# f) empowerment & sexual decision making of the mother
+mothers$m_finished_hs <- mothers$m_education # mother finished high school
+levels(mothers$m_finished_hs) <- c("no", "no", "yes", "yes")
+
+mothers$m_finished_college <- mothers$m_education # mother finished college
+levels(mothers$m_finished_college) <- c("no", "no", "no", "yes")
+
+# e) empowerment & sexual decision making of the mother
 # We measure empowerment as the ability of the mothers's to make their own sexual decisions
 # We classify unempowered women as those who aren't able to turn down sex
 # We also classify unempowerment as the inability to demand the use of contraception
@@ -338,7 +333,7 @@ mothers$m_empowerment <- factor(with(mothers,
             as.integer(f2_s8_839) == 2 ~ "no", # cannot turn down sex
             TRUE ~ "yes")), levels = c("yes", "no"))
 
-# g) mother has a job 
+# f) mother has a job 
 mothers$m_job <- with(mothers,
   factor(case_when(is.na(f1_s3_1) ~ NA_character_,
                    as.integer(f1_s3_1) == 2 & as.integer(f1_s3_2) == 12 ~ "no", 
@@ -349,17 +344,17 @@ mothers$m_job <- with(mothers,
 #################################################################################
 
 daughters_tidy <- daughters %>%  select(household_id, subject_id, mother_id, 
-  early_sexual_activity, rural, minority, h_internet, attends_school,  period_knowledge, 
-  aids_knowledge, pregnancy_knowledge, sexuality_knowledge, ever_drunk_alcohol, ever_smoked,
-  coercion_1st_intercourse) %>% left_join(income, by = c("household_id" = "household_id"))
+   early_sexual_activity, rural, minority, h_internet, attends_school,  period_knowledge, 
+   aids_knowledge, pregnancy_knowledge, sexuality_knowledge, ever_drunk_alcohol, ever_smoked,
+   coercion_1st_intercourse) %>% left_join(income, by = c("household_id" = "household_id"))
 
-mothers_tidy <- mothers %>% select(subject_id, m_teenage_birth,
-  m_empowerment, m_finished_HS, m_job, m_age_1st_intercourse, m_education, m_finished_ps)
+mothers_tidy <- mothers %>% select(subject_id, m_teenage_birth, m_empowerment, m_job, 
+   m_age_1st_intercourse, m_education, m_finished_ps, m_finished_hs, m_finished_college)
 
 data <- daughters_tidy %>% left_join(mothers_tidy, by = c("mother_id" = "subject_id")) %>%
   filter(!is.na(early_sexual_activity)) # we eliminate NAs
 
-saveRDS(data, file = "early_sexual_activity.rds")
+# saveRDS(data, file = "early_sexual_activity_data.rds") this code saves the data into an rds file
 
 #################################################################################
 #####                       4 The logit models                              #####
@@ -369,17 +364,17 @@ saveRDS(data, file = "early_sexual_activity.rds")
 # with early sexual activity.
 
 # Model 1: ------------------------------
-# mother empowerment + control variables
+# m_empowerment + control variables
 
 logit_m1 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
                   attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
-                  sexuality_knowledge + m_job + m_finished_HS +  m_empowerment,
+                  sexuality_knowledge + m_job + m_education +  m_empowerment,
                 data = data, family = "binomial")
 
 summary(logit_m1)
 
 # Model 2: ------------------------------
-# mother empowerment & m_teenage_birth + control variables
+# m_empowerment & m_teenage_birth + control variables
 
 logit_m2 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
                   attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
@@ -389,7 +384,7 @@ logit_m2 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_memb
 summary(logit_m2)
 
 # Model 3: ------------------------------ 
-# mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables
+# m_empowerment & m_teenage_birth & m_age_1st_intercourse + control variables
 
 logit_m3 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
                   attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
@@ -398,28 +393,26 @@ logit_m3 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_memb
 
 summary(logit_m3)
 
-# Model 4/5/6------------------------------
-# mother empowerment & m_teenage_birth & m_age_1st_intercourse + control variables (including behavioral)
-logit_m4 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
-                  sexuality_knowledge + m_job + m_education +  m_empowerment + ever_smoked +
-                  ever_drunk_alcohol,
-                data = data, family = "binomial")
+# Model 4/5/6 (includes drinking and smoking) ------------------------------
+# m_empowerment & m_teenage_birth & m_age_1st_intercourse + control variables 
+logit_m4 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education + ever_drunk_alcohol + ever_smoked + 
+                  m_empowerment, data = data, family = "binomial")
 
 summary(logit_m4)
 
-logit_m5 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
-                  sexuality_knowledge + m_job + m_education +  m_empowerment + m_teenage_birth +
-                  ever_smoked + ever_drunk_alcohol,
-                data = data, family = "binomial")
+logit_m5 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education + ever_drunk_alcohol + ever_smoked + 
+                  m_empowerment + m_teenage_birth, data = data, family = "binomial")
 
 summary(logit_m5)
 
-logit_m6 <- glm(early_sexual_activity ~ rural + h_income + h_num_members + h_internet + minority + 
-                  attends_school + period_knowledge + aids_knowledge + pregnancy_knowledge + 
-                  sexuality_knowledge + m_job + m_education +  m_empowerment + m_teenage_birth +
-                  m_age_1st_intercourse + ever_smoked + ever_drunk_alcohol,
+logit_m6 <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
+                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
+                  sexuality_knowledge + m_job + m_education + ever_drunk_alcohol + ever_smoked + 
+                  m_empowerment + m_teenage_birth + m_age_1st_intercourse,
                 data = data, family = "binomial")
 
 summary(logit_m6)
@@ -450,7 +443,8 @@ cat_var <- c("minority", "rural", "h_internet", "attends_school", "period_knowle
              "pregnancy_knowledge", "aids_knowledge", "sexuality_knowledge_no info", 
              "sexuality_knowledge_family", "sexuality_knowledge_school", 
              "sexuality_knowledge_other", "ever_drunk_alcohol", "ever_smoked", "m_job", 
-             "m_finished_ps", "m_teenage_birth", "m_empowerment")
+             "m_finished_ps", "m_finished_hs", "m_finished_college", "m_teenage_birth", 
+             "m_empowerment")
 
 
 chi_sq_test  <- sapply(cat_var, function(x){
@@ -459,12 +453,14 @@ chi_sq_test  <- sapply(cat_var, function(x){
 })
 
 mean_early_sex  <- sapply(cat_var, function(x){
-  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "yes", x]) == 2, na.rm = TRUE)
+  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "yes", x]) == 2, 
+               na.rm = TRUE)
   return(mean)
 })
 
 mean_no_early_sex  <- sapply(cat_var, function(x){
-  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "no", x]) == 2, na.rm = TRUE)
+  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "no", x]) == 2, 
+               na.rm = TRUE)
   return(mean)
 })
 
@@ -493,8 +489,8 @@ mean_no_early_sex  <- sapply(cont_var, function(x){
 
 # We add the new means and p values to the table we already made
 summary_statistics <- rbind(summary_statistics, tibble(variable = cont_var, 
-  mean_early_sex = mean_early_sex, mean_no_early_sex = mean_no_early_sex, 
-  p_value = t_test))
+                                                       mean_early_sex = mean_early_sex, mean_no_early_sex = mean_no_early_sex, 
+                                                       p_value = t_test))
 
 # Adding some format to the table ------------------------------
 
@@ -506,83 +502,53 @@ summary_statistics_copy <- summary_statistics
 summary_statistics_copy$p_value <- 
   with(summary_statistics_copy, case_when(p_value < 0.0005 ~ paste("0.000", "***"),
                                           p_value <= 0.001 ~ paste(as.character(p_value), "***"),
-                                          p_value <= 0.01 ~ paste(p_value, "**"),
-                                          p_value <= 0.05 ~ paste(p_value, "*"),
-                                          p_value <= 0.1 ~ paste(as.numeric(p_value), "  ."),
+                                          p_value <= 0.01 ~ paste(p_value, "***"),
+                                          p_value <= 0.05 ~ paste(p_value, "**"),
+                                          p_value <= 0.1 ~ paste(as.numeric(p_value), " *"),
                                           TRUE ~ as.character(p_value)))
 
-names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No early sexual activity", "p value")
+names(summary_statistics_copy) <- c("Variables", "Early sexual activity", 
+                                    "No early sexual activity", "p value")
 
-summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area", "Does not have internet", 
-  "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
-  "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from family", 
-  "Knows about sexuality from school", "Knows about sexuality from other sources",
-  "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished primary school",
-  "Mother had a teenage birth", "Mother lacks sexual bargaining", "Household income", 
-  "Number of members in the household", "Mother's age at first intercourse")
+summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area", 
+                                       "Does not have internet", "Misses school", "Lacks knowledge about period", 
+                                       "Lacks knowledge about pregnancy", "Lacks knowledge about AIDs", 
+                                       "Does not know about sexuality", "Knows about sexuality from family", 
+                                       "Knows about sexuality from school", "Knows about sexuality from other sources",
+                                       "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished primary school",
+                                       "Mother finished high school", "Mother finished college", "Mother had a teenage birth", 
+                                       "Mother lacks sexual bargaining", "Household income", "Number of members in the household", 
+                                       "Mother's age at first intercourse")
 
 summary_statistics_copy
-
-# What percent of our sample belongs to each group: early sexual activity and no early sexual activity
-
-index <- as.integer(names(logit_m1$fitted.values)) # these are the observations we used in our model
-data_copy <- data[index,]
-
-prop.table(table(data_copy$early_sexual_activity))
-length(index)
-
-mean(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
-sd(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
-
-# Ns used in the logistic models
-length(logit_m1$fitted.values)
-length(logit_m4$fitted.values)
 
 #################################################################################
 #####       5.2 CDF of the mother's age at first intercourse by gruop       #####
 #################################################################################
 
 plot(ecdf(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"]),
-          col = "cadetblue1", main = "", xlab = "Age at first intercourse", ylab = "Density",
+     col = "cadetblue1", main = "", xlab = "Age at first intercourse", ylab = "Density",
      cex.axis=0.75, cex.lab=0.75)
 plot(ecdf(data_copy[data_copy$early_sexual_activity == "no", "m_age_1st_intercourse"]),
      col = "palegreen", add = TRUE)
 legend("left", c("Early sexual activity", "No early sexual activity"),
        col = c("cadetblue1", "palegreen"), lwd = 5, bty = "n", cex = 0.6)
 
-# ------------------
+#################################################################################
+#####                              5.3 Q & A                                #####
+#################################################################################
 
-mean(data[data$early_sexual_activity == "no", "m_finished_PS"] == "yes", na.rm = TRUE)
+# 1)  What percent of girls in our sample had a coerced first sex?
+mean(data$coercion_1st_intercourse == "yes", na.rm = TRUE)
 
-summary(logit_m1)
-
-logit_mx <- glm(early_sexual_activity ~ minority + rural + h_income + h_num_members + h_internet + 
-                  attends_school + period_knowledge + pregnancy_knowledge + aids_knowledge + 
-                  sexuality_knowledge + m_job + m_education +  m_empowerment, data = data, family = "binomial")
-summary(logit_mx)
-
-c("Ethnic minority", "Lives in a rural area", "Household income", "Number of members in the household", "Does not have internet", 
-  "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", "Lacks knowledge about AIDs", 
-  "Knows about sexuality from family", "Knows about sexuality from school", "Knows about sexuality from other sources",
-  "Mother has a job", "Mother finished primary school", "Mother finished secondary school", "Mother finished college",
-  "Mother lacks sexual bargaining", "Mother had a teenage birth",
-   "Mother's age at first intercourse")
-
-
-# ------------------
-index <- as.integer(names(logit_m4$fitted.values)) # these are the observations we used in our model
+# 2) What percent of girls in our sample had their first intercourse before age 16?
+index <- as.integer(names(logit_m1$fitted.values)) # these are the observations used in our model
 data_copy <- data[index,]
 
 prop.table(table(data_copy$early_sexual_activity))
-length(index)
 
-mean(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
-sd(data_copy[data_copy$early_sexual_activity == "yes", "m_age_1st_intercourse"], na.rm = TRUE)
+# 3) What is the mean age and sd of the mothers' age at first intercourse by group?
 
-#################################################################################
-#####                              6. Q & A                                 #####
-#################################################################################
-
-# How many girls in our sample had a coerced first sex?
-
-mean(data$coercion_1st_intercourse == "yes", na.rm = TRUE)
+data_copy %>% group_by(early_sexual_activity) %>% 
+  summarize(mean = mean(m_age_1st_intercourse, na.rm = TRUE),
+            sd = sd(m_age_1st_intercourse, na.rm = TRUE))
