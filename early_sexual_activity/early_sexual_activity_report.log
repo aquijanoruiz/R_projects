@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  4 NOV 2020 13:26
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  4 NOV 2020 16:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -635,7 +635,7 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.316 
+l.319 
       ]
 <early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf, id=60, 
 469.755pt x 325.215pt>
@@ -643,28 +643,28 @@ File: early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf Gra
 phic file (type pdf)
 <use early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf>
 Package pdftex.def Info: early_sexual_activity_report_files/figure-latex/unname
-d-chunk-2-1.pdf  used on input line 319.
+d-chunk-2-1.pdf  used on input line 322.
 (pdftex.def)             Requested size: 375.80452pt x 260.17235pt.
 [4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.374 
+l.367 
        <./early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf
 >]
 
-LaTeX Warning: Float too large for page by 17.55388pt on input line 509.
+LaTeX Warning: Float too large for page by 17.55388pt on input line 512.
 
 [5] [6pdfTeX warning (ext4): destination with the same identifier (name{table.2
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.582 
+l.585 
       ] [7pdfTeX warning (ext4): destination with the same identifier (name{tab
 le.3}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.582 
+l.585 
       ] [8] [9] [10] (./early_sexual_activity_report.aux)
 Package rerunfilecheck Info: File `early_sexual_activity_report.out' has not ch
 anged.
@@ -676,7 +676,7 @@ LaTeX Warning: There were multiply-defined labels.
 Here is how much of TeX's memory you used:
  11966 strings out of 481408
  173068 string characters out of 5917944
- 510973 words of memory out of 5000000
+ 511006 words of memory out of 5000000
  28441 multiletter control sequences out of 15000+600000
  578742 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
@@ -694,7 +694,7 @@ mr17.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
 lmri10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/l
 m/lmsy10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public
 /lm/lmsy7.pfb>
-Output written on early_sexual_activity_report.pdf (10 pages, 180263 bytes).
+Output written on early_sexual_activity_report.pdf (10 pages, 180294 bytes).
 PDF statistics:
  184 PDF objects out of 1000 (max. 8388607)
  160 compressed objects within 2 object streams

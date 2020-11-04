@@ -65,7 +65,8 @@ cat_var <- c("minority", "rural", "h_internet", "attends_school", "period_knowle
              "pregnancy_knowledge", "aids_knowledge", "sexuality_knowledge_no info", 
              "sexuality_knowledge_family", "sexuality_knowledge_school", 
              "sexuality_knowledge_other", "ever_drunk_alcohol", "ever_smoked", "m_job", 
-             "m_finished_ps", "m_teenage_birth", "m_empowerment")
+             "m_finished_ps", "m_finished_hs", "m_finished_college", "m_teenage_birth", 
+             "m_empowerment")
 
 
 chi_sq_test  <- sapply(cat_var, function(x){
@@ -74,12 +75,14 @@ chi_sq_test  <- sapply(cat_var, function(x){
 })
 
 mean_early_sex  <- sapply(cat_var, function(x){
-  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "yes", x]) == 2, na.rm = TRUE)
+  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "yes", x]) == 2, 
+               na.rm = TRUE)
   return(mean)
 })
 
 mean_no_early_sex  <- sapply(cat_var, function(x){
-  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "no", x]) == 2, na.rm = TRUE)
+  mean <- mean(as.integer(data_copy[data_copy$early_sexual_activity == "no", x]) == 2, 
+               na.rm = TRUE)
   return(mean)
 })
 
@@ -126,15 +129,18 @@ summary_statistics_copy$p_value <-
                                           p_value <= 0.1 ~ paste(as.numeric(p_value), " *"),
                                           TRUE ~ as.character(p_value)))
 
-names(summary_statistics_copy) <- c("Variables", "Early sexual activity", "No early sexual activity", "p value")
+names(summary_statistics_copy) <- c("Variables", "Early sexual activity", 
+                                    "No early sexual activity", "p value")
 
-summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area", "Does not have internet", 
-  "Misses school", "Lacks knowledge about period", "Lacks knowledge about pregnancy", 
-  "Lacks knowledge about AIDs", "Does not know about sexuality", "Knows about sexuality from family", 
+summary_statistics_copy$Variables <- c("Ethnic minority", "Lives in a rural area", 
+  "Does not have internet", "Misses school", "Lacks knowledge about period", 
+  "Lacks knowledge about pregnancy", "Lacks knowledge about AIDs", 
+  "Does not know about sexuality", "Knows about sexuality from family", 
   "Knows about sexuality from school", "Knows about sexuality from other sources",
   "Has ever drunk alcohol", "Has ever smoked", "Mother has a job", "Mother finished primary school",
-  "Mother had a teenage birth", "Mother lacks sexual bargaining", "Household income", 
-  "Number of members in the household", "Mother's age at first intercourse")
+  "Mother finished high school", "Mother finished college", "Mother had a teenage birth", 
+  "Mother lacks sexual bargaining", "Household income", "Number of members in the household", 
+  "Mother's age at first intercourse")
 
 kable(summary_statistics_copy, format = "latex", booktabs = TRUE, 
       caption = "Percentage and mean levels of explanatory variables by group") %>%
