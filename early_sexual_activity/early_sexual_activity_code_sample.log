@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  4 NOV 2020 20:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  6 NOV 2020 11:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -638,155 +638,134 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 124
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 160.
+(Font)              <10> on input line 131.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 160.
+(Font)              <7> on input line 131.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 160.
+(Font)              <5> on input line 131.
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 1
-63.
+67.
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 172.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 176.
 [1
 
 {/Users/elocarinista/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.m
 ap}]
 LaTeX Font Info:    Trying to load font information for TS1+lmtt on input line 
-267.
+273.
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [2] [3] [4] [5]
-Underfull \vbox (badness 10000) detected at line 624
+Underfull \vbox (badness 10000) detected at line 630
  []
 
 
-Underfull \vbox (badness 10000) detected at line 624
+Underfull \vbox (badness 10000) detected at line 630
  []
 
 [6]
-Underfull \vbox (badness 10000) detected at line 624
+Underfull \vbox (badness 10000) detected at line 630
  []
 
 
-Underfull \vbox (badness 10000) detected at line 624
+Underfull \vbox (badness 10000) detected at line 630
  []
 
 [7]
-Underfull \vbox (badness 10000) detected at line 624
+Underfull \vbox (badness 10000) detected at line 630
  []
 
 
-Underfull \vbox (badness 10000) detected at line 624
+Underfull \vbox (badness 10000) detected at line 630
  []
 
 [8]
-Underfull \vbox (badness 1831) detected at line 671
+Underfull \vbox (badness 2735) detected at line 677
  []
 
-[9]
-
-LaTeX Warning: Float too large for page by 17.55388pt on input line 834.
-
-[10] [11pdfTeX warning (ext4): destination with the same identifier (name{table
-.1}) has been already used, duplicate ignored
+[9] [10] [11pdfTeX warning (ext4): destination with the same identifier (name{t
+able.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.836 \begin{Shaded}
-                    ] [12pdfTeX warning (ext4): destination with the same ident
-ifier (name{table.2}) has been already used, duplicate ignored
+l.775 \end{Shaded}
+                  ]
+
+LaTeX Warning: Float too large for page by 17.55388pt on input line 840.
+
+[12] [13pdfTeX warning (ext4): destination with the same identifier (name{table
+.2}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.836 \begin{Shaded}
-                    ]
-Underfull \vbox (badness 10000) detected at line 947
+l.953 \end{Shaded}
+                  ]
+Underfull \vbox (badness 10000) detected at line 953
  []
 
 
-Underfull \vbox (badness 10000) detected at line 947
- []
-
-[13]
-Underfull \vbox (badness 10000) detected at line 947
- []
-
-
-Underfull \vbox (badness 10000) detected at line 947
+Underfull \vbox (badness 10000) detected at line 953
  []
 
 [14]
 <early_sexual_activity_code_sample_files/figure-latex/unnamed-chunk-5-1.pdf, id
-=83, 469.755pt x 325.215pt>
+=81, 469.755pt x 325.215pt>
 File: early_sexual_activity_code_sample_files/figure-latex/unnamed-chunk-5-1.pd
 f Graphic file (type pdf)
 <use early_sexual_activity_code_sample_files/figure-latex/unnamed-chunk-5-1.pdf
 >
 Package pdftex.def Info: early_sexual_activity_code_sample_files/figure-latex/u
-nnamed-chunk-5-1.pdf  used on input line 1011.
+nnamed-chunk-5-1.pdf  used on input line 1017.
 (pdftex.def)             Requested size: 375.80452pt x 260.17235pt.
-
-Overfull \vbox (1.38277pt too high) detected at line 1027
- []
-
 [15pdfTeX warning (ext4): destination with the same identifier (name{table.3}) 
 has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.1027 \end{Shaded}
+l.1033 \end{Shaded}
                    ] [16pdfTeX warning (ext4): destination with the same identi
 fier (name{figure.1}) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.1071 \begin{Shaded}
+l.1071 \end{verbatim}
                       <./early_sexual_activity_code_sample_files/figure-latex/u
-nnamed-chunk-5-1.pdf>] [17]
-Underfull \vbox (badness 10000) detected at line 1203
- []
-
-
-Underfull \vbox (badness 10000) detected at line 1203
- []
-
-[18] [19] (./early_sexual_activity_code_sample.aux)
+nnamed-chunk-5-1.pdf>] [17] (./early_sexual_activity_code_sample.aux)
 Package rerunfilecheck Info: File `early_sexual_activity_code_sample.out' has n
 ot changed.
-(rerunfilecheck)             Checksum: E39A0FDEBBCA64EAB5C0DB163BB222D4;287.
+(rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 12456 strings out of 481408
- 180700 string characters out of 5917944
- 544592 words of memory out of 5000000
- 28947 multiletter control sequences out of 15000+600000
- 580310 words of font info for 72 fonts, out of 8000000 for 9000
+ 12447 strings out of 481408
+ 180547 string characters out of 5917944
+ 533981 words of memory out of 5000000
+ 28943 multiletter control sequences out of 15000+600000
+ 577312 words of font info for 71 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 66i,17n,72p,603b,366s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}
-{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.en
-c}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.
-enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.en
-c}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc
-}</Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.p
-fb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10
+ 66i,17n,72p,527b,470s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.
+enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
+t.enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.
+enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ts1.e
+nc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc
+}</Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.p
+fb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.
+pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12
 .pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr1
-0.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr
-12.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
-r17.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/l
-mri10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm
-/lmsy10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/
-lm/lmsy7.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public
-/lm/lmtk10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/publ
-ic/lm/lmtt10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/pu
-blic/lm/lmtti10.pfb>
-Output written on early_sexual_activity_code_sample.pdf (19 pages, 255813 bytes
+7.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr
+i10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/l
+msy10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm
+/lmsy7.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/l
+m/lmtk10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public
+/lm/lmtt10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/publ
+ic/lm/lmtti10.pfb>
+Output written on early_sexual_activity_code_sample.pdf (17 pages, 229127 bytes
 ).
 PDF statistics:
- 167 PDF objects out of 1000 (max. 8388607)
- 131 compressed objects within 2 object streams
- 26 named destinations out of 1000 (max. 500000)
- 14 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 149 PDF objects out of 1000 (max. 8388607)
+ 116 compressed objects within 2 object streams
+ 22 named destinations out of 1000 (max. 500000)
+ 6 words of extra memory for PDF output out of 10000 (max. 10000000)
 

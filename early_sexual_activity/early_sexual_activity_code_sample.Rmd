@@ -6,15 +6,15 @@ header-includes:
    - \usepackage{dcolumn}
 ---
 
-The following R code reproduces the statistical analysis presented in the attached writing sample. It demonstrates how I handle data and how I typically share my code with my research partners or other people who wish to replicate its results.
+The following R code reproduces the statistical analysis presented in the writing sample titled *Maternal sexual empowerment and early sexual onset among female adolescents: Evidence from a prevalence study in Ecuador*. It shows how I typically handle large datasets and how I share my code with research partners or other people who wish to replicate my results. The code can also be found on my github https://github.com/aquijanoruiz/R_projects/blob/master/early_sexual_activity/early_sexual_activity_code_sample.Rmd. A short chunk of stata code 
 
-This code first takes raw data from the National Statistics Institute of Ecuador (INEC) and transforms it into tidy data ready for analysis. The code automatically downloads the zip file containing the .dta files from the permanent link of INEC. I also added code that downloads the R packages used in the study if they have not been installed already. By doing this, I make sure anyone can easily reproduce my code without any errors or wasted time.
+This code takes raw data from the National Statistics Institute of Ecuador (INEC). It first downloads from the INEC website the zip that contains the .dta files. I also added some simple code that downloads the packages used in the study in case they have not been installed already. By doing this, I make sure anyone can easily run my code immediately without any wasted time.
 
-Then, I describe the data wrangling process, in which I merge the different datasets and separate the information that is useful for the analysis. It involves matching subjects' data with their mothers' data and combining them into one data frame. I proceed by creating the variables that were put into the models. Making some of these variables involved using several logical operators and reassigning the levels of the factors. I finished by running the logistic regressions and creating a summary statistics table. I also added a simple CDF plot.
+Then, I describe the data wrangling process. You will see how I use the dplyr package. I merge the different datasets and select the information that is useful for the analysis. It involves matching subjects' data among various datasets and combining them into one data frame. I proceed by creating the variables that were applied in the models. Creating some of these variables involved using several logical operators and reassigning the levels of the factors. I finished by running the logistic regressions and creating a summary statistics table. I also added a simple CDF plot.
 
-I do not like to write convoluted code. I instead prefer to use functions and apply loops to optimize the amount of code that I write (which you can see in many sections of this sample). I am not yet the best at writing the most efficient code, but I believe my code is easy-to-read and concise. I hope you find my code runs smoothly, is easy to follow, and well-commented.
+I do not like to write convoluted code. I instead prefer to create my own functions and apply loops to optimize the amount of code I write (which you may see in this sample). I am not yet the best at writing the most efficient code, but I believe my code is easy-to-read and concise. I hope you find my code runs smoothly, is easy to follow, and well-commented.
 
-Before finishing, I would like to mention that I am keen on geospatial analysis. At the end, I added some additional code of an interactive map I created for my website that illustrates the number of confirmed covid-19 cases in Ecuador. I was actually one of the first in my country to create an interactive map with detailed data for every province and county. You can check the final product at this url https://bit.ly/3k0LnJE.
+Before finishing, I would like to mention that I am keen on geospatial analysis. I like creating interactive maps using tmap and leaflet. At the beginning of the pandemic, I created a map illustrating the number of confirmed covid-19 cases in Ecuador. I was actually one of the first in my country to create an interactive map with detailed data for every province and city in my country. You can check the map at this url https://bit.ly/3k0LnJE.
 
 ```{r, warning=FALSE, message=FALSE}
 ##################################################################################
@@ -48,6 +48,8 @@ if(!require(stargazer)) install.packages("stargazer", repos = "http://cran.us.r-
 
 # 4) The "house" dataset will contain the data about the house the household lives in, 
 # contained in the "2_BDD_ENS2018_f1_hogar.dta" file
+
+options(timeout=600) # we change the download timeout time to 600
 
 # We give the url a name
 url <- "https://www.ecuadorencifras.gob.ec/documentos/web-inec/Estadisticas_Sociales/ENSANUT/ENSANUT_2018/BDD_ENSANUT_2018_STATA_.zip"
@@ -610,138 +612,4 @@ prop.table(table(data_copy$early_sexual_activity))
 data_copy %>% group_by(early_sexual_activity) %>% 
   summarize(mean = mean(m_age_1st_intercourse, na.rm = TRUE),
             sd = sd(m_age_1st_intercourse, na.rm = TRUE))
-```
-
-## Coronavirus map of confirmed cases in Ecuador
-
-```{r, eval=FALSE}
-# --------- these are the packages used to create the map ---------
-
-if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
-if(!require(sf)) install.packages("sf", repos = "http://cran.us.r-project.org")
-if(!require(rmapshaper)) install.packages("rmapshaper", repos = "http://cran.us.r-project.org")
-if(!require(tmap)) install.packages("tmap", repos = "http://cran.us.r-project.org")
-if(!require(leaflet)) install.packages("leaflet", repos = "http://cran.us.r-project.org")
-
-# --------- preparing the st data ---------
-# --------- Download the shapefile and the coronavirus csv data from github ---------
-# The coronavirus data by province and cantons ----
-
-url <- "https://raw.githubusercontent.com/aquijanoruiz/elquantificador_posts/master/salud/2020-03-22-mapa-del-coronavirus-en-el-ecuador/COVID19_ECU_CONFIRMED_CANTON.csv"
-confirmed_c <- read_csv(url) # Now we have loaded the confirmed cases by canton
-
-url <- "https://raw.githubusercontent.com/aquijanoruiz/elquantificador_posts/master/salud/2020-03-22-mapa-del-coronavirus-en-el-ecuador/COVID19_ECU_CONFIRMED_PROVINCE.csv"
-confirmed_p <- read_csv(url) # Now we have loaded the confirmed cases by province
-
-# Ecuador's administrative division (*.shp) data ----
-
-# Now, we need to load Ecuador's administrative division by province
-url <- "https://github.com/aquijanoruiz/elquantificador_posts/raw/master/salud/2020-03-22-mapa-del-coronavirus-en-el-ecuador/ECU_PROVINCE_SHAPEFILE.zip"
-td <- tempdir() # We create a temporary directory
-tf <- tempfile(tmpdir=td, fileext = ".zip") # We create the placeholder file
-download.file(url,tf) # We download the data into the placeholder file
-
-# We get the name of the file inside the zip file that contains the demographic and economic data, 
-# unzip it, get the full path name of it, and finally load it
-shp.file.name <- unzip(tf, list=TRUE)$Name[4] # The shp file name
-shx.file.name <- unzip(tf, list=TRUE)$Name[6] # The shx file name
-dbf.fine.name <- unzip(tf, list=TRUE)$Name[8] # The dbf file name
-prf.fine.name <- unzip(tf, list=TRUE)$Name[10] # The prf file name
-
-unzip(tf, files=c(shp.file.name, shx.file.name, dbf.fine.name, prf.fine.name), exdir=td, overwrite=TRUE)
-shp.file.path <- file.path(td, shp.file.name)
-
-ecu_map_p <- st_read(shp.file.path) # Now we have loaded the shapefile
-
-# We first need to load Ecuador's administrative division by canton
-url <- "https://github.com/aquijanoruiz/elquantificador_posts/raw/master/salud/2020-03-22-mapa-del-coronavirus-en-el-ecuador/ECU_CANTON_SHAPEFILE.zip"
-td <- tempdir() # We create a temporary directory
-tf <- tempfile(tmpdir=td, fileext = ".zip") # We create the placeholder file
-download.file(url,tf) # We download the data into the placeholder file
-
-# We get the name of the file inside the zip file that contains the demographic and economic data, 
-# unzip it, get the full path name of it, and finally load it
-shp.file.name <- unzip(tf, list=TRUE)$Name[9] # The shp file name
-shx.file.name <- unzip(tf, list=TRUE)$Name[11] # The shx file name
-dbf.fine.name <- unzip(tf, list=TRUE)$Name[5] # The dbf file name
-prf.fine.name <- unzip(tf, list=TRUE)$Name[7] # The prf file name
-
-unzip(tf, files=c(shp.file.name, shx.file.name, dbf.fine.name, prf.fine.name), exdir=td, overwrite=TRUE)
-shp.file.path <- file.path(td, shp.file.name)
-
-ecu_map_c <- st_read(shp.file.path) # Now we have loaded the shapefile
-
-# --------- preparing canton map ---------
-# We simplify the data
-ecu_map_c <- ms_simplify(ecu_map_c, keep=0.01) # We keep the 0.4% of the polygon
-
-# We keep only the variables we need
-ecu_map_c <- ecu_map_c %>% select(-c(ID_0, ISO, NAME_0, NAME_1, ID_1, ID_2, TYPE_2, ENGTYPE_2, NL_NAME_2, VARNAME_2)) %>%
-  rename(Cantón = NAME_2) %>% # We only keep the province names and the geometry
-  filter(!Cantón == "Bolívar") # We take out the canton Bolivar beacuse there are two catons with the same name,
-  # one in Manabi and one in Carchi. This duplicate creates a problem when illustrating the map. As there are very few
-  # cases in Bolivar in Manabi, we will remove them.
-
-# --------- preparing province map ---------
-# We simplify the data
-ecu_map_p <- ms_simplify(ecu_map_p, keep=0.01) # We keep the 0.4% of the polygon
-
-# We keep only the variables we need
-ecu_map_p <- ecu_map_p %>% select(-c(ID_0, ISO, NAME_0, ID_1, TYPE_1, ENGTYPE_1, NL_NAME_1, VARNAME_1)) %>%
-  rename(Provincia = NAME_1)
-
-# --------- preparing coronavirus data ---------
-# The canton data
-confirmed_c
-
-# We need to transform the data from wide to long
-confirmed_c <- confirmed_c %>% select(-Provincia) %>% gather(Fecha, Casos, -Cantón) %>% 
-  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%y"), Casos = as.numeric(Casos)) %>%
-  filter(Fecha >= as.Date("2020-03-16")) %>% # We only have data by province from May 16th
-  replace_na(list(Casos = 0)) %>% filter(!Cantón == "Bolívar")
-
-confirmed_c$Cantón <- factor(confirmed_c$Cantón, levels = levels(ecu_map_c$Cantón))
-
-# The province data
-confirmed_p
-
-# We need to transform the data from wide to long
-confirmed_p <- confirmed_p %>% gather(Fecha, Casos, -Provincia) %>% 
-  mutate(Fecha = as.Date(Fecha, format = "%m/%d/%y")) %>%
-  filter(Fecha >= as.Date("2020-03-16")) %>% # We only have data by province from May 16th
-  replace_na(list(Casos = 0))
-
-confirmed_p$Provincia <- factor(confirmed_p$Provincia, levels = levels(ecu_map_p$Provincia))
-
-# --------- merging the st data with the coronavirus data ---------
-centroid <- st_centroid(ecu_map_p)
-centroid[23,] # We use Tungurahua province as the center of our map 
-
-# The canton data
-covid19_confirmed_c <- inner_join(ecu_map_c, confirmed_c, by = "Cantón") # We merge the map data with the coronavirus data
-
-today <- "2020-04-08"
-covid19_confirmed_c <- covid19_confirmed_c %>% filter(Fecha == today) %>% select(-Fecha)
-
-# The province data
-covid19_confirmed_p <- inner_join(ecu_map_p, confirmed_p, by = "Provincia") # We merge the map data with the coronavirus data
-covid19_confirmed_p <- covid19_confirmed_p %>% filter(Fecha == today) %>% select(-Fecha)
-
-
-# --------- creating the interactive map ---------
-# We filter the data and take out the nonzero elements
-covid19_nozeros_c <- covid19_confirmed_c[!covid19_confirmed_c$Casos == 0,]
-
-covid19_confirmed_today_map <-
-  tm_shape(ecu_map_p) + tm_borders(col = "grey", lwd = 2, alpha = 0.4) + # This is the province sf file
-  tm_polygons(col = "skyblue", alpha = 0.2) + 
-  tm_shape(covid19_confirmed_p) +  # We add a second tm_shape with the province data stored in the sf file
-  tm_fill(col = "Casos", alpha = 0, legend.show = FALSE) + # We set transparency to 0 because we don't want any colors, just the data
-  tm_shape(covid19_nozeros_c) + # We add a third tm_shape with the canton data stored in the sf file
-  tm_bubbles(size = "Casos", col = "red", alpha = 0.6, scale = 4, border.lwd = NA) # We add the bubbles
-  
-covid19_confirmed_today_map <- tmap_leaflet(covid19_confirmed_today_map) # We transform the map into a leaflet map
-
-covid19_confirmed_today_map %>% removeLayersControl() %>%
-  setView(lng = -78.50374, lat = -1.289527, zoom = 6) %>% fitBounds(-80.0, -4.2, -76.6, 0.8) # We center the map in Tungurahua
 ```

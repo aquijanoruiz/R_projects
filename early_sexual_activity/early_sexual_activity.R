@@ -28,6 +28,8 @@ if(!require(readstata13)) install.packages("readstata13", repos = "http://cran.u
 # 4) The "house" dataset will contain the data about the house the household lives in, 
 # contained in the "2_BDD_ENS2018_f1_hogar.dta" file
 
+options(timeout=600) # we change the timeout time to 600
+
 # We give the url a name
 url <- "https://www.ecuadorencifras.gob.ec/documentos/web-inec/Estadisticas_Sociales/ENSANUT/ENSANUT_2018/BDD_ENSANUT_2018_STATA_.zip"
 # We create a temporary directory
@@ -355,6 +357,30 @@ data <- daughters_tidy %>% left_join(mothers_tidy, by = c("mother_id" = "subject
   filter(!is.na(early_sexual_activity)) # we eliminate NAs
 
 # saveRDS(data, file = "early_sexual_activity_data.rds") this code saves the data into an rds file
+
+
+data_copy <- data
+data_copy$value <- 1
+data_copy <- spread(data_copy, sexuality_knowledge, value, fill = 0, sep = "_")
+
+data_copy$value <- 1
+data_copy <- spread(data_copy, m_education, value, fill = 0, sep = "_")
+
+binary_var <- c("early_sexual_activity", "coercion_1st_intercourse", "minority", "rural", 
+                "h_internet", "attends_school", "period_knowledge", "pregnancy_knowledge", 
+                "aids_knowledge", "ever_drunk_alcohol", "ever_smoked", "m_job", 
+                "m_teenage_birth", "m_empowerment")
+
+binarize <- function(x){ # We create a variable to make factors binary variables
+  x = ifelse(as.integer(x) == 1, 0, 1) # and apply it to all the columns
+  return(x)
+}
+
+data_copy[, binary_var] <- sapply(data_copy[, binary_var], FUN = binarize)
+data_copy <- select(data_copy, -`sexuality_knowledge_no info`)
+
+if(!require(haven)) install.packages("haven", repos = "http://cran.us.r-project.org")
+write_dta(data_copy, "early_sexual_activity_data.dta")
 
 #################################################################################
 #####                       4 The logit models                              #####

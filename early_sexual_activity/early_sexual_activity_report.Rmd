@@ -1,5 +1,5 @@
 ---
-title: 'Intergenerational empowerment and early sexual onset among female adolescents: Evidence from a prevalence study in Ecuador'
+title: 'Maternal sexual empowerment and early sexual onset among female adolescents: Evidence from a prevalence study in Ecuador'
 author: "Alonso Quijano"
 output: 
   pdf_document:
@@ -11,7 +11,7 @@ header-includes:
 
 *This study uses data from the 2018 National Health and Nutrition Survey of Ecuador (Ensanut) to examine whether maternal sexual empowerment is predictive of early sexual onset among female adolescents. We used mothers’ ability to turn down sex and demand contraception as a measure of sexual empowerment. We also considered mothers’ age at first intercourse and whether they had experienced early childbearing. Several logistic regressions were employed to estimate the predicting value and significance of the variables of interest. Even after controlling for several sociodemographic and economic confounders, having a mother who lacked sexual empowerment was predictive of early sexual activity. However, mothers’ age at first intercourse was included in the model, sexual empowerment was no longer significant, suggesting that maternal sexual empowerment was predictive of sexual debut through mothers’ age at first intercourse. This study contributes to the literature of early sexual initiation by exploring new connections in which sexual values and behaviors may be transmitted from mother to daughter. More research is needed confirm the robustness of these results and analyze other forms of maternal empowerment.*
 
-## INTRUDUCTION
+## INTRODUCTION
 
 The age of puberty onset has decreased substantially over the past decades [@bellis2006adults]. Reasons exist to be concerned about this fact as early sexual debut has been linked to several adverse outcomes. Early sexual initiators have been found to be more prone to having multiple sex partners, forcing partners to have sex, having frequent sexual intercourse, and being engaged in teenage pregnancy [@o2001early]. Studies performed on different populations have also shown an association between early initiation of sexual intercourse and HIV and other STDs risks [e.g. @kaestle2005young; @stockl2013early]. One major cause of the high prevalence of STDs and unwanted pregnancies among young males and females is that those who engage in early sexual activityare much less likely to use contraception [@finer2013sexual]. Additionally, even for those who manage to avoid pregnancy at first intercourse despite not using contraception, chances of experiencing early childbearing remain high since those who fail to use contraception at first sex are more likely to continue engaging in risky sexual behavior in the future [@st1996examination; @magnusson2012early].
 
