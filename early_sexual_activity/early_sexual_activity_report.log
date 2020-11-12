@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  6 NOV 2020 18:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  11 NOV 2020 22:26
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -351,6 +351,27 @@ Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
 \backup@length=\skip54
 \ar@cellbox=\box50
 ))
+(/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.s
+ty
+Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
+(/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+)
+(/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
+s
+\f@nch@headwidth=\skip55
+\f@nch@O@elh=\skip56
+\f@nch@O@erh=\skip57
+\f@nch@O@olh=\skip58
+\f@nch@O@orh=\skip59
+\f@nch@O@elf=\skip60
+\f@nch@O@erf=\skip61
+\f@nch@O@olf=\skip62
+\f@nch@O@orf=\skip63
+)
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \heavyrulewidth=\dimen164
@@ -372,10 +393,10 @@ Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
 \@thisrulewidth=\dimen176
 ) (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip55
-\LTright=\skip56
-\LTpre=\skip57
-\LTpost=\skip58
+\LTleft=\skip64
+\LTright=\skip65
+\LTpre=\skip66
+\LTpost=\skip67
 \LTchunksize=\count278
 \LTcapwidth=\dimen177
 \LT@head=\box51
@@ -390,9 +411,9 @@ Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
 )
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
-\multirow@colwidth=\skip59
+\multirow@colwidth=\skip68
 \multirow@cntb=\count283
-\multirow@dima=\skip60
+\multirow@dima=\skip69
 \bigstrutjot=\dimen178
 ) (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/wrapfig/wrapfig.sty
 \wrapoverhang=\dimen179
@@ -412,15 +433,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
 Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
 \everycr=\toks30
-\minrowclearance=\skip61
-)
-(/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/pdflscape/pdflscape.s
-ty
-Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
-(/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/graphics/lscape.sty
-Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
-)
-Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
+\minrowclearance=\skip70
 ) (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/tabu/tabu.sty
 Package: tabu 2019/01/11 v2.9 - flexible LaTeX tabulars (FC+tabu-fixed)
 
@@ -452,7 +465,7 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabu@arstrutbox=\box60
 \tabu@hleads=\box61
 \tabu@vleads=\box62
-\tabu@cellskip=\skip62
+\tabu@cellskip=\skip71
 )
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/threeparttable/threep
 arttable.sty
@@ -469,11 +482,11 @@ Package: environ 2014/05/04 v0.3 A new way to define environments
 .sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
-\TPTL@width=\skip63
+\TPTL@width=\skip72
 ) (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/generic/ulem/ulem.sty
 \UL@box=\box64
 \UL@hyphenbox=\box65
-\UL@skip=\skip64
+\UL@skip=\skip73
 \UL@hook=\toks33
 \UL@height=\dimen192
 \UL@pe=\count293
@@ -488,38 +501,34 @@ Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
 \c@nlinenum=\count294
 \TeXr@lab=\toks34
 )
-\cslhangindent=\skip65
+\cslhangindent=\skip74
 
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-p
 dftex.def
 File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 \l__kernel_color_stack_int=\count295
 \l__pdf_internal_box=\box67
-) (./early_sexual_activity_report.aux
-
-LaTeX Warning: Label `' multiply defined.
-
-)
+) (./early_sexual_activity_report.aux)
 \openout1 = `early_sexual_activity_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 89.
-LaTeX Font Info:    ... okay on input line 89.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 93.
+LaTeX Font Info:    ... okay on input line 93.
 
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/epstopdf-pkg/epstopdf
 -base.sty
@@ -532,7 +541,7 @@ sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-Package hyperref Info: Link coloring OFF on input line 89.
+Package hyperref Info: Link coloring OFF on input line 93.
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 
@@ -545,9 +554,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count296
 )
-LaTeX Info: Redefining \ref on input line 89.
-LaTeX Info: Redefining \pageref on input line 89.
-LaTeX Info: Redefining \nameref on input line 89.
+LaTeX Info: Redefining \ref on input line 93.
+LaTeX Info: Redefining \pageref on input line 93.
+LaTeX Info: Redefining \nameref on input line 93.
 (./early_sexual_activity_report.out) (./early_sexual_activity_report.out)
 \@outlinefile=\write3
 \openout3 = `early_sexual_activity_report.out'.
@@ -587,37 +596,37 @@ LaTeX Info: Redefining \nameref on input line 89.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 9
-1.
+5.
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 9
-1.
+5.
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-91.
+95.
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-91.
+95.
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 91.
+(Font)              <12> on input line 95.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 91.
+(Font)              <8> on input line 95.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 91.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 91.
+(Font)              <6> on input line 95.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 95.
 
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 91.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 95.
 
 (/Users/elocarinista/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -626,61 +635,61 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 {/Users/elocarinista/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.m
 ap}] [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 268.
+(Font)              <10> on input line 308.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 268.
+(Font)              <7> on input line 308.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 268.
-[3pdfTeX warning (ext4): destination with the same identifier (name{table.1}) h
-as been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  
-l.319 
-      ]
-<early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf, id=60, 
-469.755pt x 325.215pt>
-File: early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf Gra
-phic file (type pdf)
-<use early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf>
-Package pdftex.def Info: early_sexual_activity_report_files/figure-latex/unname
-d-chunk-2-1.pdf  used on input line 322.
-(pdftex.def)             Requested size: 375.80452pt x 260.17235pt.
-[4pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
-has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  
-l.367 
-       <./early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1.pdf
->]
+(Font)              <5> on input line 308.
 
-LaTeX Warning: Float too large for page by 17.55388pt on input line 512.
+LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[5] [6pdfTeX warning (ext4): destination with the same identifier (name{table.2
+[3] [4pdfTeX warning (ext4): destination with the same identifier (name{table.1
 }) has been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.585 
-      ] [7pdfTeX warning (ext4): destination with the same identifier (name{tab
-le.3}) has been already used, duplicate ignored
+l.325 \begin{landscape}
+                       ] [5
+
+pdfTeX warning (ext4): destination with the same identifier (name{table.2}) has
+ been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.585 
-      ] [8] [9] [10] (./early_sexual_activity_report.aux)
+l.366 \end{landscape}
+                     ]
+<early_sexual_activity_report_files/figure-latex/unnamed-chunk-5-1.pdf, id=69, 
+434.62375pt x 250.9375pt>
+File: early_sexual_activity_report_files/figure-latex/unnamed-chunk-5-1.pdf Gra
+phic file (type pdf)
+<use early_sexual_activity_report_files/figure-latex/unnamed-chunk-5-1.pdf>
+Package pdftex.def Info: early_sexual_activity_report_files/figure-latex/unname
+d-chunk-5-1.pdf  used on input line 371.
+(pdftex.def)             Requested size: 375.825pt x 216.98901pt.
+[6
+
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) ha
+s been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.436 
+       <./early_sexual_activity_report_files/figure-latex/unnamed-chunk-5-1.pdf
+>] [7pdfTeX warning (ext4): destination with the same identifier (name{table.3}
+) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.460 
+      ] [8] [9] [10] [11] (./early_sexual_activity_report.aux)
 Package rerunfilecheck Info: File `early_sexual_activity_report.out' has not ch
 anged.
 (rerunfilecheck)             Checksum: 4EF8982D3946180C5BF244C892B6C96A;753.
-
-LaTeX Warning: There were multiply-defined labels.
-
  ) 
 Here is how much of TeX's memory you used:
- 11966 strings out of 481408
- 173068 string characters out of 5917944
- 510992 words of memory out of 5000000
- 28441 multiletter control sequences out of 15000+600000
+ 12106 strings out of 481408
+ 174802 string characters out of 5917944
+ 488858 words of memory out of 5000000
+ 28576 multiletter control sequences out of 15000+600000
  578742 words of font info for 67 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 66i,17n,72p,262b,357s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,20n,72p,2086b,427s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.
 enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
 t.enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.
@@ -694,10 +703,10 @@ mr17.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
 lmri10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/l
 m/lmsy10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public
 /lm/lmsy7.pfb>
-Output written on early_sexual_activity_report.pdf (10 pages, 180314 bytes).
+Output written on early_sexual_activity_report.pdf (11 pages, 181377 bytes).
 PDF statistics:
- 184 PDF objects out of 1000 (max. 8388607)
- 160 compressed objects within 2 object streams
- 61 named destinations out of 1000 (max. 500000)
+ 190 PDF objects out of 1000 (max. 8388607)
+ 164 compressed objects within 2 object streams
+ 62 named destinations out of 1000 (max. 500000)
  70 words of extra memory for PDF output out of 10000 (max. 10000000)
 

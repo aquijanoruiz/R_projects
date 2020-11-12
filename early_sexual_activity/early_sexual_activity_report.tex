@@ -60,6 +60,10 @@
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
 \setcounter{secnumdepth}{-\maxdimen} % remove section numbering
 \usepackage{dcolumn}
+\usepackage{pdflscape}
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+\usepackage{fancyhdr}
 \usepackage{booktabs}
 \usepackage{longtable}
 \usepackage{array}
@@ -260,48 +264,48 @@ other sources (e.g., internet) (p \textless{} .001). In contrast,
 non-sexually active girls were more prone to learning from school (p
 \textless{} .001).
 
-\begin{table}
+\begin{table}[!h]
 
-\caption{\label{tab:unnamed-chunk-1}Percentage and mean levels of explanatory variables by group}
+\caption{\label{tab:unnamed-chunk-2}Percentage and mean levels of explanatory variables by group}
 \centering
+\resizebox{\linewidth}{!}{
 \begin{threeparttable}
-\begin{tabular}[t]{lrrl}
+\begin{tabular}[t]{lrrrl}
 \toprule
-Variables & Early sexual activity & No early sexual activity & p value\\
+  & Total & \makecell[c]{Early\\sexual initiatiors} & \makecell[c]{Non-early\\sexual initiatiors} & p value\\
 \midrule
-Ethnic minority & 0.30 & 0.21 & 0.001 ***\\
-Lives in a rural area & 0.48 & 0.41 & 0.033 **\\
-Does not have internet & 0.75 & 0.55 & 0.000 ***\\
-Misses school & 0.44 & 0.05 & 0.000 ***\\
-Lacks knowledge about period & 0.28 & 0.19 & 0.000 ***\\
-\addlinespace
-Lacks knowledge about pregnancy & 0.20 & 0.17 & 0.273\\
-Lacks knowledge about AIDs & 0.18 & 0.12 & 0.014 **\\
-Does not know about sexuality & 0.09 & 0.07 & 0.273\\
-Knows about sexuality from family & 0.15 & 0.10 & 0.015 **\\
-Knows about sexuality from school & 0.68 & 0.80 & 0.000 ***\\
-\addlinespace
-Knows about sexuality from other sources & 0.08 & 0.03 & 0.000 ***\\
-Has ever drunk alcohol & 0.62 & 0.44 & 0.000 ***\\
-Has ever smoked & 0.09 & 0.03 & 0.000 ***\\
-Mother has a job & 0.64 & 0.60 & 0.282\\
-Mother finished primary school & 0.91 & 0.96 & 0.003 ***\\
-\addlinespace
-Mother finished high school & 0.44 & 0.51 & 0.1  *\\
-Mother finished college & 0.09 & 0.16 & 0.021 **\\
-Mother had a teenage birth & 0.68 & 0.48 & 0.000 ***\\
-Mother lacks sexual bargaining & 0.15 & 0.11 & 0.108\\
-Household income & 646.79 & 630.03 & 0.944\\
-\addlinespace
-Number of members in the household & 5.64 & 5.42 & 0.08  *\\
-Mother's age at first intercourse & 16.11 & 17.64 & 0.000 ***\\
+\addlinespace[2em]
+\multicolumn{5}{l}{\textit{Explanatory variables}}\\
+\hspace{1em}Mother lacks sexual empowerment & 0.08 & 0.11 & 0.07 & 0.137\\
+\hspace{1em}Mother had a teenage birth & 0.53 & 0.69 & 0.49 & 0.000 ***\\
+\hspace{1em}Mother's age at first intercourse & 17.38 & 16.11 & 17.64 & 0.000 ***\\
+\addlinespace[2em]
+\multicolumn{5}{l}{\textit{Mother-related variables}}\\
+\hspace{1em}Mother has a job & 0.60 & 0.68 & 0.59 & 0.041 **\\
+\hspace{1em}Mother finished primary school & 0.97 & 0.94 & 0.98 & 0.016 **\\
+\hspace{1em}Mother finished high school & 0.54 & 0.50 & 0.55 & 0.291\\
+\hspace{1em}Mother finished college & 0.16 & 0.11 & 0.17 & 0.124\\
+\addlinespace[2em]
+\multicolumn{5}{l}{\textit{Daughter-related variables}}\\
+\hspace{1em}Misses school & 0.08 & 0.26 & 0.04 & 0.000 ***\\
+\hspace{1em}Lacked knowledge about period & 0.20 & 0.28 & 0.18 & 0.009 ***\\
+\hspace{1em}Knows about sexuality from family & 0.12 & 0.15 & 0.11 & 0.253\\
+\hspace{1em}Knows about sexuality from school & 0.80 & 0.74 & 0.81 & 0.071  *\\
+\hspace{1em}Knows about sexuality from other sources & 0.03 & 0.07 & 0.03 & 0.039 **\\
+\addlinespace[2em]
+\multicolumn{5}{l}{\textit{Household-related variables}}\\
+\hspace{1em}Ethnic minority & 0.21 & 0.30 & 0.19 & 0.005 ***\\
+\hspace{1em}Rural area & 0.39 & 0.41 & 0.39 & 0.66\\
+\hspace{1em}Internet access & 0.44 & 0.30 & 0.47 & 0.000 ***\\
+\hspace{1em}Household members & 5.57 & 5.98 & 5.49 & 0.004 ***\\
+\hspace{1em}Household income & 601.87 & 736.92 & 575.35 & 0.711\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}[para]
 \item \textit{Note: } 
 \item p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. *p < .1; **p < .05; ***p < .01
 \end{tablenotes}
-\end{threeparttable}
+\end{threeparttable}}
 \end{table}
 
 Mother characteristics significantly differed across groups. Mothers of
@@ -317,13 +321,58 @@ coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79),
 respectively. The t-test showed that these differences were unlikely to
 have been due to chance (p \textless{} .001).
 
+\newpage
+\begin{landscape}
+\begin{table}[!h]
+
+\caption{\label{tab:unnamed-chunk-4}}
+\centering
+\resizebox{\linewidth}{!}{
+\begin{threeparttable}
+\begin{tabular}[t]{lrrrlrrlr}
+\toprule
+\multicolumn{2}{c}{ } & \multicolumn{3}{c}{Maternal sexual empowerment} & \multicolumn{3}{c}{Mother had teenage birth} & \multicolumn{1}{c}{ } \\
+\cmidrule(l{3pt}r{3pt}){3-5} \cmidrule(l{3pt}r{3pt}){6-8}
+  & Total & \makecell[c]{Lacks sexual\\empowerment} & \makecell[c]{Is sexually\\empowered} & p value & \makecell[c]{Teenage\\birth} & \makecell[c]{No teenage\\birth} & p value & \makecell[c]{Mother's age\\at first\\ intercourse}\\
+\midrule
+\addlinespace[2em]
+\multicolumn{9}{l}{\textit{Mother-related variables}}\\
+\hspace{1em}Mother has a job & 0.60 & 0.51 & 0.61 & 0.099 * & 0.62 & 0.59 & 0.418 & 17.36\\
+\hspace{1em}Mother finished primary school & 0.97 & 0.97 & 0.97 & 1 & 0.98 & 0.97 & 0.502 & 17.42\\
+\hspace{1em}Mother finished high school & 0.54 & 0.44 & 0.55 & 0.093 * & 0.48 & 0.61 & 0.000 *** & 17.97\\
+\hspace{1em}Mother finished college & 0.16 & 0.08 & 0.16 & 0.094 * & 0.12 & 0.20 & 0.000 *** & 18.89\\
+\addlinespace[2em]
+\multicolumn{9}{l}{\textit{Daughter-related variables}}\\
+\hspace{1em}Misses school & 0.08 & 0.07 & 0.08 & 0.895 & 0.09 & 0.07 & 0.213 & 15.97\\
+\hspace{1em}Lacked knowledge about period & 0.20 & 0.25 & 0.19 & 0.349 & 0.21 & 0.18 & 0.199 & 16.93\\
+\hspace{1em}Knows about sexuality from family & 0.12 & 0.07 & 0.12 & 0.266 & 0.14 & 0.09 & 0.015 ** & 17.20\\
+\hspace{1em}Knows about sexuality from school & 0.80 & 0.84 & 0.80 & 0.507 & 0.78 & 0.82 & 0.094 * & 17.45\\
+\hspace{1em}Knows about sexuality from other sources & 0.03 & 0.05 & 0.03 & 0.522 & 0.05 & 0.02 & 0.093 * & 16.69\\
+\addlinespace[2em]
+\multicolumn{9}{l}{\textit{Household-related variables}}\\
+\hspace{1em}Ethnic minority & 0.21 & 0.34 & 0.20 & 0.006 *** & 0.21 & 0.20 & 0.75 & 16.88\\
+\hspace{1em}Rural area & 0.39 & 0.51 & 0.38 & 0.047 ** & 0.39 & 0.39 & 0.881 & 17.04\\
+\hspace{1em}Internet access & 0.44 & 0.38 & 0.45 & 0.351 & 0.40 & 0.49 & 0.013 ** & 18.02\\
+\hspace{1em}Household members & 5.57 & 5.82 & 5.55 & 0.243 & 5.83 & 5.29 & 0.000 *** & NA\\
+\hspace{1em}Household income & 601.87 & 822.73 & 582.83 & 0.688 & 690.88 & 503.05 & 0.561 & NA\\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}[para]
+\item \textit{Note: } 
+\item p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. *p < .1; **p < .05; ***p < .01
+\end{tablenotes}
+\end{threeparttable}}
+\end{table}
+\end{landscape}
+\newpage
+
 \begin{figure}
 
-{\centering \includegraphics[width=0.8\linewidth,height=0.7\textheight]{early_sexual_activity_report_files/figure-latex/unnamed-chunk-2-1} 
+{\centering \includegraphics[width=0.8\linewidth,height=0.7\textheight]{early_sexual_activity_report_files/figure-latex/unnamed-chunk-5-1} 
 
 }
 
-\caption{Cumulative histogram of age at first intercourse of mothers by group}\label{fig:unnamed-chunk-2}
+\caption{Cumulative histogram of age at first intercourse of mothers by group}\label{fig:unnamed-chunk-5}
 \end{figure}
 
 Logistic regressions were used to assess the relationship between the
@@ -385,131 +434,7 @@ significant. As with the previous regressions, attending school and
 having a mother who finished primary school are associated with delayed
 sexual activity.
 
-\begin{table}[!htbp] \centering 
-  \caption{Logistic Regression Results} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-4} 
-\\[-1.8ex] & \multicolumn{3}{c}{Early sexual activity} \\ 
-\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
-\hline \\[-1.8ex] 
- Ethnic minority & 0.314 & 0.324 & 0.325 \\ 
-  & (0.255) & (0.259) & (0.270) \\ 
-  Lives in a rural area & -0.053 & -0.025 & 0.058 \\ 
-  & (0.231) & (0.233) & (0.241) \\ 
-  Household income & 0.0001 & 0.0001 & 0.0001 \\ 
-  & (0.0001) & (0.0001) & (0.0001) \\ 
-  Number of members in the household & 0.098 & 0.070 & 0.037 \\ 
-  & (0.056) & (0.058) & (0.059) \\ 
-  Does not have internet & 0.430 & 0.447 & 0.404 \\ 
-  & (0.246) & (0.249) & (0.257) \\ 
-  Misses school & 2.127^{***} & 2.139^{***} & 2.163^{***} \\ 
-  & (0.319) & (0.322) & (0.340) \\ 
-  Lacks knowledge about period & 0.251 & 0.242 & 0.350 \\ 
-  & (0.252) & (0.254) & (0.264) \\ 
-  Lacks knowledge about pregnancy & 0.290 & 0.323 & 0.424 \\ 
-  & (0.260) & (0.261) & (0.272) \\ 
-  Lacks knowledge about AIDs & -0.024 & 0.033 & -0.120 \\ 
-  & (0.308) & (0.311) & (0.337) \\ 
-  Knows about sexuality from family & 2.631^{*} & 2.578^{*} & 2.564^{*} \\ 
-  & (1.141) & (1.205) & (1.204) \\ 
-  Knows about sexuality from school & 2.069 & 2.125 & 2.056 \\ 
-  & (1.109) & (1.173) & (1.170) \\ 
-  Knows about sexuality from other sources & 3.000^{*} & 2.976^{*} & 3.144^{*} \\ 
-  & (1.191) & (1.250) & (1.248) \\ 
-  Mother has a job & 0.631^{**} & 0.575^{*} & 0.595^{*} \\ 
-  & (0.225) & (0.228) & (0.236) \\ 
-  Mother finished primary school & -1.187 & -1.332 & -1.161 \\ 
-  & (0.683) & (0.695) & (0.707) \\ 
-  Mother finished secondary school & -0.693 & -0.790 & -0.584 \\ 
-  & (0.685) & (0.697) & (0.710) \\ 
-  Mother finished college & -0.943 & -0.961 & -0.554 \\ 
-  & (0.734) & (0.744) & (0.761) \\ 
-  Mother lacks sexual bargaining & 0.628^{*} & 0.600^{*} & 0.478 \\ 
-  & (0.297) & (0.300) & (0.316) \\ 
-  Mother had a teenage birth &  & 0.778^{***} & 0.294 \\ 
-  &  & (0.220) & (0.258) \\ 
-  Mother's age at first intercourse &  &  & -0.188^{***} \\ 
-  &  &  & (0.055) \\ 
-  Constant & -4.583^{***} & -4.829^{***} & -1.389 \\ 
-  & (1.287) & (1.334) & (1.649) \\ 
- \hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{828} & \multicolumn{1}{c}{824} & \multicolumn{1}{c}{783} \\ 
-Log Likelihood & \multicolumn{1}{c}{-321.446} & \multicolumn{1}{c}{-314.520} & \multicolumn{1}{c}{-291.948} \\ 
-Akaike Inf. Crit. & \multicolumn{1}{c}{678.891} & \multicolumn{1}{c}{667.040} & \multicolumn{1}{c}{623.895} \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.05; $^{**}$p$<$0.01; $^{***}$p$<$0.001} \\ 
-\end{tabular} 
-\end{table}
-
-\begin{table}[!htbp] \centering 
-  \caption{Logistic Regression Results} 
-  \label{} 
-\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} } 
-\\[-1.8ex]\hline 
-\hline \\[-1.8ex] 
- & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
-\cline{2-4} 
-\\[-1.8ex] & \multicolumn{3}{c}{Early sexual activity} \\ 
-\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
-\hline \\[-1.8ex] 
- Ethnic minority & 0.671 & 0.695 & 0.667 \\ 
-  & (0.409) & (0.411) & (0.414) \\ 
-  Lives in a rural area & -0.411 & -0.372 & -0.363 \\ 
-  & (0.354) & (0.354) & (0.358) \\ 
-  Household income & 0.0002 & 0.0002 & 0.0002 \\ 
-  & (0.0001) & (0.0001) & (0.0001) \\ 
-  Number of members in the household & 0.118 & 0.095 & 0.087 \\ 
-  & (0.091) & (0.093) & (0.093) \\ 
-  Does not have internet & 0.775^{*} & 0.774^{*} & 0.675 \\ 
-  & (0.357) & (0.356) & (0.358) \\ 
-  Misses school & 1.554^{**} & 1.532^{**} & 1.568^{**} \\ 
-  & (0.495) & (0.498) & (0.513) \\ 
-  Lacks knowledge about period & -0.232 & -0.199 & -0.168 \\ 
-  & (0.426) & (0.427) & (0.434) \\ 
-  Lacks knowledge about pregnancy & -0.165 & -0.174 & -0.122 \\ 
-  & (0.434) & (0.435) & (0.437) \\ 
-  Lacks knowledge about AIDs & -0.007 & -0.037 & -0.208 \\ 
-  & (0.505) & (0.510) & (0.524) \\ 
-  Knows about sexuality from family & 1.288 & 1.329 & 1.244 \\ 
-  & (1.585) & (1.623) & (1.623) \\ 
-  Knows about sexuality from school & 0.659 & 0.771 & 0.636 \\ 
-  & (1.537) & (1.578) & (1.580) \\ 
-  Knows about sexuality from other sources & 1.656 & 1.755 & 1.623 \\ 
-  & (1.648) & (1.684) & (1.683) \\ 
-  Mother has a job & 0.488 & 0.436 & 0.455 \\ 
-  & (0.325) & (0.327) & (0.333) \\ 
-  Mother finished primary school & -2.610^{**} & -2.748^{**} & -2.460^{*} \\ 
-  & (0.971) & (0.979) & (0.981) \\ 
-  Mother finished secondary school & -2.018^{*} & -2.128^{*} & -1.782 \\ 
-  & (0.980) & (0.984) & (0.987) \\ 
-  Mother finished college & -2.215^{*} & -2.275^{*} & -1.792 \\ 
-  & (1.047) & (1.046) & (1.057) \\ 
-  Ever drunk alcohol & 0.872^{**} & 0.868^{**} & 0.785^{*} \\ 
-  & (0.328) & (0.328) & (0.333) \\ 
-  Ever smoked & 1.415^{**} & 1.358^{**} & 1.404^{**} \\ 
-  & (0.497) & (0.500) & (0.512) \\ 
-  Mother lacks sexual bargaining & 0.685 & 0.704 & 0.587 \\ 
-  & (0.438) & (0.440) & (0.450) \\ 
-  Mother had a teenage birth &  & 0.353 & -0.131 \\ 
-  &  & (0.311) & (0.358) \\ 
-  Mother's age at first intercourse &  &  & -0.191^{*} \\ 
-  &  &  & (0.080) \\ 
-  Constant & -2.446 & -2.483 & 0.998 \\ 
-  & (1.749) & (1.782) & (2.272) \\ 
- \hline \\[-1.8ex] 
-Observations & \multicolumn{1}{c}{417} & \multicolumn{1}{c}{415} & \multicolumn{1}{c}{401} \\ 
-Log Likelihood & \multicolumn{1}{c}{-155.455} & \multicolumn{1}{c}{-154.608} & \multicolumn{1}{c}{-150.149} \\ 
-Akaike Inf. Crit. & \multicolumn{1}{c}{350.910} & \multicolumn{1}{c}{351.216} & \multicolumn{1}{c}{344.298} \\ 
-\hline 
-\hline \\[-1.8ex] 
-\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.05; $^{**}$p$<$0.01; $^{***}$p$<$0.001} \\ 
-\end{tabular} 
-\end{table}
+\begin{table}[!htbp] \centering    \caption{Logistic Regression Results}    \label{}  \begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-3} D{.}{.}{-3} D{.}{.}{-3} }  \\[-1.8ex]\hline  \hline \\[-1.8ex]   & \multicolumn{3}{c}{\textit{Dependent variable:}} \\  \cline{2-4}  \\[-1.8ex] & \multicolumn{3}{c}{Early sexual initiation} \\  \\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\  \hline \\[-1.8ex]   Mother lacks sexual empowerment & 0.543^{*} & 0.499 & 0.476 \\    & (0.323) & (0.327) & (0.329) \\    Mother had a teenage birth &  & 0.712^{***} & 0.329 \\    &  & (0.207) & (0.234) \\    Mother's age at first intercourse &  &  & -0.160^{***} \\    &  &  & (0.050) \\   &  &  &  \\   &  &  &  \\    Mother has a job & 0.583^{***} & 0.555^{***} & 0.544^{**} \\    & (0.212) & (0.214) & (0.215) \\    Mother finished primary school & -0.594 & -0.676 & -0.652 \\    & (0.495) & (0.506) & (0.503) \\    Mother finished high school & -0.352 & -0.386 & -0.303 \\    & (0.511) & (0.523) & (0.520) \\    Mother finished college & -0.450 & -0.420 & -0.231 \\    & (0.578) & (0.587) & (0.588) \\   &  &  &  \\  &  &  &  \\    Misses school & 2.113^{***} & 2.123^{***} & 2.031^{***} \\    & (0.297) & (0.300) & (0.305) \\    Lacked knowledge about period & 0.333 & 0.314 & 0.324 \\    & (0.233) & (0.235) & (0.238) \\    Knows about sexuality from family & 1.808^{***} & 1.612^{***} & 1.576^{***} \\    & (0.592) & (0.605) & (0.607) \\    Knows about sexuality from school & 1.331^{**} & 1.234^{**} & 1.202^{**} \\    & (0.535) & (0.546) & (0.548) \\    Knows about sexuality from other sources & 2.199^{***} & 2.010^{***} & 1.989^{***} \\    & (0.676) & (0.688) & (0.690) \\   \hline \\[-1.8ex]  Household-related controls? & Yes & Yes & Yes \\  Observations & \multicolumn{1}{c}{920} & \multicolumn{1}{c}{920} & \multicolumn{1}{c}{920} \\  \hline  \hline \\[-1.8ex]  \textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\  \end{tabular}  \end{table}
 
 \hypertarget{discussion}{%
 \subsection{DISCUSSION}\label{discussion}}
