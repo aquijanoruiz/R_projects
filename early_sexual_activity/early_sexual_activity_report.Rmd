@@ -54,129 +54,18 @@ if(!require(kableExtra)) install.packages("kableExtra", repos = "http://cran.us.
 if(!require(stargazer)) install.packages("stargazer", repos = "http://cran.us.r-project.org")
 if(!require(starpolishr)) devtools::install_github("ChandlerLutz/starpolishr")
 
-options(tinytex.verbose = TRUE)
-data <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/early_sexual_activity_data.rds"))
+data <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/early_sexual_activity_data.rds"))
 
-#################################################################################
-#####         1 Summary statistics                                          #####
-#####         1.1 Table 1: Percentage and mean levels by sexual activity    #####
-#################################################################################
+table_1_sum_stat_copy <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_1_sum_stat_copy.rds"))
 
-data_copy <- data
-data_copy$value <- TRUE
-data_copy <- spread(data_copy, sexuality_knowledge, value, fill = FALSE, sep = "_")
+table_2_sum_stat_copy <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_2_sum_stat_copy.rds"))
+```
 
-data_copy$value <- TRUE
-data_copy <- spread(data_copy, m_education, value, fill = FALSE, sep = "_")
-
-binary_var <- c("early_sexual_activity", "coercion_1st_intercourse", "minority", "rural", 
-                "h_internet", "misses_school", "lack_period_knowledge", "m_job", 
-                "m_teenage_birth", "m_lack_empowerment", "m_finished_ps", "m_finished_hs",
-                "m_finished_college")
-
-binarize <- function(x){ # We create a variable to make factors binary variables
-  x = ifelse(as.integer(x) == 2, TRUE, FALSE) # and apply it to all the columns
-  return(x)
-}
-
-data_copy[, binary_var] <- sapply(data_copy[, binary_var], FUN = binarize)
-
-# if(!require(haven)) install.packages("haven", repos = "http://cran.us.r-project.org")
-# write_dta(data_copy, "early_sexual_activity_data.dta")
-
-# We will use the chi square test and t test to compare variables within groups (early
-# sexual initiators and no early sexual initiators)
-
-# percentages and chi square test (categorical variables) ------------------------------
-
-cat_var <- c("m_lack_empowerment", "m_teenage_birth", "minority", "rural", "h_internet", 
-             "misses_school", "lack_period_knowledge", "sexuality_knowledge_family", 
-             "sexuality_knowledge_school", "sexuality_knowledge_other",
-             "m_job", "m_finished_ps", "m_finished_hs", "m_finished_college")
-
-chi_sq_test  <- sapply(cat_var, function(x){
-  chi_sq <- chisq.test(data_copy[,"early_sexual_activity"], data_copy[,x])
-  return(chi_sq$p.value)
-})
-
-mean_total  <- sapply(cat_var, function(x){
-  mean <- mean(data_copy[, x], na.rm = TRUE)
-  return(mean)
-})
-
-mean_early_sex  <- sapply(cat_var, function(x){
-  mean <- mean(data_copy[data_copy$early_sexual_activity == TRUE, x], na.rm = TRUE)
-  return(mean)
-})
-
-mean_no_early_sex  <- sapply(cat_var, function(x){
-  mean <- mean(data_copy[data_copy$early_sexual_activity == FALSE, x], na.rm = TRUE)
-  return(mean)
-})
-
-# We put the percentages and p values in one table
-table_1_sum_stat <- 
-  tibble(variable = cat_var, total = mean_total, mean_early_sex = mean_early_sex,
-         mean_no_early_sex = mean_no_early_sex, p_value = chi_sq_test)
-
-# means and t test (continuous variables) ------------------------------
-
-cont_var <- c("m_age_1st_intercourse", "h_income", "h_num_members")
-
-t_test  <- sapply(cont_var, function(x){
-  t_test <- t.test(data_copy[,x] ~ data_copy[,"early_sexual_activity"], var.equal = TRUE)
-  return(t_test$p.value)
-})
-
-mean_total  <- sapply(cont_var, function(x){
-  mean <- mean(data_copy[, x], na.rm = TRUE)
-  return(mean)
-})
-
-mean_early_sex  <- sapply(cont_var, function(x){
-  mean <- mean(data_copy[data_copy$early_sexual_activity == TRUE, x], na.rm = TRUE)
-  return(mean)
-})
-
-mean_no_early_sex  <- sapply(cont_var, function(x){
-  mean <- mean(data_copy[data_copy$early_sexual_activity == FALSE, x], na.rm = TRUE)
-  return(mean)
-})
-
-# We put everything in one table
-table_1_sum_stat <- 
-  rbind(table_1_sum_stat, tibble(variable = cont_var,
-                                   total = mean_total,
-                                   mean_early_sex = mean_early_sex, 
-                                   mean_no_early_sex = mean_no_early_sex, 
-                                   p_value = t_test))
-
-# Adding some format to the table ------------------------------
-
-table_1_sum_stat[, 2:4] <- round(table_1_sum_stat[, 2:4], digits = 2)
-table_1_sum_stat[, 5] <- round(table_1_sum_stat[, 5], digits = 3)
-
-table_1_sum_stat_copy <- table_1_sum_stat
-
-table_1_sum_stat_copy$p_value <- 
-  with(table_1_sum_stat_copy, case_when(p_value < 0.0005 ~ paste("0.000", "***"),
-                                          p_value <= 0.001 ~ paste(as.character(p_value), "***"),
-                                          p_value <= 0.01 ~ paste(p_value, "***"),
-                                          p_value <= 0.05 ~ paste(p_value, "**"),
-                                          p_value <= 0.1 ~ paste(as.numeric(p_value), " *"),
-                                          TRUE ~ as.character(p_value)))
-
-rownames(table_1_sum_stat_copy) <- table_1_sum_stat_copy$variable
-
-# We reorder the rows in the table
-table_1_sum_stat_copy <- table_1_sum_stat_copy[
-  c("m_lack_empowerment", "m_teenage_birth", "m_age_1st_intercourse", "m_job", 
-    "m_finished_ps", "m_finished_hs", "m_finished_college", "misses_school", 
-    "lack_period_knowledge", "sexuality_knowledge_family", "sexuality_knowledge_school",
-    "sexuality_knowledge_other", "minority", "rural", "h_internet", 
-    "h_num_members", "h_income"),]
-
-table_1_sum_stat_copy <- table_1_sum_stat_copy[,-1] # we eliminate the first column
+\newpage
+\blandscape
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
+# 1 Summary statistics ------------------------------
+# 1.1 Table 1: Percentage and mean levels by sexual activity ------------------------------
 
 variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth",
     "Mother's age at first intercourse", "Mother has a job", 
@@ -185,28 +74,16 @@ variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth",
     "Knows about sexuality from family", "Knows about sexuality from school", 
     "Knows about sexuality from other sources", "Ethnic minority", "Rural area", 
     "Internet access", "Household members", "Household income")
-```
 
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
 rownames(table_1_sum_stat_copy) <- variables
 
-kable(table_1_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escape = F,
-      col.names = linebreak(c("Total","Early\nsexual initiatiors",
-                              "Non-early\nsexual initiatiors","p value"), align = "c"), 
-      caption = "Percentage and mean levels of explanatory variables by group") %>%
-  kable_styling(latex_options = c("hold_position", "scale_down")) %>%
-  pack_rows("Explanatory variables", 1, 3, latex_gap_space = "2em", italic = T, bold = F) %>%
-  pack_rows("Mother-related variables", 4, 7, latex_gap_space = "2em", italic = T, bold = F) %>%
-  pack_rows("Daughter-related variables", 8, 12, latex_gap_space = "2em", italic = T, bold = F) %>%
-  pack_rows("Household-related variables", 13, 17, latex_gap_space = "2em", italic = T, bold = F) %>%
-  footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. *p < .1; **p < .05; ***p < .01",
-           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) 
 ```
-
+\elandscape
+\newpage
 
 Mother characteristics significantly differed across groups. Mothers of early sexual initiators were less likely to have finished primary school (p < .01) and more likely to have become a teenage parent (p < .001). As expected, early sexual initiators were more likely to have been reared by a mother who had herself had her first coitus at a very young age. Figure 1 illustrates the cumulative histogram of age at first coitus of the mothers. The figure clearly shows that mothers of early sexual initiators had their first coitus at a younger age than mothers of those who were not sexually active. The mean age at first coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79), respectively. The t-test showed that these differences were unlikely to have been due to chance (p < .001).
 
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
 #################################################################################
 #####    5.2 Table 2: Percentage and mean levels by maternal empowerment    #####
 #################################################################################
@@ -353,7 +230,7 @@ table_2_sum_stat_copy <-
 
 \newpage
 \blandscape
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
 rownames(table_2_sum_stat_copy) <- variables[4:17]
 
 kable(table_2_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escape = F,
@@ -372,7 +249,7 @@ kable(table_2_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escap
 \elandscape
 \newpage
 
-```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%', fig.cap=paste("Cumulative histogram of age at first intercourse of mothers by group")}
+```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%', fig.cap=paste("Cumulative histogram of age at first intercourse of mothers by group"), eval=FALSE}
 
 plot(ecdf(data_copy[data_copy$early_sexual_activity == TRUE, "m_age_1st_intercourse"]),
      col = "cadetblue1", main = "", xlab = "Age at first intercourse", ylab = "Density",
@@ -393,7 +270,7 @@ As mentioned before, data about smoking and drinking were not gathered for all s
 
 As expected, smoking and drinking were high predictors for precocious sexual initiation. Table 3 shows that even after controlling for these two additional variables, the log odds of early sexual onset decrease for each additional year that the mother delays her sexual debut. Interestingly, when adding these cofounders, from whom girls learn about sexual relations and having an employed mother are no longer significant. As with the previous regressions, attending school and having a mother who finished primary school are associated with delayed sexual activity.
 
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
 #################################################################################
 #####                       4 The logit models                              #####
 #################################################################################
@@ -441,7 +318,7 @@ variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth",
     "Internet access", "Household members", "Household income")
 ``` 
 
-```{r, results='asis', warning=FALSE, message=FALSE, include=FALSE}
+```{r, results='asis', warning=FALSE, message=FALSE, include=FALSE, eval=FALSE}
 reg_table <- stargazer(logit_m1, logit_m2, logit_m3, title="Logistic Regression Results", type = "latex",
           covariate.labels = variables, style = "default",
           align=TRUE, header = FALSE, star.cutoffs = c(.1, .05, .01), omit = c("Constant", "minority", "rural", "h_internet", "h_num_members", "h_income"), add.lines=list(c("Household-related controls?", "Yes", "Yes", "Yes")),
@@ -449,7 +326,7 @@ reg_table <- stargazer(logit_m1, logit_m2, logit_m3, title="Logistic Regression 
           dep.var.labels.include = TRUE, no.space = T)
 ```
 
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
 reg_table %>%
   star_insert_row(insert.after=c(18,18,26,26), c(' &  &  &  \\\\ ',
                                      ' &  &  &  \\\\ ',
