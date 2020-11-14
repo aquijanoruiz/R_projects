@@ -618,9 +618,8 @@
 @Misc{inec2019,
   author = {{INEC}},
   note   = {data retrieved from Instituto Ecuatoriano de Estadistica y Censos, https://www.ecuadorencifras.gob.ec/salud-salud-reproductiva-y-nutricion},
-  title  = {Encuesta de Salud y Nutricion 2018},
+  title  = {Encuesta de Salud y Nutricion 2018. data retrieved from Instituto Ecuatoriano de Estadistica y Censos, url\{https://www.ecuadorencifras.gob.ec/salud-salud-reproductiva-y-nutricion},
   year   = {2019},
-  url = {https://www.ecuadorencifras.gob.ec/salud-salud-reproductiva-y-nutricion},
 }
 
 @Book{knitr2015,

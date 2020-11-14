@@ -5,6 +5,7 @@ output:
   pdf_document:
     keep_tex: true
 bibliography: early_sexual_activity_report.bib
+csl: elsevier-harvard.csl
 header-includes:
    - \usepackage{dcolumn}
    - \usepackage{pdflscape}
@@ -77,160 +78,33 @@ variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth",
 
 rownames(table_1_sum_stat_copy) <- variables
 
+kable(table_1_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escape = F,
+      col.names = linebreak(c("Total","Has ever had\nsexual intercourse","Has not had\nsexual intercourse",
+                              "p value","Has ever been\n pregnant", "Has not been\npregnant", "p value",
+                              "Used\ncontraception", "Did not use\ncontraception",
+                              "p value"), align = "c"), 
+      caption = "Percentage and mean levels of explanatory variables by group") %>%
+  add_header_above(c(" " = 2, "Early sexual initiation" = 3, 
+                     "Teenage pregnancy" = 3, "Contraception use at first intercourse" = 3)) %>%
+  add_header_above(c(" " = 2, "Daughters' sexual outcomes" = 9)) %>%
+  kable_styling(latex_options = c("hold_position", "scale_down")) %>%
+  pack_rows("Explanatory variables", 1, 3, latex_gap_space = "2em", italic = T, bold = F) %>%
+  pack_rows("Mother-related variables", 4, 7, latex_gap_space = "2em", italic = T, bold = F) %>%
+  pack_rows("Daughter-related variables", 8, 12, latex_gap_space = "2em", italic = T, bold = F) %>%
+  pack_rows("Household-related variables", 13, 17, latex_gap_space = "2em", italic = T, bold = F) %>%
+  footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. *p < .1; **p < .05; ***p < .01",
+           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) 
 ```
 \elandscape
 \newpage
 
 Mother characteristics significantly differed across groups. Mothers of early sexual initiators were less likely to have finished primary school (p < .01) and more likely to have become a teenage parent (p < .001). As expected, early sexual initiators were more likely to have been reared by a mother who had herself had her first coitus at a very young age. Figure 1 illustrates the cumulative histogram of age at first coitus of the mothers. The figure clearly shows that mothers of early sexual initiators had their first coitus at a younger age than mothers of those who were not sexually active. The mean age at first coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79), respectively. The t-test showed that these differences were unlikely to have been due to chance (p < .001).
 
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
-#################################################################################
-#####    5.2 Table 2: Percentage and mean levels by maternal empowerment    #####
-#################################################################################
-
-# percentages and chi square test (categorical variables) ------------------------------
-cat_var <- c("minority", "rural", "h_internet", "misses_school", "lack_period_knowledge", 
-             "sexuality_knowledge_family", "sexuality_knowledge_school", 
-             "sexuality_knowledge_other", "m_job", "m_finished_ps", "m_finished_hs", 
-             "m_finished_college")
-
-exp_var <- c("m_lack_empowerment", "m_teenage_birth")
-
-chi_sq_test <- matrix(NA, nrow = length(cat_var), ncol = length(exp_var))
-rownames(chi_sq_test) <- cat_var
-colnames(chi_sq_test) <- exp_var
-
-for(x in cat_var) {
-  for(y in exp_var) {
-    chi_sq_test[x,y] <- chisq.test(data_copy[,x], data_copy[,y])$p.value
-  }
-}
-
-colnames(chi_sq_test) <- c("p_val_m_lack_empowerment", "p_val_m_teenage_birth")
-
-cat_var_mean_T <- matrix(NA, nrow = length(cat_var), ncol = length(exp_var))
-rownames(cat_var_mean_T) <- cat_var
-colnames(cat_var_mean_T) <- exp_var
-
-for(x in cat_var) {
-  for(y in exp_var) {
-    cat_var_mean_T[x,y] <- mean(data_copy[data_copy[,y] == TRUE, x], na.rm = TRUE)
-  }
-}
-
-cat_var_mean_F <- matrix(NA, nrow = length(cat_var), ncol = length(exp_var))
-rownames(cat_var_mean_F) <- cat_var
-colnames(cat_var_mean_F) <- exp_var
-
-for(x in cat_var) {
-  for(y in exp_var) {
-    cat_var_mean_F[x,y] <- mean(data_copy[data_copy[,y] == FALSE, x], na.rm = TRUE)
-  }
-}
-
-colnames(cat_var_mean_F) <- c("no_m_lack_empowerment", "no_m_teenage_birth")
-
-# means and t-test (continuous variables) ------------------------------
-
-cont_var <- c("h_income", "h_num_members")
-
-t_test <- matrix(NA, nrow = length(cont_var), ncol = length(exp_var))
-rownames(t_test) <- cont_var
-colnames(t_test) <- exp_var
-
-for(x in cont_var) {
-  for(y in exp_var) {
-    t_test[x,y] <- t.test(data_copy[,x] ~ data_copy[,y], var.equal = TRUE)$p.value
-  }
-}
-
-colnames(t_test) <- c("p_val_m_lack_empowerment", "p_val_m_teenage_birth")
-
-cont_var_mean_T <- matrix(NA, nrow = length(cont_var), ncol = length(exp_var))
-rownames(cont_var_mean_T) <- cont_var
-colnames(cont_var_mean_T) <- exp_var
-
-for(x in cont_var) {
-  for(y in exp_var) {
-    cont_var_mean_T[x,y] <- mean(data_copy[data_copy[,y] == TRUE, x], na.rm = TRUE)
-  }
-}
-
-cont_var_mean_F <- matrix(NA, nrow = length(cont_var), ncol = length(exp_var))
-rownames(cont_var_mean_F) <- cont_var
-colnames(cont_var_mean_F) <- exp_var
-
-for(x in cont_var) {
-  for(y in exp_var) {
-    cont_var_mean_F[x,y] <- mean(data_copy[data_copy[,y] == FALSE, x], na.rm = TRUE)
-  }
-}
-
-colnames(cont_var_mean_F) <- c("no_m_lack_empowerment", "no_m_teenage_birth")
-
-# mother's age at first intercourse ------------------------------
-
-m_age_1st_intercourse <- sapply(cat_var, function(x){
-  mean <- mean(data_copy[data_copy[,x],"m_age_1st_intercourse"], na.rm = TRUE)
-  return(mean)
-})
-
-m_age_1st_intercourse <- 
-  rbind(as.data.frame(m_age_1st_intercourse), 
-        data.frame(m_age_1st_intercourse = c(NA,NA), row.names = cont_var))
-
-mean_total  <- sapply(c(cat_var, cont_var), function(x){
-  mean <- mean(data_copy[, x], na.rm = TRUE)
-  return(mean)
-})
-
-# Creating the table ------------------------------
-
-table_2_sum_stat <- rbind(cbind(chi_sq_test, cat_var_mean_T, cat_var_mean_F), 
-      cbind(t_test, cont_var_mean_T, cont_var_mean_F))
-
-table_2_sum_stat <- cbind(table_2_sum_stat, mean_total, m_age_1st_intercourse)
-
-table_2_sum_stat <-
-  table_2_sum_stat[,c("mean_total", "m_lack_empowerment", "no_m_lack_empowerment", 
-                      "p_val_m_lack_empowerment", "m_teenage_birth", "no_m_teenage_birth", 
-                      "p_val_m_teenage_birth", "m_age_1st_intercourse")]
-
-# Adding some format to the table ------------------------------
-table_2_sum_stat_copy <- as.data.frame(table_2_sum_stat)
-
-table_2_sum_stat_copy[, c(1:3,5,6,8)] <- round(table_2_sum_stat_copy[, c(1:3,5,6,8)], digits = 2)
-table_2_sum_stat_copy[, c(4,7)] <- round(table_2_sum_stat_copy[, c(4,7)], digits = 3)
-
-table_2_sum_stat_copy$p_val_m_lack_empowerment <- 
-  with(table_2_sum_stat_copy, 
-       case_when(p_val_m_lack_empowerment < 0.0005 ~ paste("0.000", "***"),
-                 p_val_m_lack_empowerment <= 0.001 ~ paste(as.character(p_val_m_lack_empowerment), "***"),
-                 p_val_m_lack_empowerment <= 0.01 ~ paste(p_val_m_lack_empowerment, "***"),
-                 p_val_m_lack_empowerment <= 0.05 ~ paste(p_val_m_lack_empowerment, "**"),
-                 p_val_m_lack_empowerment <= 0.1 ~ paste(as.numeric(p_val_m_lack_empowerment), "*"),
-                 TRUE ~ as.character(p_val_m_lack_empowerment)))
-
-table_2_sum_stat_copy$p_val_m_teenage_birth <- 
-  with(table_2_sum_stat_copy, 
-       case_when(p_val_m_teenage_birth < 0.0005 ~ paste("0.000", "***"),
-                 p_val_m_teenage_birth <= 0.001 ~ paste(as.character(p_val_m_teenage_birth), "***"),
-                 p_val_m_teenage_birth <= 0.01 ~ paste(p_val_m_teenage_birth, "***"),
-                 p_val_m_teenage_birth <= 0.05 ~ paste(p_val_m_teenage_birth, "**"),
-                 p_val_m_teenage_birth <= 0.1 ~ paste(as.numeric(p_val_m_teenage_birth), "*"),
-                 TRUE ~ as.character(p_val_m_teenage_birth)))
-
-# We reorder the rows in the table
-table_2_sum_stat_copy <- 
-  table_2_sum_stat_copy[c("m_job", "m_finished_ps", "m_finished_hs", "m_finished_college",
-                          "misses_school", "lack_period_knowledge", "sexuality_knowledge_family", 
-                          "sexuality_knowledge_school","sexuality_knowledge_other", "minority", 
-                          "rural", "h_internet", "h_num_members", "h_income"),]
-```
-
 \newpage
 \blandscape
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
+# 1.2 Table 2: ------------------------------
+
 rownames(table_2_sum_stat_copy) <- variables[4:17]
 
 kable(table_2_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escape = F,
@@ -249,14 +123,14 @@ kable(table_2_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escap
 \elandscape
 \newpage
 
-```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%', fig.cap=paste("Cumulative histogram of age at first intercourse of mothers by group"), eval=FALSE}
-
-plot(ecdf(data_copy[data_copy$early_sexual_activity == TRUE, "m_age_1st_intercourse"]),
-     col = "cadetblue1", main = "", xlab = "Age at first intercourse", ylab = "Density",
+```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%', fig.cap=paste("Cumulative histogram of age at first intercourse of mothers by group")}
+# 2 Plots ------------------------------
+plot(ecdf(data[data$early_sexual_activity == "yes", "m_age_1st_intercourse"]),
+     col = "cadetblue1", main = "", xlab = "Mothers' age at first intercourse", ylab = "Density",
      cex.axis=0.75, cex.lab=0.75)
-plot(ecdf(data_copy[data_copy$early_sexual_activity == FALSE, "m_age_1st_intercourse"]),
+plot(ecdf(data[data$early_sexual_activity == "no", "m_age_1st_intercourse"]),
      col = "palegreen", add = TRUE)
-legend("left", c("Early sexual activity", "No early sexual activity"),
+legend("left", c("Early sexual initiators", "Non-early sexual initiators"),
        col = c("cadetblue1", "palegreen"), lwd = 5, bty = "n", cex = 0.6)
 ```
 
@@ -270,63 +144,56 @@ As mentioned before, data about smoking and drinking were not gathered for all s
 
 As expected, smoking and drinking were high predictors for precocious sexual initiation. Table 3 shows that even after controlling for these two additional variables, the log odds of early sexual onset decrease for each additional year that the mother delays her sexual debut. Interestingly, when adding these cofounders, from whom girls learn about sexual relations and having an employed mother are no longer significant. As with the previous regressions, attending school and having a mother who finished primary school are associated with delayed sexual activity.
 
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
-#################################################################################
-#####                       4 The logit models                              #####
-#################################################################################
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
+# 2 Logit models ------------------------------
 
-# We will run logistic regressions to see what variables are most correlated 
-# with early sexual activity
-
-# Model 1: ------------------------------
-# m_lack_empowerment 
+# Model 1:
+# early sexual activity
 
 logit_m1 <- 
-  glm(early_sexual_activity ~ m_lack_empowerment + # explanatory variables
-        m_job + m_education + # mother-related variables
-        misses_school + lack_period_knowledge + sexuality_knowledge + # daughter-related variables
-        minority + rural + h_internet + h_num_members + h_income, # sociodemographic variables
-      data = data, family = "binomial")
-
-# Model 2: ------------------------------
-# m_lack_empowerment & m_teenage_birth
-
-logit_m2 <- 
   glm(early_sexual_activity ~ m_lack_empowerment + m_teenage_birth + # explanatory variables
         m_job + m_education + # mother-related variables
         misses_school + lack_period_knowledge + sexuality_knowledge + # daughter-related variables
-        minority + rural + h_internet + h_num_members + h_income, # sociodemographic variables
+        minority + rural + h_internet, # sociodemographic variables
       data = data, family = "binomial")
 
-# Model 3: ------------------------------ 
-# m_lack_empowerment & m_teenage_birth & m_age_1st_intercourse
+# Model 2:
+# teenage pregnancy
 
-logit_m3 <- 
-  glm(early_sexual_activity ~ 
-        m_lack_empowerment + m_teenage_birth + m_age_1st_intercourse + # explanatory variables
+logit_m2 <- 
+  glm(teenage_pregnancy ~ m_lack_empowerment + m_teenage_birth + # explanatory variables
         m_job + m_education + # mother-related variables
         misses_school + lack_period_knowledge + sexuality_knowledge + # daughter-related variables
-        minority + rural + h_internet + h_num_members + h_income, # sociodemographic variables
+        minority + rural + h_internet, # sociodemographic variables
       data = data, family = "binomial")
 
-variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth",
-    "Mother's age at first intercourse", "Mother has a job", 
-    "Mother finished primary school", "Mother finished high school", 
+# Model 3:
+# contraception 1st intercourse
+
+logit_m3 <- 
+  glm(contraception_1st_intercourse ~ m_lack_empowerment + m_teenage_birth + # explanatory variables
+        m_job + m_education + # mother-related variables
+        misses_school + lack_period_knowledge + sexuality_knowledge + # daughter-related variables
+        minority + rural + h_internet, # sociodemographic variables
+      data = data, family = "binomial")
+
+reg_var <- c("Mother lacks sexual empowerment", "Mother had a teenage birth",
+    "Mother has a job", "Mother finished primary school", "Mother finished high school", 
     "Mother finished college", "Misses school", "Lacked knowledge about period", 
     "Knows about sexuality from family", "Knows about sexuality from school", 
     "Knows about sexuality from other sources", "Ethnic minority", "Rural area", 
-    "Internet access", "Household members", "Household income")
+    "Internet access")
 ``` 
 
-```{r, results='asis', warning=FALSE, message=FALSE, include=FALSE, eval=FALSE}
+```{r, results='asis', warning=FALSE, message=FALSE, include=FALSE}
 reg_table <- stargazer(logit_m1, logit_m2, logit_m3, title="Logistic Regression Results", type = "latex",
-          covariate.labels = variables, style = "default",
-          align=TRUE, header = FALSE, star.cutoffs = c(.1, .05, .01), omit = c("Constant", "minority", "rural", "h_internet", "h_num_members", "h_income"), add.lines=list(c("Household-related controls?", "Yes", "Yes", "Yes")),
-          dep.var.labels = "Early sexual initiation", omit.stat = c("ll","aic"),
+          covariate.labels = reg_var, style = "default",
+          align=TRUE, header = FALSE, star.cutoffs = c(.1, .05, .01), omit = c("Constant", "minority", "rural", "h_internet"), add.lines=list(c("Household-related controls?", "Yes", "Yes", "Yes")),
+          dep.var.labels = c("Early sexual\ninitiation", "Teenage\npregnancy", "Contraception\nuse"), omit.stat = c("ll","aic"),
           dep.var.labels.include = TRUE, no.space = T)
 ```
 
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE, eval=FALSE}
+```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
 reg_table %>%
   star_insert_row(insert.after=c(18,18,26,26), c(' &  &  &  \\\\ ',
                                      ' &  &  &  \\\\ ',
