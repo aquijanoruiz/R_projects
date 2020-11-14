@@ -58,8 +58,6 @@ if(!require(starpolishr)) devtools::install_github("ChandlerLutz/starpolishr")
 data <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/early_sexual_activity_data.rds"))
 
 table_1_sum_stat_copy <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_1_sum_stat_copy.rds"))
-
-table_2_sum_stat_copy <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_2_sum_stat_copy.rds"))
 ```
 
 \newpage
@@ -68,60 +66,39 @@ table_2_sum_stat_copy <- readRDS(url("https://github.com/aquijanoruiz/R_projects
 # 1 Summary statistics ------------------------------
 # 1.1 Table 1: Percentage and mean levels by sexual activity ------------------------------
 
-variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth",
-    "Mother's age at first intercourse", "Mother has a job", 
-    "Mother finished primary school", "Mother finished high school", 
-    "Mother finished college", "Misses school", "Lacked knowledge about period", 
-    "Knows about sexuality from family", "Knows about sexuality from school", 
-    "Knows about sexuality from other sources", "Ethnic minority", "Rural area", 
-    "Internet access", "Household members", "Household income")
+variables <- c("Early sexual initiation", "Teenage pregnancy", 
+               "Contraception use", "Mother lacks sexual empowerment", 
+               "Mother had a teenage birth", "Mother's age at first intercourse", 
+               "Age", "Employed", "Non-partnered", "Cohabiting", "Married", "No education", 
+               "Primary education", "Secondary education", "Tertirary education", 
+               "Misses school", "No knowledge about period", "No knowledge",
+               "Knows from family", "Knows from school", "Knows from other sources", 
+               "Ethnic minority", "Rural area", "Internet access", "Household income")
 
 rownames(table_1_sum_stat_copy) <- variables
 
 kable(table_1_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escape = F,
-      col.names = linebreak(c("Total","Has ever had\nsexual intercourse","Has not had\nsexual intercourse",
-                              "p value","Has ever been\n pregnant", "Has not been\npregnant", "p value",
-                              "Used\ncontraception", "Did not use\ncontraception",
+      col.names = linebreak(c("Total","Yes","No", "p value","Yes", "No", "p value", "Yes", "No",
                               "p value"), align = "c"), 
       caption = "Percentage and mean levels of explanatory variables by group") %>%
   add_header_above(c(" " = 2, "Early sexual initiation" = 3, 
-                     "Teenage pregnancy" = 3, "Contraception use at first intercourse" = 3)) %>%
+                     "Teenage pregnancy" = 3, "Contraception use" = 3)) %>%
   add_header_above(c(" " = 2, "Daughters' sexual outcomes" = 9)) %>%
   kable_styling(latex_options = c("hold_position", "scale_down")) %>%
-  pack_rows("Explanatory variables", 1, 3, latex_gap_space = "2em", italic = T, bold = F) %>%
-  pack_rows("Mother-related variables", 4, 7, latex_gap_space = "2em", italic = T, bold = F) %>%
-  pack_rows("Daughter-related variables", 8, 12, latex_gap_space = "2em", italic = T, bold = F) %>%
-  pack_rows("Household-related variables", 13, 17, latex_gap_space = "2em", italic = T, bold = F) %>%
+  pack_rows("Daughters' sexual outcomes", 1, 3, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Explanatory variables", 4, 6, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Mother-related variables", 7, 15, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Daughter-related variables", 16, 17, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Daughters' knowledge about contraception", 18, 21, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Household-related variables", 22, 25, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. *p < .1; **p < .05; ***p < .01",
-           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) 
+           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) %>% kable_styling(font_size = 7.5)
 ```
 \elandscape
 \newpage
 
 Mother characteristics significantly differed across groups. Mothers of early sexual initiators were less likely to have finished primary school (p < .01) and more likely to have become a teenage parent (p < .001). As expected, early sexual initiators were more likely to have been reared by a mother who had herself had her first coitus at a very young age. Figure 1 illustrates the cumulative histogram of age at first coitus of the mothers. The figure clearly shows that mothers of early sexual initiators had their first coitus at a younger age than mothers of those who were not sexually active. The mean age at first coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79), respectively. The t-test showed that these differences were unlikely to have been due to chance (p < .001).
 
-\newpage
-\blandscape
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
-# 1.2 Table 2: ------------------------------
-
-rownames(table_2_sum_stat_copy) <- variables[4:17]
-
-kable(table_2_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escape = F,
-      col.names = linebreak(c("Total","Lacks sexual\nempowerment","Is sexually\nempowered",
-      "p value","Teenage\nbirth", "No teenage\nbirth", "p value",
-      "Mother's age\nat first\n intercourse"), align = "c"), caption = "") %>% 
-  kable_styling(latex_options = c("hold_position", "scale_down")) %>%
-  add_header_above(c(" " = 2, "Maternal sexual empowerment" = 3, 
-                     "Mother had teenage birth" = 3, " " = 1)) %>%
-  pack_rows("Mother-related variables", 1, 4, latex_gap_space = "2em", italic = T, bold = F) %>%
-  pack_rows("Daughter-related variables", 5, 9, latex_gap_space = "2em", italic = T, bold = F) %>%
-  pack_rows("Household-related variables", 10, 14, latex_gap_space = "2em", italic = T, bold = F) %>%
-  footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. *p < .1; **p < .05; ***p < .01", 
-           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) 
-```
-\elandscape
-\newpage
 
 ```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%', fig.cap=paste("Cumulative histogram of age at first intercourse of mothers by group")}
 # 2 Plots ------------------------------
