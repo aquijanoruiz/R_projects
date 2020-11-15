@@ -57,7 +57,7 @@ if(!require(starpolishr)) devtools::install_github("ChandlerLutz/starpolishr")
 
 data <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/early_sexual_activity_data.rds"))
 
-table_1_sum_stat_copy <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_1_sum_stat_copy.rds"))
+table_sum_stat <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_sum_stat.rds"))
 ```
 
 \newpage
@@ -75,9 +75,9 @@ variables <- c("Early sexual initiation", "Teenage pregnancy",
                "Knows from family", "Knows from school", "Knows from other sources", 
                "Ethnic minority", "Rural area", "Internet access", "Household income")
 
-rownames(table_1_sum_stat_copy) <- variables
+rownames(table_sum_stat) <- variables
 
-kable(table_1_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escape = F,
+kable(table_sum_stat, format = "latex", booktabs = T, linesep = "", escape = F,
       col.names = linebreak(c("Total","Yes","No", "p value","Yes", "No", "p value", "Yes", "No",
                               "p value"), align = "c"), 
       caption = "Percentage and mean levels of explanatory variables by group") %>%
