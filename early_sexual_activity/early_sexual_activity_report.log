@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  14 NOV 2020 15:57
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  14 NOV 2020 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -634,15 +634,12 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {/Users/elocarinista/Library/TinyTeX/texmf-var/fonts/map/pdftex/updmap/pdftex.m
 ap}] [2] [3]
-LaTeX Font Info:    Calculating math sizes for size <7.5> on input line 326.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7.5> on input line 326.
+(Font)              <7> on input line 326.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5.24997> on input line 326.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <3.75> on input line 326.
+(Font)              <5> on input line 326.
 
-LaTeX Warning: Float too large for page by 62.40213pt on input line 327.
+LaTeX Warning: Float too large for page by 38.88573pt on input line 327.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -673,10 +670,6 @@ l.392 A
 /early_sexual_activity_report_files/figure-latex/unnamed-chunk-3-1.pdf>]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10> on input line 412.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 412.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 412.
 
 Overfull \hbox (31.49571pt too wide) in paragraph at lines 412--412
  [][] 
@@ -693,13 +686,13 @@ anged.
 (rerunfilecheck)             Checksum: 4EF8982D3946180C5BF244C892B6C96A;753.
  ) 
 Here is how much of TeX's memory you used:
- 12126 strings out of 481408
- 175119 string characters out of 5917944
+ 12107 strings out of 481408
+ 174807 string characters out of 5917944
  492837 words of memory out of 5000000
- 28596 multiletter control sequences out of 15000+600000
- 598005 words of font info for 84 fonts, out of 8000000 for 9000
+ 28577 multiletter control sequences out of 15000+600000
+ 585991 words of font info for 69 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 66i,17n,72p,2079b,414s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 66i,17n,72p,2078b,405s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.
 enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
 t.enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.
@@ -710,12 +703,12 @@ pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi1
 10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
 r12.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/l
 mr17.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
-lmr8.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
+lmr7.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
 lmri10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/l
-m/lmri8.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/
+m/lmri7.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/
 lm/lmsy10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/publi
 c/lm/lmsy7.pfb>
-Output written on early_sexual_activity_report.pdf (10 pages, 226003 bytes).
+Output written on early_sexual_activity_report.pdf (10 pages, 225618 bytes).
 PDF statistics:
  192 PDF objects out of 1000 (max. 8388607)
  165 compressed objects within 2 object streams

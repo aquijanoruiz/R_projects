@@ -92,7 +92,7 @@ kable(table_1_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escap
   pack_rows("Daughters' knowledge about contraception", 18, 21, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Household-related variables", 22, 25, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. *p < .1; **p < .05; ***p < .01",
-           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) %>% kable_styling(font_size = 7.5)
+           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) %>% kable_styling(font_size = 7)
 ```
 \elandscape
 \newpage
