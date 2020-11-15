@@ -58,6 +58,8 @@ if(!require(starpolishr)) devtools::install_github("ChandlerLutz/starpolishr")
 data <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/early_sexual_activity_data.rds"))
 
 table_sum_stat <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_sum_stat.rds"))
+
+table_logit_results <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_logit_results.rds"))
 ```
 
 \newpage
@@ -121,62 +123,39 @@ As mentioned before, data about smoking and drinking were not gathered for all s
 
 As expected, smoking and drinking were high predictors for precocious sexual initiation. Table 3 shows that even after controlling for these two additional variables, the log odds of early sexual onset decrease for each additional year that the mother delays her sexual debut. Interestingly, when adding these cofounders, from whom girls learn about sexual relations and having an employed mother are no longer significant. As with the previous regressions, attending school and having a mother who finished primary school are associated with delayed sexual activity.
 
+\newpage
+\blandscape
 ```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
-# 2 Logit models ------------------------------
+# 1 Summary statistics ------------------------------
+# 1.1 Table 1: Percentage and mean levels by sexual activity ------------------------------
 
-# Model 1:
-# early sexual activity
+variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth", 
+               "Age", "Employed", "Cohabiting", "Married", "Primary education", 
+               "Secondary education", "Tertirary education", "Misses school", 
+               "No knowledge about period", "Knows from family", 
+               "Knows from school", "Knows from other sources", "Ethnic minority", 
+               "Rural area", "Internet access", "Household income")
 
-logit_m1 <- 
-  glm(early_sexual_activity ~ m_lack_empowerment + m_teenage_birth + # explanatory variables
-        m_job + m_education + # mother-related variables
-        misses_school + lack_period_knowledge + sexuality_knowledge + # daughter-related variables
-        minority + rural + h_internet, # sociodemographic variables
-      data = data, family = "binomial")
+table_logit_results <- table_logit_results[-1,]
+rownames(table_logit_results) <- variables
 
-# Model 2:
-# teenage pregnancy
-
-logit_m2 <- 
-  glm(teenage_pregnancy ~ m_lack_empowerment + m_teenage_birth + # explanatory variables
-        m_job + m_education + # mother-related variables
-        misses_school + lack_period_knowledge + sexuality_knowledge + # daughter-related variables
-        minority + rural + h_internet, # sociodemographic variables
-      data = data, family = "binomial")
-
-# Model 3:
-# contraception 1st intercourse
-
-logit_m3 <- 
-  glm(contraception_1st_intercourse ~ m_lack_empowerment + m_teenage_birth + # explanatory variables
-        m_job + m_education + # mother-related variables
-        misses_school + lack_period_knowledge + sexuality_knowledge + # daughter-related variables
-        minority + rural + h_internet, # sociodemographic variables
-      data = data, family = "binomial")
-
-reg_var <- c("Mother lacks sexual empowerment", "Mother had a teenage birth",
-    "Mother has a job", "Mother finished primary school", "Mother finished high school", 
-    "Mother finished college", "Misses school", "Lacked knowledge about period", 
-    "Knows about sexuality from family", "Knows about sexuality from school", 
-    "Knows about sexuality from other sources", "Ethnic minority", "Rural area", 
-    "Internet access")
-``` 
-
-```{r, results='asis', warning=FALSE, message=FALSE, include=FALSE}
-reg_table <- stargazer(logit_m1, logit_m2, logit_m3, title="Logistic Regression Results", type = "latex",
-          covariate.labels = reg_var, style = "default",
-          align=TRUE, header = FALSE, star.cutoffs = c(.1, .05, .01), omit = c("Constant", "minority", "rural", "h_internet"), add.lines=list(c("Household-related controls?", "Yes", "Yes", "Yes")),
-          dep.var.labels = c("Early sexual\ninitiation", "Teenage\npregnancy", "Contraception\nuse"), omit.stat = c("ll","aic"),
-          dep.var.labels.include = TRUE, no.space = T)
+kable(table_logit_results, format = "latex", booktabs = T, linesep = "", escape = F,
+      col.names = linebreak(c("OR","95% CI", "OR", "95% CI", "OR", "95% CI"), align = "c"), 
+      caption = "Odds ratio from logistic regression models predicting daughters' sexual outcomes") %>%
+  add_header_above(c(" " = 2, "Early sexual initiation" = 2, 
+                     "Teenage pregnancy" = 2, "Contraception use" = 2)) %>%
+  add_header_above(c(" " = 2, "Daughters' sexual outcomes" = 6)) %>%
+  kable_styling(latex_options = c("hold_position", "scale_down")) %>%
+  pack_rows("Explanatory variables", 1, 2, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Mother-related variables", 3, 9, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Daughter-related variables", 10, 11, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Daughters' knowledge about contraception", 12, 14, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Household-related variables", 15, 18, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  footnote(general = "*p < .1; **p < .05; ***p < .01",
+           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) %>% kable_styling(font_size = 7)
 ```
-
-```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
-reg_table %>%
-  star_insert_row(insert.after=c(18,18,26,26), c(' &  &  &  \\\\ ',
-                                     ' &  &  &  \\\\ ',
-                                     ' &  &  &  \\\\',
-                                     ' &  &  &  \\\\ ')) %>% cat()
-```
+\elandscape
+\newpage
 
 
 ## DISCUSSION
