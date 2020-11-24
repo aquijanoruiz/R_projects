@@ -57,7 +57,7 @@ if(!require(starpolishr)) devtools::install_github("ChandlerLutz/starpolishr")
 
 data <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/early_sexual_activity_data.rds"))
 
-table_sum_stat_copy <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_sum_stat.rds"))
+table_sum_stat_copy <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_sum_stat_copy.rds"))
 
 table_logit_results <- readRDS(url("https://github.com/aquijanoruiz/R_projects/raw/master/early_sexual_activity/datasets/table_logit_results.rds"))
 ```
