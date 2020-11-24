@@ -824,4 +824,25 @@
   publisher = {Elsevier},
 }
 
+@Article{margherita2017teen,
+  author    = {Margherita, Giorgia and Troisi, Gina and Tessitore, Francesca and Gargiulo, Anna},
+  journal   = {Children and Youth Services Review},
+  title     = {Teen mothers who are daughters of teen mothers: Psychological intergenerational dimensions of early motherhood},
+  year      = {2017},
+  pages     = {294--301},
+  volume    = {83},
+  publisher = {Elsevier},
+}
+
+@Article{velazquez2017cultural,
+  author    = {Velazquez, Efren and Corona, Rosalie and Easter, Rebecca and Barinas, Jennifer and Elshaer, Lynda and Halfond, Raquel W},
+  journal   = {Journal of Latina/o Psychology},
+  title     = {Cultural values, mother--adolescent discussions about sex, and Latina/o adolescents’ condom use attitudes and intentions.},
+  year      = {2017},
+  number    = {3},
+  pages     = {213},
+  volume    = {5},
+  publisher = {Educational Publishing Foundation},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

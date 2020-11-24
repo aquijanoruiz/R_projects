@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  14 NOV 2020 23:25
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.2)  15 NOV 2020 14:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -669,17 +669,12 @@ l.392 A
        s mentioned before, data about smoking and drinking were not gathered <.
 /early_sexual_activity_report_files/figure-latex/unnamed-chunk-3-1.pdf>]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 412.
-
-Overfull \hbox (31.49571pt too wide) in paragraph at lines 412--412
- [][] 
- []
-
+(Font)              <10> on input line 460.
 [6pdfTeX warning (ext4): destination with the same identifier (name{table.2}) h
 as been already used, duplicate ignored
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   
-l.435 
+l.484 
       ] [7] [8] [9] [10] (./early_sexual_activity_report.aux)
 Package rerunfilecheck Info: File `early_sexual_activity_report.out' has not ch
 anged.
@@ -687,31 +682,25 @@ anged.
  ) 
 Here is how much of TeX's memory you used:
  12107 strings out of 481408
- 174807 string characters out of 5917944
- 492837 words of memory out of 5000000
+ 174826 string characters out of 5917944
+ 492890 words of memory out of 5000000
  28577 multiletter control sequences out of 15000+600000
  585991 words of font info for 69 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 66i,17n,72p,2078b,405s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.
-enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathi
-t.enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.
-enc}{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.en
-c}</Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.
-pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi1
-0.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr
+ 66i,12n,72p,262b,405s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}
+</Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pf
+b></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.p
+fb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.
+pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17
+.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7
+.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri
 10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lm
-r12.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/l
-mr17.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
-lmr7.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/
-lmri10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/l
-m/lmri7.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/public/
-lm/lmsy10.pfb></Users/elocarinista/Library/TinyTeX/texmf-dist/fonts/type1/publi
-c/lm/lmsy7.pfb>
-Output written on early_sexual_activity_report.pdf (10 pages, 225615 bytes).
+ri7.pfb>
+Output written on early_sexual_activity_report.pdf (10 pages, 217080 bytes).
 PDF statistics:
- 192 PDF objects out of 1000 (max. 8388607)
- 165 compressed objects within 2 object streams
+ 175 PDF objects out of 1000 (max. 8388607)
+ 151 compressed objects within 2 object streams
  60 named destinations out of 1000 (max. 500000)
  70 words of extra memory for PDF output out of 10000 (max. 10000000)
 

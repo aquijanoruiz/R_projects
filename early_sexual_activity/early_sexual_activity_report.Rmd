@@ -88,7 +88,7 @@ kable(table_sum_stat, format = "latex", booktabs = T, linesep = "", escape = F,
   add_header_above(c(" " = 2, "Daughters' sexual outcomes" = 9)) %>%
   kable_styling(latex_options = c("hold_position", "scale_down")) %>%
   pack_rows("Daughters' sexual outcomes", 1, 3, latex_gap_space = "0.8em", italic = T, bold = F) %>%
-  pack_rows("Explanatory variables", 4, 6, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Main explanatory variables", 4, 6, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Mother-related variables", 7, 15, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Daughter-related variables", 16, 17, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Daughters' knowledge about contraception", 18, 21, latex_gap_space = "0.8em", italic = T, bold = F) %>%
@@ -123,12 +123,7 @@ As mentioned before, data about smoking and drinking were not gathered for all s
 
 As expected, smoking and drinking were high predictors for precocious sexual initiation. Table 3 shows that even after controlling for these two additional variables, the log odds of early sexual onset decrease for each additional year that the mother delays her sexual debut. Interestingly, when adding these cofounders, from whom girls learn about sexual relations and having an employed mother are no longer significant. As with the previous regressions, attending school and having a mother who finished primary school are associated with delayed sexual activity.
 
-\newpage
-\blandscape
 ```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
-# 1 Summary statistics ------------------------------
-# 1.1 Table 1: Percentage and mean levels by sexual activity ------------------------------
-
 variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth", 
                "Age", "Employed", "Cohabiting", "Married", "Primary education", 
                "Secondary education", "Tertirary education", "Misses school", 
@@ -138,25 +133,22 @@ variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth",
 
 table_logit_results <- table_logit_results[-1,]
 rownames(table_logit_results) <- variables
+colnames(table_logit_results) <- c("OR","95\\% CI", "OR", "95\\% CI", "OR", "95\\% CI")
 
 kable(table_logit_results, format = "latex", booktabs = T, linesep = "", escape = F,
-      col.names = linebreak(c("OR","95% CI", "OR", "95% CI", "OR", "95% CI"), align = "c"), 
       caption = "Odds ratio from logistic regression models predicting daughters' sexual outcomes") %>%
-  add_header_above(c(" " = 2, "Early sexual initiation" = 2, 
+  add_header_above(c(" " = 1, "Early sexual initiation" = 2, 
                      "Teenage pregnancy" = 2, "Contraception use" = 2)) %>%
-  add_header_above(c(" " = 2, "Daughters' sexual outcomes" = 6)) %>%
+  add_header_above(c(" " = 1, "Daughters' sexual outcomes" = 6)) %>%
   kable_styling(latex_options = c("hold_position", "scale_down")) %>%
-  pack_rows("Explanatory variables", 1, 2, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Main explanatory variables", 1, 2, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Mother-related variables", 3, 9, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Daughter-related variables", 10, 11, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Daughters' knowledge about contraception", 12, 14, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Household-related variables", 15, 18, latex_gap_space = "0.8em", italic = T, bold = F) %>%
-  footnote(general = "*p < .1; **p < .05; ***p < .01",
-           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) %>% kable_styling(font_size = 7)
+  footnote(general = "N=981 for Early sexual initiation and Teenage pregnancy. N=159 for Contraception use. *p < .1; **p < .05; ***p < .01",
+           threeparttable = T, footnote_as_chunk = T, fixed_small_size = F)
 ```
-\elandscape
-\newpage
-
 
 ## DISCUSSION
 
