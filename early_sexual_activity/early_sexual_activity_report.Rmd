@@ -70,16 +70,16 @@ table_logit_results <- readRDS(url("https://github.com/aquijanoruiz/R_projects/r
 
 variables <- c("Early sexual initiation", "Teenage pregnancy", 
                "Contraception use", "Mother lacks sexual empowerment", 
-               "Mother had a teenage birth", "Mother's age at first intercourse", 
+               "Mother had a teenage birth",
                "Age", "Employed", "Non-partnered", "Cohabiting", "Married", "No education", 
                "Primary education", "Secondary education", "Tertirary education", 
-               "Misses school", "No knowledge about period", "No knowledge",
+               "Not enrolled in school", "No knowledge about period", "No knowledge",
                "Knows from family", "Knows from school", "Knows from other sources", 
                "Ethnic minority", "Rural area", "Internet access", "Household income")
 
-rownames(table_sum_stat) <- variables
+rownames(table_sum_stat_copy) <- variables
 
-kable(table_sum_stat, format = "latex", booktabs = T, linesep = "", escape = F,
+kable(table_sum_stat_copy, format = "latex", booktabs = T, linesep = "", escape = F,
       col.names = linebreak(c("Total","Yes","No", "p value","Yes", "No", "p value", "Yes", "No",
                               "p value"), align = "c"), 
       caption = "Percentage and mean levels of explanatory variables by group") %>%
@@ -88,30 +88,18 @@ kable(table_sum_stat, format = "latex", booktabs = T, linesep = "", escape = F,
   add_header_above(c(" " = 2, "Daughters' sexual outcomes" = 9)) %>%
   kable_styling(latex_options = c("hold_position", "scale_down")) %>%
   pack_rows("Daughters' sexual outcomes", 1, 3, latex_gap_space = "0.8em", italic = T, bold = F) %>%
-  pack_rows("Main explanatory variables", 4, 6, latex_gap_space = "0.8em", italic = T, bold = F) %>%
-  pack_rows("Mother-related variables", 7, 15, latex_gap_space = "0.8em", italic = T, bold = F) %>%
-  pack_rows("Daughter-related variables", 16, 17, latex_gap_space = "0.8em", italic = T, bold = F) %>%
-  pack_rows("Daughters' knowledge about contraception", 18, 21, latex_gap_space = "0.8em", italic = T, bold = F) %>%
-  pack_rows("Household-related variables", 22, 25, latex_gap_space = "0.8em", italic = T, bold = F) %>%
-  footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. Ns = 401–828. *p < .1; **p < .05; ***p < .01",
+  pack_rows("Main explanatory variables", 4, 5, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Mother-related variables", 6, 14, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Daughter-related variables", 15, 16, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Daughters' knowledge about contraception", 17, 20, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  pack_rows("Household-related variables", 21, 24, latex_gap_space = "0.8em", italic = T, bold = F) %>%
+  footnote(general = "p values for comparison of percentagges using chi-square. p values for comparison of means using t-test. N=978 for early sexual initiation and teenage pregnancy. N=159 for contraception use. *p < .1; **p < .05; ***p < .01",
            threeparttable = T, footnote_as_chunk = T, fixed_small_size = F) %>% kable_styling(font_size = 7)
 ```
 \elandscape
 \newpage
 
 Mother characteristics significantly differed across groups. Mothers of early sexual initiators were less likely to have finished primary school (p < .01) and more likely to have become a teenage parent (p < .001). As expected, early sexual initiators were more likely to have been reared by a mother who had herself had her first coitus at a very young age. Figure 1 illustrates the cumulative histogram of age at first coitus of the mothers. The figure clearly shows that mothers of early sexual initiators had their first coitus at a younger age than mothers of those who were not sexually active. The mean age at first coitus for each group was 16.11 (SD = 2.48) and 17.76 (SD = 2.79), respectively. The t-test showed that these differences were unlikely to have been due to chance (p < .001).
-
-
-```{r, warning=FALSE, message=FALSE, echo=FALSE, out.width='80%', fig.align='center', out.height='70%', fig.cap=paste("Cumulative histogram of age at first intercourse of mothers by group")}
-# 2 Plots ------------------------------
-plot(ecdf(data[data$early_sexual_activity == "yes", "m_age_1st_intercourse"]),
-     col = "cadetblue1", main = "", xlab = "Mothers' age at first intercourse", ylab = "Density",
-     cex.axis=0.75, cex.lab=0.75)
-plot(ecdf(data[data$early_sexual_activity == "no", "m_age_1st_intercourse"]),
-     col = "palegreen", add = TRUE)
-legend("left", c("Early sexual initiators", "Non-early sexual initiators"),
-       col = c("cadetblue1", "palegreen"), lwd = 5, bty = "n", cex = 0.6)
-```
 
 Logistic regressions were used to assess the relationship between the early onset of sexual activity among girls and the mothers’ sexual bargaining ability, as well as other behavioral traits such as the mothers’ age at first intercourse and whether she had a teenage birth. Table 2 shows the coefficients (log odds ratio) of these regressions. To observe the predicting ability of the three mother-related variables (sexual bargaining, teenage birth, and age at first intercourse) alone and in interaction, we computed three logistic regressions. Thus, we can notice how the significance of the coefficient changes with each additional variable. Each regression is represented by a separate column in Table 2.
 
@@ -126,7 +114,7 @@ As expected, smoking and drinking were high predictors for precocious sexual ini
 ```{r, results='asis', warning=FALSE, message=FALSE, echo=FALSE}
 variables <- c("Mother lacks sexual empowerment", "Mother had a teenage birth", 
                "Age", "Employed", "Cohabiting", "Married", "Primary education", 
-               "Secondary education", "Tertirary education", "Misses school", 
+               "Secondary education", "Tertirary education", "Not enrolled in school", 
                "No knowledge about period", "Knows from family", 
                "Knows from school", "Knows from other sources", "Ethnic minority", 
                "Rural area", "Internet access", "Household income")
@@ -146,7 +134,7 @@ kable(table_logit_results, format = "latex", booktabs = T, linesep = "", escape 
   pack_rows("Daughter-related variables", 10, 11, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Daughters' knowledge about contraception", 12, 14, latex_gap_space = "0.8em", italic = T, bold = F) %>%
   pack_rows("Household-related variables", 15, 18, latex_gap_space = "0.8em", italic = T, bold = F) %>%
-  footnote(general = "N=981 for Early sexual initiation and Teenage pregnancy. N=159 for Contraception use. *p < .1; **p < .05; ***p < .01",
+  footnote(general = "N=981 for early sexual initiation and teenage pregnancy. N=159 for contraception use. *p < .1; **p < .05; ***p < .01",
            threeparttable = T, footnote_as_chunk = T, fixed_small_size = F)
 ```
 
