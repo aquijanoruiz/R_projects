@@ -10,7 +10,7 @@ header-includes:
    - \usepackage{fancyhdr}
 ---
 
-The following R code reproduces the statistical analysis presented in the writing sample titled *Maternal sexual empowerment and early sexual onset among female adolescents: Evidence from a prevalence study in Ecuador*. It shows how I typically handle large datasets and how I share my code with colleagues or other people who wish to replicate my results. The code can also be found on [github](https://github.com/aquijanoruiz/R_projects/blob/master/early_sexual_activity/early_sexual_activity_code_sample.Rmd). 
+The following R code reproduces the statistical analysis presented in the writing sample titled *Maternal sexual empowerment and early sexual onset among female adolescents: Evidence from a prevalence study in Ecuador*. It shows how I typically handle large datasets and how I share my code with colleagues or other people who wish to replicate my results. The code can also be found on [github](https://github.com/aquijanoruiz/R_projects/blob/master/m_sexual_empowerment/m_sexual_empowerment_code_sample.Rmd). 
 
 This study uses data from the National Statistics Institute of Ecuador (INEC). It first downloads the zip that contains the .dta files. I added some code that automatically downloads the packages used in case they are not installed already. Then, I describe the data wrangling process, for which I use the dplyr package. I merge different datasets and select the information that is useful for the analysis. This involves matching subjects' data among various datasets. I proceed by creating the variables, for which I use several logical operators and reassign the levels of the factors. I finish by creating the summary statistics table and run the logistic regression.
 
